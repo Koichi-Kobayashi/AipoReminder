@@ -1,0 +1,291 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Data.Common;
+using System.Diagnostics;
+
+#if Npgsql
+using Npgsql;
+using WinFramework.Exceptions;
+#else
+using Npgsql;
+using WinFramework.Exceptions;
+#endif
+
+namespace WinFramework.Utility
+{
+    /// <summary>
+    /// 汎用DBクラス
+    /// </summary>
+    public class DBHelper
+    {
+        private string server;
+        private string port;
+        private string userid;
+        private string password;
+        private string database;
+
+        ConnectionStringSettings settings = null;
+#if Npgsql
+        NpgsqlConnection connection = null;
+        NpgsqlTransaction transaction = null;
+#else
+        NpgsqlConnection connection = null;
+        NpgsqlTransaction transaction = null;
+#endif
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public DBHelper()
+        {
+            DbConnect();
+        }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="server">サーバIP</param>
+        /// <param name="port">ポート</param>
+        /// <param name="userid">ユーザID</param>
+        /// <param name="password">パスワード</param>
+        /// <param name="database">データベース名</param>
+        public DBHelper(string server, string port, string userid, string password, string database)
+        {
+            DbConnect(server, port, userid, password, database);
+        }
+
+        /// <summary>
+        /// DB接続
+        /// </summary>
+        /// <returns></returns>
+        public DbConnection GetConnection()
+        {
+            try
+            {
+#if Npgsql
+            this.connection = new NpgsqlConnection();
+            this.connection.ConnectionString = this.settings.ConnectionString;
+#else
+            this.connection = new NpgsqlConnection();
+            this.connection.ConnectionString = this.settings.ConnectionString;
+#endif
+            }
+            catch (NullReferenceException ex)
+            {
+                throw new DBException("", ex);
+            }
+            return this.connection;
+        }
+
+        /// <summary>
+        /// DBオープン
+        /// </summary>
+        public void Open()
+        {
+            this.GetConnection().Open();
+        }
+
+        /// <summary>
+        /// DBクローズ
+        /// </summary>
+        public void Close()
+        {
+            if (this.transaction != null)
+            {
+                this.transaction.Dispose();
+                this.transaction = null;
+            }
+
+            if (this.connection != null)
+            {
+                this.connection.Close();
+            }
+        }
+
+        /// <summary>
+        /// トランザクション開始
+        /// </summary>
+        public void BeginTransaction()
+        {
+            this.transaction = this.connection.BeginTransaction();
+        }
+
+        /// <summary>
+        /// コミット
+        /// </summary>
+        public void Commit()
+        {
+            if (this.transaction != null)
+            {
+                this.transaction.Commit();
+            }
+        }
+
+        /// <summary>
+        /// ロールバック
+        /// </summary>
+        public void Rollback()
+        {
+            if (this.transaction != null)
+            {
+                this.transaction.Rollback();
+            }
+        }
+
+        /// <summary>
+        /// Select文発行
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="commandText"></param>
+        /// <param name="param"></param>
+        public void Select(DataTable data, string commandText, ArrayList paramList)
+        {
+#if Npgsql
+            NpgsqlCommand command;
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
+#else
+            NpgsqlCommand command;
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
+#endif
+
+            try
+            {
+                command = this.connection.CreateCommand();
+                command.Transaction = this.transaction;
+                command.CommandText = commandText;
+
+                if (paramList != null)
+                {
+#if Npgsql
+                    foreach (NpgsqlParameter param in paramList)
+#else
+                    foreach (NpgsqlParameter param in paramList)
+#endif
+                    {
+                        command.Parameters.Add(param);
+                    }
+                }
+
+                dataAdapter.SelectCommand = command;
+
+#if DEBUG
+                Debug.WriteLine("【SQL】");
+                Debug.WriteLine(ParamForLogString(command));
+#endif
+                dataAdapter.Fill(data);
+
+            }
+#if Npgsql
+            catch (NpgsqlException e)
+            {
+                LogUtility.WriteLogError("" , e);
+            }
+#endif
+            catch (Exception e)
+            {
+                LogUtility.WriteLogError("", e);
+            }
+
+        }
+
+        /// <summary>
+        /// DB接続設定読み込み
+        /// </summary>
+        /// <param name="server">サーバIP</param>
+        /// <param name="port">ポート</param>
+        /// <param name="userid">ユーザID</param>
+        /// <param name="password">パスワード</param>
+        /// <param name="database">データベース名</param>
+        public void DbConnect(string server, string port, string userid, string password, string database)
+        {
+            this.server = server;
+            this.port = port;
+            this.userid = userid;
+            this.password = password;
+            this.database = database;
+
+            DbConnect();
+        }
+
+        /// <summary>
+        /// DB接続設定読み込み
+        /// </summary>
+        private void DbConnect()
+        {
+#if Npgsql
+            if (String.IsNullOrEmpty(this.server)   ||
+                String.IsNullOrEmpty(this.port) ||
+                String.IsNullOrEmpty(this.userid) ||
+                String.IsNullOrEmpty(this.password) ||
+                String.IsNullOrEmpty(this.database))
+            {
+                this.settings = ConfigurationManager.ConnectionStrings["PostgreSql"];
+            }
+            else
+            {
+                ConnectionStringSettings con = new ConnectionStringSettings();
+                con.ConnectionString = "Server=" + this.server + ";Port=" + this.port + ";User Id=" + this.userid + ";Password=" + this.password + ";Database=" + this.database + ";";
+                con.Name = "PostgreSql";
+                con.ProviderName = "Npgsql";
+                this.settings = con;
+            }
+#else
+            if (String.IsNullOrEmpty(this.server)   ||
+                String.IsNullOrEmpty(this.port) ||
+                String.IsNullOrEmpty(this.userid) ||
+                String.IsNullOrEmpty(this.password) ||
+                String.IsNullOrEmpty(this.database))
+            {
+               this.settings = ConfigurationManager.ConnectionStrings["PostgreSql"];
+            }
+            else
+            {
+                ConnectionStringSettings con = new ConnectionStringSettings();
+                con.ConnectionString = "Server=" + server + ";Port=" + port + ";User Id=" + userid + ";Password=" + password + ";Database=" + database + ";";
+                con.Name = "PostgreSql";
+                con.ProviderName = "Npgsql";
+                this.settings = con;
+            }
+#endif
+        }
+
+#if Npgsql
+        /// <summary>
+        /// SQLのバインド変数を値に変換する
+        /// </summary>
+        /// <param name="command">NpgsqlCommand</param>
+        /// <returns></returns>
+        private string ParamForLogString(NpgsqlCommand command)
+        {
+            string str = command.CommandText;
+
+            foreach (DbParameter param in command.Parameters)
+            {
+                str = str.Replace(param.ParameterName, param.Value.ToString());
+            }
+
+            return str;
+        }
+#else
+        /// <summary>
+        /// SQLのバインド変数を値に変換する
+        /// </summary>
+        /// <param name="command">NpgsqlCommand</param>
+        /// <returns></returns>
+        private string ParamForLogString(NpgsqlCommand command)
+        {
+            string str = command.CommandText;
+
+            foreach (DbParameter param in command.Parameters)
+            {
+                str = str.Replace(param.ParameterName, param.Value.ToString());
+            }
+
+            return str;
+        }
+#endif
+
+    }
+}
