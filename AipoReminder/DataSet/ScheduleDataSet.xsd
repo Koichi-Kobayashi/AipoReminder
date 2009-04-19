@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ScheduleDataSet" targetNamespace="http://tempuri.org/ScheduleDataSet.xsd" xmlns:mstns="http://tempuri.org/ScheduleDataSet.xsd" xmlns="http://tempuri.org/ScheduleDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="org001ConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="org001ConnectionString (Settings)" PropertyReference="ApplicationSettings.AipoReminder.Properties.Settings.GlobalReference.Default.org001ConnectionString" Provider="System.Data.Odbc" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ScheduleDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="ScheduleDataSet" msprop:Generator_DataSetName="ScheduleDataSet" msprop:EnableTableAdapterManager="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="eip_t_schedule" msprop:Generator_UserTableName="eip_t_schedule" msprop:Generator_RowDeletedName="eip_t_scheduleRowDeleted" msprop:Generator_RowChangedName="eip_t_scheduleRowChanged" msprop:Generator_RowClassName="eip_t_scheduleRow" msprop:Generator_RowChangingName="eip_t_scheduleRowChanging" msprop:Generator_RowEvArgName="eip_t_scheduleRowChangeEvent" msprop:Generator_RowEvHandlerName="eip_t_scheduleRowChangeEventHandler" msprop:Generator_TableClassName="eip_t_scheduleDataTable" msprop:Generator_TableVarName="tableeip_t_schedule" msprop:Generator_RowDeletingName="eip_t_scheduleRowDeleting" msprop:Generator_TablePropName="eip_t_schedule">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="schedule_id" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="schedule_id" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="schedule_id" msprop:Generator_ColumnPropNameInTable="schedule_idColumn" msprop:Generator_ColumnVarNameInTable="columnschedule_id" type="xs:string" default="" />
+              <xs:element name="user_id" msprop:Generator_UserColumnName="user_id" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnuser_id" msprop:Generator_ColumnPropNameInTable="user_idColumn" msprop:Generator_ColumnPropNameInRow="user_id" type="xs:string" default="" minOccurs="0" />
+              <xs:element name="last_name" msprop:Generator_UserColumnName="last_name" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="last_name" msprop:Generator_ColumnPropNameInTable="last_nameColumn" msprop:Generator_ColumnVarNameInTable="columnlast_name" type="xs:string" default="" minOccurs="0" />
+              <xs:element name="first_name" msprop:Generator_UserColumnName="first_name" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnfirst_name" msprop:Generator_ColumnPropNameInTable="first_nameColumn" msprop:Generator_ColumnPropNameInRow="first_name" type="xs:string" default="" minOccurs="0" />
+              <xs:element name="start_date" msprop:Generator_UserColumnName="start_date" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="start_date" msprop:Generator_ColumnPropNameInTable="start_dateColumn" msprop:Generator_ColumnVarNameInTable="columnstart_date" type="xs:string" default="" minOccurs="0" />
+              <xs:element name="end_date" msprop:Generator_UserColumnName="end_date" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="end_date" msprop:Generator_ColumnPropNameInTable="end_dateColumn" msprop:Generator_ColumnVarNameInTable="columnend_date" type="xs:string" default="" minOccurs="0" />
+              <xs:element name="name" msprop:Generator_UserColumnName="name" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_ColumnVarNameInTable="columnname" default="" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="99" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="place" msprop:Generator_UserColumnName="place" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="place" msprop:Generator_ColumnPropNameInTable="placeColumn" msprop:Generator_ColumnVarNameInTable="columnplace" default="" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="99" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="note" msprop:Generator_UserColumnName="note" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="note" msprop:Generator_ColumnPropNameInTable="noteColumn" msprop:Generator_ColumnVarNameInTable="columnnote" default="" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="public_flag" msprop:Generator_UserColumnName="public_flag" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="public_flag" msprop:Generator_ColumnPropNameInTable="public_flagColumn" msprop:Generator_ColumnVarNameInTable="columnpublic_flag" default="" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="edit_flag" msprop:Generator_UserColumnName="edit_flag" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="edit_flag" msprop:Generator_ColumnPropNameInTable="edit_flagColumn" msprop:Generator_ColumnVarNameInTable="columnedit_flag" default="" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="search_eip_t_schedule" msprop:Generator_UserTableName="search_eip_t_schedule" msprop:Generator_RowDeletedName="search_eip_t_scheduleRowDeleted" msprop:Generator_RowChangedName="search_eip_t_scheduleRowChanged" msprop:Generator_RowClassName="search_eip_t_scheduleRow" msprop:Generator_RowChangingName="search_eip_t_scheduleRowChanging" msprop:Generator_RowEvArgName="search_eip_t_scheduleRowChangeEvent" msprop:Generator_RowEvHandlerName="search_eip_t_scheduleRowChangeEventHandler" msprop:Generator_TableClassName="search_eip_t_scheduleDataTable" msprop:Generator_TableVarName="tablesearch_eip_t_schedule" msprop:Generator_RowDeletingName="search_eip_t_scheduleRowDeleting" msprop:Generator_TablePropName="search_eip_t_schedule">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="user_id" msprop:Generator_UserColumnName="user_id" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnuser_id" msprop:Generator_ColumnPropNameInTable="user_idColumn" msprop:Generator_ColumnPropNameInRow="user_id" type="xs:string" default="" minOccurs="0" />
+              <xs:element name="start_date" msprop:Generator_UserColumnName="start_date" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnstart_date" msprop:Generator_ColumnPropNameInTable="start_dateColumn" msprop:Generator_ColumnPropNameInRow="start_date" type="xs:string" default="" minOccurs="0" />
+              <xs:element name="public_flag" msprop:Generator_UserColumnName="public_flag" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnpublic_flag" msprop:Generator_ColumnPropNameInTable="public_flagColumn" msprop:Generator_ColumnPropNameInRow="public_flag" type="xs:string" default="" minOccurs="0" />
+              <xs:element name="edit_flag" msprop:Generator_UserColumnName="edit_flag" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnedit_flag" msprop:Generator_ColumnPropNameInTable="edit_flagColumn" msprop:Generator_ColumnPropNameInRow="edit_flag" type="xs:string" default="" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
