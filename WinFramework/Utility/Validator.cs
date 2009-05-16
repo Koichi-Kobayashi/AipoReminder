@@ -9,9 +9,9 @@ namespace WinFramework.Utility
     public static class Validator
     {
         public static int UNINPUT = 1;
-        public static int LENGTH = 1;
+        public static int LENGTH = 10;
         public static int HALF_ALPHA = 100;
-        public static int HALF_ALPHA_NUM = 200;
+        public static int HALF_ALPHA_NUM_SYMBOL = 200;
         public static int HALF_NUM = 300;
         public static int URL = 400;
 
@@ -53,13 +53,14 @@ namespace WinFramework.Utility
                     return HALF_ALPHA;
                 }
             }
-            else if (type == HALF_ALPHA_NUM)
+            else if (type == HALF_ALPHA_NUM_SYMBOL)
             {
-                // a-zA-Z0-9 のみの文字列
-                regex = new Regex(@"^[a-zA-Z0-9]+$");
+                // ! から ~ までの文字列
+                // http://e-words.jp/p/r-ascii.html
+                regex = new Regex(@"^[!-~]+$");
                 if (!regex.IsMatch(value))
                 {
-                    return HALF_ALPHA_NUM;
+                    return HALF_ALPHA_NUM_SYMBOL;
                 }
             }
             else if (type == HALF_NUM)
