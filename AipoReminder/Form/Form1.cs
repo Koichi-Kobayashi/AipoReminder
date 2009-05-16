@@ -98,6 +98,8 @@ namespace AipoReminder
         /// </summary>
         private void SetUserData()
         {
+            // ウィンドウ非表示
+            this.Visible = false;
             // サーバIP
             textBoxServerIP.Text = SettingManager.NpgsqlConnectionServer;
             // ポート
@@ -936,7 +938,7 @@ namespace AipoReminder
             int ret = 0;
 
             // ログイン名
-            ret = Validator.InputCheck(textBoxUserName.Text, true, textBoxUserName.MaxLength, Validator.HALF_ALPHA_NUM);
+            ret = Validator.InputCheck(textBoxUserName.Text, true, textBoxUserName.MaxLength, Validator.HALF_ALPHA_NUM_SYMBOL);
             if (ret == Validator.UNINPUT)
             {
                 // 必須
@@ -951,16 +953,16 @@ namespace AipoReminder
                 MessageBox.Show(msg, MessageConstants.MSG_CAPTION_001, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            else if (ret == Validator.HALF_ALPHA_NUM)
+            else if (ret == Validator.HALF_ALPHA_NUM_SYMBOL)
             {
                 // 文字種
-                string msg = String.Format(MessageConstants.CHK_HALF_ALPHA_NUM, MessageConstants.ITEM_LOGIN);
+                string msg = String.Format(MessageConstants.CHK_HALF_ALPHA_NUM_SYMBOL, MessageConstants.ITEM_LOGIN);
                 MessageBox.Show(msg, MessageConstants.MSG_CAPTION_001, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             // パスワード
-            ret = Validator.InputCheck(textBoxPassword.Text, true, textBoxPassword.MaxLength, Validator.HALF_ALPHA_NUM);
+            ret = Validator.InputCheck(textBoxPassword.Text, true, textBoxPassword.MaxLength, Validator.HALF_ALPHA_NUM_SYMBOL);
             if (ret == Validator.UNINPUT)
             {
                 // 必須
@@ -975,10 +977,10 @@ namespace AipoReminder
                 MessageBox.Show(msg, MessageConstants.MSG_CAPTION_001, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            else if (ret == Validator.HALF_ALPHA_NUM)
+            else if (ret == Validator.HALF_ALPHA_NUM_SYMBOL)
             {
                 // 文字種
-                string msg = String.Format(MessageConstants.CHK_HALF_ALPHA_NUM, MessageConstants.ITEM_PASSWORD);
+                string msg = String.Format(MessageConstants.CHK_HALF_ALPHA_NUM_SYMBOL, MessageConstants.ITEM_PASSWORD);
                 MessageBox.Show(msg, MessageConstants.MSG_CAPTION_001, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
@@ -1008,7 +1010,7 @@ namespace AipoReminder
             }
 
             // サーバIP
-            ret = Validator.InputCheck(textBoxServerIP.Text, true, textBoxServerIP.MaxLength, Validator.HALF_ALPHA_NUM);
+            ret = Validator.InputCheck(textBoxServerIP.Text, true, textBoxServerIP.MaxLength, 0);
             if (ret == Validator.UNINPUT)
             {
                 // 必須
@@ -1023,16 +1025,9 @@ namespace AipoReminder
                 MessageBox.Show(msg, MessageConstants.MSG_CAPTION_002, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            else if (ret == Validator.HALF_ALPHA_NUM)
-            {
-                // 文字種
-                string msg = String.Format(MessageConstants.CHK_HALF_ALPHA_NUM, MessageConstants.ITEM_DB_SERVER_IP);
-                MessageBox.Show(msg, MessageConstants.MSG_CAPTION_002, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
 
             // ポート
-            ret = Validator.InputCheck(textBoxServerPort.Text, true, textBoxServerPort.MaxLength, Validator.HALF_ALPHA_NUM);
+            ret = Validator.InputCheck(textBoxServerPort.Text, true, textBoxServerPort.MaxLength, Validator.HALF_NUM);
             if (ret == Validator.UNINPUT)
             {
                 // 必須
@@ -1050,13 +1045,13 @@ namespace AipoReminder
             else if (ret == Validator.HALF_NUM)
             {
                 // 文字種
-                string msg = String.Format(MessageConstants.CHK_HALF_ALPHA_NUM, MessageConstants.ITEM_DB_PORT);
+                string msg = String.Format(MessageConstants.CHK_HALF_NUM, MessageConstants.ITEM_DB_PORT);
                 MessageBox.Show(msg, MessageConstants.MSG_CAPTION_002, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             // DBユーザID
-            ret = Validator.InputCheck(textBoxDbUserId.Text, true, textBoxDbUserId.MaxLength, Validator.HALF_ALPHA_NUM);
+            ret = Validator.InputCheck(textBoxDbUserId.Text, true, textBoxDbUserId.MaxLength, Validator.HALF_ALPHA_NUM_SYMBOL);
             if (ret == Validator.UNINPUT)
             {
                 // 必須
@@ -1071,16 +1066,16 @@ namespace AipoReminder
                 MessageBox.Show(msg, MessageConstants.MSG_CAPTION_002, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            else if (ret == Validator.HALF_ALPHA_NUM)
+            else if (ret == Validator.HALF_ALPHA_NUM_SYMBOL)
             {
                 // 文字種
-                string msg = String.Format(MessageConstants.CHK_HALF_ALPHA_NUM, MessageConstants.ITEM_DB_USER_ID);
+                string msg = String.Format(MessageConstants.CHK_HALF_ALPHA_NUM_SYMBOL, MessageConstants.ITEM_DB_USER_ID);
                 MessageBox.Show(msg, MessageConstants.MSG_CAPTION_002, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             // DBパスワード
-            ret = Validator.InputCheck(textBoxDbPassword.Text, true, textBoxDbPassword.MaxLength, Validator.HALF_ALPHA_NUM);
+            ret = Validator.InputCheck(textBoxDbPassword.Text, true, textBoxDbPassword.MaxLength, Validator.HALF_ALPHA_NUM_SYMBOL);
             if (ret == Validator.UNINPUT)
             {
                 // 必須
@@ -1095,16 +1090,16 @@ namespace AipoReminder
                 MessageBox.Show(msg, MessageConstants.MSG_CAPTION_002, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            else if (ret == Validator.HALF_ALPHA_NUM)
+            else if (ret == Validator.HALF_ALPHA_NUM_SYMBOL)
             {
                 // 文字種
-                string msg = String.Format(MessageConstants.CHK_HALF_ALPHA_NUM, MessageConstants.ITEM_DB_PASSWORD);
+                string msg = String.Format(MessageConstants.CHK_HALF_ALPHA_NUM_SYMBOL, MessageConstants.ITEM_DB_PASSWORD);
                 MessageBox.Show(msg, MessageConstants.MSG_CAPTION_002, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             // データベース
-            ret = Validator.InputCheck(textBoxDbName.Text, true, textBoxDbName.MaxLength, Validator.HALF_ALPHA_NUM);
+            ret = Validator.InputCheck(textBoxDbName.Text, true, textBoxDbName.MaxLength, Validator.HALF_ALPHA_NUM_SYMBOL);
             if (ret == Validator.UNINPUT)
             {
                 // 必須
@@ -1119,10 +1114,10 @@ namespace AipoReminder
                 MessageBox.Show(msg, MessageConstants.MSG_CAPTION_002, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            else if (ret == Validator.HALF_ALPHA_NUM)
+            else if (ret == Validator.HALF_ALPHA_NUM_SYMBOL)
             {
                 // 文字種
-                string msg = String.Format(MessageConstants.CHK_HALF_ALPHA_NUM, MessageConstants.ITEM_DB_NAME);
+                string msg = String.Format(MessageConstants.CHK_HALF_ALPHA_NUM_SYMBOL, MessageConstants.ITEM_DB_NAME);
                 MessageBox.Show(msg, MessageConstants.MSG_CAPTION_002, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }

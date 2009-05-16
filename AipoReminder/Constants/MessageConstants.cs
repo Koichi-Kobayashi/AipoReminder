@@ -28,7 +28,8 @@ namespace AipoReminder.Constants
         public const string CHK_HALF_LENGTH = "{0}は半角{1}文字で入力して下さい。";
 
         // 文字種
-        public const string CHK_HALF_ALPHA_NUM = "{0}は半角英数字で入力して下さい。";
+        public const string CHK_HALF_ALPHA_NUM_SYMBOL = "{0}は半角英数記号で入力して下さい。";
+        public const string CHK_HALF_NUM = "{0}は半角英数で入力して下さい。";
         public const string CHK_URL = "{0}は「http」で始まる文字列を入力して下さい。";
 
         // 伝言メモ
