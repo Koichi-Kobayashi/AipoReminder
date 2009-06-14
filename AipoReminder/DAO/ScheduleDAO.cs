@@ -38,7 +38,6 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("        on t1.user_id = t3.user_id");
             sqlbldr.AppendLine("where 1 = 1");
             sqlbldr.AppendLine("and t1.user_id = :user_id");
-            sqlbldr.AppendLine("and t2.public_flag in ('O', 'C', 'P')");
             sqlbldr.AppendLine("and t2.start_date = :start_date");
             sqlbldr.AppendLine("and t2.repeat_pattern = 'N'");
 
@@ -60,7 +59,6 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("        on t1.user_id = t3.user_id");
             sqlbldr.AppendLine("where 1 = 1");
             sqlbldr.AppendLine("and t1.user_id = :user_id");
-            sqlbldr.AppendLine("and t2.public_flag in ('O', 'C', 'P')");
             sqlbldr.AppendLine("and t2.start_date like :like_start_date");
             sqlbldr.AppendLine("and t2.repeat_pattern = 'DN'");
 
