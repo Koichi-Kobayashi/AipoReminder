@@ -22,6 +22,7 @@ namespace AipoReminder.DAO
         {
             System.Text.StringBuilder sqlbldr = new System.Text.StringBuilder();
 
+            // 単発スケジュール
             sqlbldr.AppendLine("select");
             sqlbldr.AppendLine(" t1.schedule_id");
             sqlbldr.AppendLine(", t2.name");
@@ -36,10 +37,14 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("    left join turbine_user t3");
             sqlbldr.AppendLine("        on t1.user_id = t3.user_id");
             sqlbldr.AppendLine("where 1 = 1");
-            sqlbldr.AppendLine("and t2.public_flag = :public_flag");
+            sqlbldr.AppendLine("and t1.user_id = :user_id");
+            sqlbldr.AppendLine("and t2.public_flag in ('O', 'C', 'P')");
             sqlbldr.AppendLine("and t2.start_date = :start_date");
             sqlbldr.AppendLine("and t2.repeat_pattern = 'N'");
+
             sqlbldr.AppendLine("union all");
+
+            // 毎日繰り返すスケジュール
             sqlbldr.AppendLine("select");
             sqlbldr.AppendLine(" t1.schedule_id");
             sqlbldr.AppendLine(", t2.name");
@@ -54,7 +59,8 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("    left join turbine_user t3");
             sqlbldr.AppendLine("        on t1.user_id = t3.user_id");
             sqlbldr.AppendLine("where 1 = 1");
-            sqlbldr.AppendLine("and t2.public_flag = :public_flag");
+            sqlbldr.AppendLine("and t1.user_id = :user_id");
+            sqlbldr.AppendLine("and t2.public_flag in ('O', 'C', 'P')");
             sqlbldr.AppendLine("and t2.start_date like :like_start_date");
             sqlbldr.AppendLine("and t2.repeat_pattern = 'DN'");
 
@@ -64,10 +70,6 @@ namespace AipoReminder.DAO
             if (!String.IsNullOrEmpty(param.user_id))
             {
                 paramList.Add(DBUtility.MakeParameter("user_id", param.user_id, NpgsqlDbType.Integer));
-            }
-            if (!String.IsNullOrEmpty(param.public_flag))
-            {
-                paramList.Add(DBUtility.MakeParameter("public_flag", param.public_flag, NpgsqlDbType.Varchar));
             }
             if (!String.IsNullOrEmpty(param.start_date))
             {

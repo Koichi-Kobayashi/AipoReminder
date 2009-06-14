@@ -162,7 +162,6 @@ namespace AipoReminder.Utility
             ScheduleDataSet.search_eip_t_scheduleRow paramRow = data.search_eip_t_schedule.Newsearch_eip_t_scheduleRow();
 
             paramRow.user_id = SettingManager.UserId;
-            paramRow.public_flag = DBConstants.PUBLIC_FLAG_OPEN;
             paramRow.start_date = start_date;
 
             data.search_eip_t_schedule.Rows.Add(paramRow);
@@ -194,9 +193,9 @@ namespace AipoReminder.Utility
                     }
                     sb.AppendLine("【" + row.name + "】");
                     sb.AppendLine(row.start_date.Substring(11, 5) + "～" + row.end_date.Substring(11, 5));
-                    sb.AppendLine("参加者");
+//                    sb.AppendLine("参加者");
                 }
-                sb.AppendLine(row.last_name + " " + row.first_name);
+//                sb.AppendLine(row.last_name + " " + row.first_name);
 
                 scheduleId = row.schedule_id;
             }

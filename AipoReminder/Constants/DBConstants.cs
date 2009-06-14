@@ -3,8 +3,9 @@ namespace AipoReminder.Constants
 {
     class DBConstants
     {
-        public const string PUBLIC_FLAG_OPEN = "O";
-        public const string PUBLIC_FLAG_CLOSED = "C";
+        public const string PUBLIC_FLAG_OPEN = "O";             // 公開
+        public const string PUBLIC_FLAG_CLOSED = "C";           // 非公開
+        public const string PUBLIC_FLAG_PRIVATE = "P";          // 完全に非公開
 
         /* ポートレットタイプ */
         public static int WHATS_NEW_TYPE_BLOG_ENTRY = 1;        // ブログ
