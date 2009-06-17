@@ -163,6 +163,7 @@ namespace AipoReminder.Utility
 
             paramRow.user_id = SettingManager.UserId;
             paramRow.start_date = start_date;
+            paramRow.check_time = SettingManager.CheckTime.ToString();
 
             data.search_eip_t_schedule.Rows.Add(paramRow);
 
@@ -192,7 +193,8 @@ namespace AipoReminder.Utility
                         sb.AppendLine("");
                     }
                     sb.AppendLine("【" + row.name + "】");
-                    sb.AppendLine(row.start_date.Substring(11, 5) + "～" + row.end_date.Substring(11, 5));
+                    sb.AppendLine(String.Format("{0:D2}", row.start_date.Hour) + ":" + String.Format("{0:D2}", row.start_date.Minute) + "～" + String.Format("{0:D2}", row.end_date.Hour) + ":" + String.Format("{0:D2}", row.end_date.Minute));
+//                    sb.AppendLine(row.start_date.Substring(11, 5) + "～" + row.end_date.Substring(11, 5));
 //                    sb.AppendLine("参加者");
                 }
 //                sb.AppendLine(row.last_name + " " + row.first_name);

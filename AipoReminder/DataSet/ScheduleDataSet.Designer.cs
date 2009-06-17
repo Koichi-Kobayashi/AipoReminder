@@ -452,7 +452,7 @@ namespace AipoReminder.DataSet {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public eip_t_scheduleRow Addeip_t_scheduleRow(string schedule_id, string user_id, string last_name, string first_name, string start_date, string end_date, string name, string place, string note, string public_flag, string edit_flag) {
+            public eip_t_scheduleRow Addeip_t_scheduleRow(string schedule_id, string user_id, string last_name, string first_name, System.DateTime start_date, System.DateTime end_date, string name, string place, string note, string public_flag, string edit_flag) {
                 eip_t_scheduleRow roweip_t_scheduleRow = ((eip_t_scheduleRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         schedule_id,
@@ -508,9 +508,9 @@ namespace AipoReminder.DataSet {
                 base.Columns.Add(this.columnlast_name);
                 this.columnfirst_name = new global::System.Data.DataColumn("first_name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfirst_name);
-                this.columnstart_date = new global::System.Data.DataColumn("start_date", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnstart_date = new global::System.Data.DataColumn("start_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstart_date);
-                this.columnend_date = new global::System.Data.DataColumn("end_date", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnend_date = new global::System.Data.DataColumn("end_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnend_date);
                 this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnname);
@@ -529,8 +529,8 @@ namespace AipoReminder.DataSet {
                 this.columnuser_id.DefaultValue = ((string)(""));
                 this.columnlast_name.DefaultValue = ((string)(""));
                 this.columnfirst_name.DefaultValue = ((string)(""));
-                this.columnstart_date.DefaultValue = ((string)(""));
-                this.columnend_date.DefaultValue = ((string)(""));
+                this.columnstart_date.Caption = "start_date1";
+                this.columnend_date.Caption = "end_date2";
                 this.columnname.DefaultValue = ((string)(""));
                 this.columnname.MaxLength = 99;
                 this.columnplace.DefaultValue = ((string)(""));
@@ -674,6 +674,8 @@ namespace AipoReminder.DataSet {
             
             private global::System.Data.DataColumn columnedit_flag;
             
+            private global::System.Data.DataColumn columncheck_time;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public search_eip_t_scheduleDataTable() {
                 this.TableName = "search_eip_t_schedule";
@@ -733,6 +735,13 @@ namespace AipoReminder.DataSet {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn check_timeColumn {
+                get {
+                    return this.columncheck_time;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -761,13 +770,14 @@ namespace AipoReminder.DataSet {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public search_eip_t_scheduleRow Addsearch_eip_t_scheduleRow(string user_id, string start_date, string public_flag, string edit_flag) {
+            public search_eip_t_scheduleRow Addsearch_eip_t_scheduleRow(string user_id, string start_date, string public_flag, string edit_flag, string check_time) {
                 search_eip_t_scheduleRow rowsearch_eip_t_scheduleRow = ((search_eip_t_scheduleRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         user_id,
                         start_date,
                         public_flag,
-                        edit_flag};
+                        edit_flag,
+                        check_time};
                 rowsearch_eip_t_scheduleRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsearch_eip_t_scheduleRow);
                 return rowsearch_eip_t_scheduleRow;
@@ -791,6 +801,7 @@ namespace AipoReminder.DataSet {
                 this.columnstart_date = base.Columns["start_date"];
                 this.columnpublic_flag = base.Columns["public_flag"];
                 this.columnedit_flag = base.Columns["edit_flag"];
+                this.columncheck_time = base.Columns["check_time"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -803,10 +814,13 @@ namespace AipoReminder.DataSet {
                 base.Columns.Add(this.columnpublic_flag);
                 this.columnedit_flag = new global::System.Data.DataColumn("edit_flag", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnedit_flag);
+                this.columncheck_time = new global::System.Data.DataColumn("check_time", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncheck_time);
                 this.columnuser_id.DefaultValue = ((string)(""));
                 this.columnstart_date.DefaultValue = ((string)(""));
                 this.columnpublic_flag.DefaultValue = ((string)(""));
                 this.columnedit_flag.DefaultValue = ((string)(""));
+                this.columncheck_time.DefaultValue = ((string)(""));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -994,13 +1008,13 @@ namespace AipoReminder.DataSet {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string start_date {
+            public System.DateTime start_date {
                 get {
-                    if (this.Isstart_dateNull()) {
-                        return string.Empty;
+                    try {
+                        return ((global::System.DateTime)(this[this.tableeip_t_schedule.start_dateColumn]));
                     }
-                    else {
-                        return ((string)(this[this.tableeip_t_schedule.start_dateColumn]));
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'eip_t_schedule\' にある列 \'start_date\' の値は DBNull です。", e);
                     }
                 }
                 set {
@@ -1009,13 +1023,13 @@ namespace AipoReminder.DataSet {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string end_date {
+            public System.DateTime end_date {
                 get {
-                    if (this.Isend_dateNull()) {
-                        return string.Empty;
+                    try {
+                        return ((global::System.DateTime)(this[this.tableeip_t_schedule.end_dateColumn]));
                     }
-                    else {
-                        return ((string)(this[this.tableeip_t_schedule.end_dateColumn]));
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("テーブル \'eip_t_schedule\' にある列 \'end_date\' の値は DBNull です。", e);
                     }
                 }
                 set {
@@ -1274,6 +1288,21 @@ namespace AipoReminder.DataSet {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string check_time {
+                get {
+                    if (this.Ischeck_timeNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tablesearch_eip_t_schedule.check_timeColumn]));
+                    }
+                }
+                set {
+                    this[this.tablesearch_eip_t_schedule.check_timeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool Isuser_idNull() {
                 return this.IsNull(this.tablesearch_eip_t_schedule.user_idColumn);
             }
@@ -1311,6 +1340,16 @@ namespace AipoReminder.DataSet {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void Setedit_flagNull() {
                 this[this.tablesearch_eip_t_schedule.edit_flagColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Ischeck_timeNull() {
+                return this.IsNull(this.tablesearch_eip_t_schedule.check_timeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setcheck_timeNull() {
+                this[this.tablesearch_eip_t_schedule.check_timeColumn] = global::System.Convert.DBNull;
             }
         }
         
