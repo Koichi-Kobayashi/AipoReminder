@@ -599,7 +599,8 @@ namespace AipoReminder
         /// <param name="e"></param>
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            this.ActiveWindow();
+            this.AnimatedTasktrayIcon(false);
+            this.ShowAipoTopPage();
         }
 
         /// <summary>
