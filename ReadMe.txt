@@ -94,7 +94,7 @@
       可しているため、AipoリマインダーをクライアントPCにインストールしても
       Aipoに接続出来ないというエラーが表示されます。
 
-  ４．PostgreSQLの設定変更について
+  ４．PostgreSQLの設定変更について(Windowsの場合)
       ここから先はPostgreSQLの知識がある方が行って下さい。
 
       AipoがEドライブにインストールされている場合は以下のように設定します。
@@ -125,6 +125,59 @@
       E:\aipo\dpl003\postgresql\bin に移動したあと、
       以下のコマンドを実行して下さい。
 
+      psql -d org001 -U aipo_postgres
+
+      PostgreSQLに接続出来たら、以下のコマンドを順に実行して下さい。
+
+      CREATE ROLE aipo_reminder WITH LOGIN PASSWORD 'reminder';
+      GRANT SELECT ON eip_t_schedule_map TO aipo_reminder;
+      GRANT SELECT ON eip_t_schedule TO aipo_reminder;
+      GRANT SELECT ON turbine_user TO aipo_reminder;
+      GRANT SELECT ON eip_t_whatsnew TO aipo_reminder;
+      GRANT SELECT ON eip_t_blog_entry TO aipo_reminder;
+      GRANT SELECT ON eip_t_blog_comment TO aipo_reminder;
+      GRANT SELECT ON eip_t_workflow_request_map TO aipo_reminder;
+      GRANT SELECT ON eip_t_workflow_request TO aipo_reminder;
+      GRANT SELECT ON eip_t_workflow_category TO aipo_reminder;
+      GRANT SELECT ON eip_t_msgboard_topic TO aipo_reminder;
+      GRANT SELECT ON eip_t_note TO aipo_reminder;
+
+      \q で切断します。
+
+  ５．PostgreSQLの設定変更について(Linuxの場合)
+      ここから先はPostgreSQLの知識がある方が行って下さい。
+
+      Aipoが /usr/local/aipo にインストールされている場合は以下のように設定します。
+      IPアドレスなどは環境に合わせて変更して下さい。
+
+      【postgresql.confの修正】
+      vi /usr/local/aipo/postgres/data/postgresql.conf
+
+      49行目
+      #listen_addresses = 'localhost'
+      ↓
+      listen_addresses = '*'
+
+      【pg_hba.confの修正】
+      vi /usr/local/aipo/postgres/data/pg_hba.conf
+      以下の設定を追加(192.168.24.0/24のネットワークの場合)
+
+      host    all         aipo_reminder         192.168.24.0/24       md5
+
+      【ロールの追加と権限の付与】
+      AipoがインストールされているPostgreSQLに対して以下のコマンドを実行し
+      て下さい。
+      (aipo_reminderの名前やパスワードについては、変更して頂いて構いません
+      が、その場合は、Aipoリマインダーの「DB設定」のユーザIDやパスワードも
+      合わせて修正して下さい。)
+
+      Aipoが起動されていない場合は以下のコマンドで起動させて下さい。
+      /usr/local/aipo/bin/startup.sh
+
+      以下のコマンドでaipo_postgresユーザになります。
+      su - aipo_postgres
+
+      PostgreSQLに接続します。
       psql -d org001 -U aipo_postgres
 
       PostgreSQLに接続出来たら、以下のコマンドを順に実行して下さい。
@@ -177,9 +230,29 @@
 ---------------------------------------------------------------------------
 --  改版履歴  -------------------------------------------------------------
 ---------------------------------------------------------------------------
+■ Ver 1.0.2 (2009/06/18)
+　【バグ】
+　・他人のスケジュールもバルーンに表示されていた可能性があったのを修正した
+　・非公開、完全に隠すスケジュールのお知らせがバルーンに表示されていなかっ
+　　たバグを修正した
+
+　【機能追加】
+　・繰り返しスケジュールに対応した
+
+　【変更】
+　・タスクトレイのアイコンをダブルクリックしたときにブラウザを開くようにした
+　・もうすぐ始まる予定に参加者を表示しないようにした
+
+　【その他】
+　・ReadMe.txt(今開いているファイル)にLinux上のPostgreSQLの設定変更方法を追
+　　加した
+
 ■ Ver 1.0.1 (2009/05/17)
-　・ありえないバグを修正(必ず入力チェックエラーとなる)
-　・Npgsqlのバージョンを2.0.5にアップデート
+　【バグ】
+　・ありえないバグを修正した(必ず入力チェックエラーとなる)
+
+　【変更】
+　・Npgsqlのバージョンを2.0.5にアップデートした
 
 ■ Ver 1.0.0 (2009/04/20)
 　・初版
