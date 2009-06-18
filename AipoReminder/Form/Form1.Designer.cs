@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.buttonDataReset = new System.Windows.Forms.Button();
             this.buttonDataSave = new System.Windows.Forms.Button();
             this.textBoxUserName = new System.Windows.Forms.TextBox();
@@ -40,7 +41,22 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.buttonInfoSettings = new System.Windows.Forms.Button();
+            this.checkBoxAutoLogin = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutoRun = new System.Windows.Forms.CheckBox();
+            this.comboBoxCheckTime = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBoxMemo = new System.Windows.Forms.CheckBox();
+            this.checkBoxWorkflow = new System.Windows.Forms.CheckBox();
+            this.checkBoxSchedule = new System.Windows.Forms.CheckBox();
+            this.checkBoxMsgboard = new System.Windows.Forms.CheckBox();
+            this.checkBoxBlogComment = new System.Windows.Forms.CheckBox();
+            this.checkBoxBlog = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxDbName = new System.Windows.Forms.TextBox();
             this.textBoxDbPassword = new System.Windows.Forms.TextBox();
@@ -60,7 +76,6 @@
             this.textBoxSystemInfo2 = new System.Windows.Forms.TextBox();
             this.textBoxSystemInfo1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.timerWhatsnew = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -70,30 +85,15 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.終了ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerTasktrayIcon = new System.Windows.Forms.Timer(this.components);
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBoxMemo = new System.Windows.Forms.CheckBox();
-            this.checkBoxWorkflow = new System.Windows.Forms.CheckBox();
-            this.checkBoxSchedule = new System.Windows.Forms.CheckBox();
-            this.checkBoxMsgboard = new System.Windows.Forms.CheckBox();
-            this.checkBoxBlogComment = new System.Windows.Forms.CheckBox();
-            this.checkBoxBlog = new System.Windows.Forms.CheckBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.comboBoxCheckTime = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.checkBoxAutoRun = new System.Windows.Forms.CheckBox();
-            this.checkBoxAutoLogin = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.buttonInfoSettings = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tabPage4.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -126,6 +126,19 @@
             this.tabPage1.Size = new System.Drawing.Size(370, 195);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "アカウント設定";
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.Moccasin;
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox2.Location = new System.Drawing.Point(15, 12);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(340, 31);
+            this.textBox2.TabIndex = 0;
+            this.textBox2.TabStop = false;
+            this.textBox2.Text = "※チェックする項目などの設定は、お知らせ設定タブで行えます。\r\n※設定ボタンを押すと、DB設定も確定されます。";
             // 
             // buttonDataReset
             // 
@@ -201,6 +214,165 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "パスワード：";
             // 
+            // tabPage4
+            // 
+            this.tabPage4.BackColor = System.Drawing.Color.FloralWhite;
+            this.tabPage4.Controls.Add(this.buttonInfoSettings);
+            this.tabPage4.Controls.Add(this.checkBoxAutoLogin);
+            this.tabPage4.Controls.Add(this.checkBoxAutoRun);
+            this.tabPage4.Controls.Add(this.comboBoxCheckTime);
+            this.tabPage4.Controls.Add(this.label9);
+            this.tabPage4.Controls.Add(this.label13);
+            this.tabPage4.Controls.Add(this.groupBox2);
+            this.tabPage4.Location = new System.Drawing.Point(4, 21);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(370, 195);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "お知らせ設定";
+            // 
+            // buttonInfoSettings
+            // 
+            this.buttonInfoSettings.Location = new System.Drawing.Point(137, 157);
+            this.buttonInfoSettings.Name = "buttonInfoSettings";
+            this.buttonInfoSettings.Size = new System.Drawing.Size(75, 23);
+            this.buttonInfoSettings.TabIndex = 6;
+            this.buttonInfoSettings.Text = "設定";
+            this.buttonInfoSettings.UseVisualStyleBackColor = true;
+            this.buttonInfoSettings.Click += new System.EventHandler(this.buttonInfoSettings_Click);
+            // 
+            // checkBoxAutoLogin
+            // 
+            this.checkBoxAutoLogin.Location = new System.Drawing.Point(7, 104);
+            this.checkBoxAutoLogin.Name = "checkBoxAutoLogin";
+            this.checkBoxAutoLogin.Size = new System.Drawing.Size(133, 32);
+            this.checkBoxAutoLogin.TabIndex = 4;
+            this.checkBoxAutoLogin.Text = "ブラウザ起動時に自動ログインする";
+            this.checkBoxAutoLogin.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxAutoRun
+            // 
+            this.checkBoxAutoRun.Location = new System.Drawing.Point(7, 66);
+            this.checkBoxAutoRun.Name = "checkBoxAutoRun";
+            this.checkBoxAutoRun.Size = new System.Drawing.Size(138, 32);
+            this.checkBoxAutoRun.TabIndex = 3;
+            this.checkBoxAutoRun.Text = "Windows起動時にAipoリマインダーを起動する";
+            this.checkBoxAutoRun.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxCheckTime
+            // 
+            this.comboBoxCheckTime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCheckTime.FormattingEnabled = true;
+            this.comboBoxCheckTime.Items.AddRange(new object[] {
+            "5",
+            "10",
+            "15",
+            "20",
+            "25",
+            "30",
+            "35",
+            "40",
+            "45",
+            "50",
+            "55",
+            "60"});
+            this.comboBoxCheckTime.Location = new System.Drawing.Point(56, 40);
+            this.comboBoxCheckTime.Name = "comboBoxCheckTime";
+            this.comboBoxCheckTime.Size = new System.Drawing.Size(49, 20);
+            this.comboBoxCheckTime.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(111, 43);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(29, 12);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "分前";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(5, 22);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(91, 12);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "スケジュール確認：";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.checkBoxMemo);
+            this.groupBox2.Controls.Add(this.checkBoxWorkflow);
+            this.groupBox2.Controls.Add(this.checkBoxSchedule);
+            this.groupBox2.Controls.Add(this.checkBoxMsgboard);
+            this.groupBox2.Controls.Add(this.checkBoxBlogComment);
+            this.groupBox2.Controls.Add(this.checkBoxBlog);
+            this.groupBox2.Location = new System.Drawing.Point(151, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(216, 148);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "新着情報";
+            // 
+            // checkBoxMemo
+            // 
+            this.checkBoxMemo.AutoSize = true;
+            this.checkBoxMemo.Location = new System.Drawing.Point(6, 128);
+            this.checkBoxMemo.Name = "checkBoxMemo";
+            this.checkBoxMemo.Size = new System.Drawing.Size(175, 16);
+            this.checkBoxMemo.TabIndex = 5;
+            this.checkBoxMemo.Text = "伝言メモの新着メモをチェックする";
+            this.checkBoxMemo.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxWorkflow
+            // 
+            this.checkBoxWorkflow.AutoSize = true;
+            this.checkBoxWorkflow.Location = new System.Drawing.Point(6, 106);
+            this.checkBoxWorkflow.Name = "checkBoxWorkflow";
+            this.checkBoxWorkflow.Size = new System.Drawing.Size(195, 16);
+            this.checkBoxWorkflow.TabIndex = 4;
+            this.checkBoxWorkflow.Text = "ワークフローの新着依頼をチェックする";
+            this.checkBoxWorkflow.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSchedule
+            // 
+            this.checkBoxSchedule.AutoSize = true;
+            this.checkBoxSchedule.Location = new System.Drawing.Point(6, 84);
+            this.checkBoxSchedule.Name = "checkBoxSchedule";
+            this.checkBoxSchedule.Size = new System.Drawing.Size(197, 16);
+            this.checkBoxSchedule.TabIndex = 3;
+            this.checkBoxSchedule.Text = "スケジュールの新着予定をチェックする";
+            this.checkBoxSchedule.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxMsgboard
+            // 
+            this.checkBoxMsgboard.AutoSize = true;
+            this.checkBoxMsgboard.Location = new System.Drawing.Point(6, 62);
+            this.checkBoxMsgboard.Name = "checkBoxMsgboard";
+            this.checkBoxMsgboard.Size = new System.Drawing.Size(204, 16);
+            this.checkBoxMsgboard.TabIndex = 2;
+            this.checkBoxMsgboard.Text = "掲示板の新しい書き込みをチェックする";
+            this.checkBoxMsgboard.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxBlogComment
+            // 
+            this.checkBoxBlogComment.AutoSize = true;
+            this.checkBoxBlogComment.Location = new System.Drawing.Point(6, 40);
+            this.checkBoxBlogComment.Name = "checkBoxBlogComment";
+            this.checkBoxBlogComment.Size = new System.Drawing.Size(177, 16);
+            this.checkBoxBlogComment.TabIndex = 1;
+            this.checkBoxBlogComment.Text = "ブログの新着コメントをチェックする";
+            this.checkBoxBlogComment.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxBlog
+            // 
+            this.checkBoxBlog.AutoSize = true;
+            this.checkBoxBlog.Location = new System.Drawing.Point(6, 18);
+            this.checkBoxBlog.Name = "checkBoxBlog";
+            this.checkBoxBlog.Size = new System.Drawing.Size(168, 16);
+            this.checkBoxBlog.TabIndex = 0;
+            this.checkBoxBlog.Text = "ブログの新着記事をチェックする";
+            this.checkBoxBlog.UseVisualStyleBackColor = true;
+            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FloralWhite;
@@ -221,6 +393,19 @@
             this.tabPage2.Size = new System.Drawing.Size(370, 195);
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "DB設定";
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.Moccasin;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Location = new System.Drawing.Point(15, 12);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(340, 31);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.TabStop = false;
+            this.textBox1.Text = "※ほとんどの場合変更する必要はありませんが、\r\n   変更するときは、アカウント設定タブでリセットボタンを押して下さい。";
             // 
             // label6
             // 
@@ -406,22 +591,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // tabPage4
-            // 
-            this.tabPage4.BackColor = System.Drawing.Color.FloralWhite;
-            this.tabPage4.Controls.Add(this.buttonInfoSettings);
-            this.tabPage4.Controls.Add(this.checkBoxAutoLogin);
-            this.tabPage4.Controls.Add(this.checkBoxAutoRun);
-            this.tabPage4.Controls.Add(this.comboBoxCheckTime);
-            this.tabPage4.Controls.Add(this.label9);
-            this.tabPage4.Controls.Add(this.label13);
-            this.tabPage4.Controls.Add(this.groupBox2);
-            this.tabPage4.Location = new System.Drawing.Point(4, 21);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(370, 195);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "お知らせ設定";
-            // 
             // timerWhatsnew
             // 
             this.timerWhatsnew.Enabled = true;
@@ -488,175 +657,6 @@
             // 
             this.timerTasktrayIcon.Tick += new System.EventHandler(this.timerTasktrayIcon_Tick);
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.checkBoxMemo);
-            this.groupBox2.Controls.Add(this.checkBoxWorkflow);
-            this.groupBox2.Controls.Add(this.checkBoxSchedule);
-            this.groupBox2.Controls.Add(this.checkBoxMsgboard);
-            this.groupBox2.Controls.Add(this.checkBoxBlogComment);
-            this.groupBox2.Controls.Add(this.checkBoxBlog);
-            this.groupBox2.Location = new System.Drawing.Point(151, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(216, 148);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "新着情報";
-            // 
-            // checkBoxMemo
-            // 
-            this.checkBoxMemo.AutoSize = true;
-            this.checkBoxMemo.Location = new System.Drawing.Point(6, 128);
-            this.checkBoxMemo.Name = "checkBoxMemo";
-            this.checkBoxMemo.Size = new System.Drawing.Size(175, 16);
-            this.checkBoxMemo.TabIndex = 5;
-            this.checkBoxMemo.Text = "伝言メモの新着メモをチェックする";
-            this.checkBoxMemo.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxWorkflow
-            // 
-            this.checkBoxWorkflow.AutoSize = true;
-            this.checkBoxWorkflow.Location = new System.Drawing.Point(6, 106);
-            this.checkBoxWorkflow.Name = "checkBoxWorkflow";
-            this.checkBoxWorkflow.Size = new System.Drawing.Size(195, 16);
-            this.checkBoxWorkflow.TabIndex = 4;
-            this.checkBoxWorkflow.Text = "ワークフローの新着依頼をチェックする";
-            this.checkBoxWorkflow.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxSchedule
-            // 
-            this.checkBoxSchedule.AutoSize = true;
-            this.checkBoxSchedule.Location = new System.Drawing.Point(6, 84);
-            this.checkBoxSchedule.Name = "checkBoxSchedule";
-            this.checkBoxSchedule.Size = new System.Drawing.Size(197, 16);
-            this.checkBoxSchedule.TabIndex = 3;
-            this.checkBoxSchedule.Text = "スケジュールの新着予定をチェックする";
-            this.checkBoxSchedule.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxMsgboard
-            // 
-            this.checkBoxMsgboard.AutoSize = true;
-            this.checkBoxMsgboard.Location = new System.Drawing.Point(6, 62);
-            this.checkBoxMsgboard.Name = "checkBoxMsgboard";
-            this.checkBoxMsgboard.Size = new System.Drawing.Size(204, 16);
-            this.checkBoxMsgboard.TabIndex = 2;
-            this.checkBoxMsgboard.Text = "掲示板の新しい書き込みをチェックする";
-            this.checkBoxMsgboard.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxBlogComment
-            // 
-            this.checkBoxBlogComment.AutoSize = true;
-            this.checkBoxBlogComment.Location = new System.Drawing.Point(6, 40);
-            this.checkBoxBlogComment.Name = "checkBoxBlogComment";
-            this.checkBoxBlogComment.Size = new System.Drawing.Size(177, 16);
-            this.checkBoxBlogComment.TabIndex = 1;
-            this.checkBoxBlogComment.Text = "ブログの新着コメントをチェックする";
-            this.checkBoxBlogComment.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxBlog
-            // 
-            this.checkBoxBlog.AutoSize = true;
-            this.checkBoxBlog.Location = new System.Drawing.Point(6, 18);
-            this.checkBoxBlog.Name = "checkBoxBlog";
-            this.checkBoxBlog.Size = new System.Drawing.Size(168, 16);
-            this.checkBoxBlog.TabIndex = 0;
-            this.checkBoxBlog.Text = "ブログの新着記事をチェックする";
-            this.checkBoxBlog.UseVisualStyleBackColor = true;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(5, 22);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(91, 12);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "スケジュール確認：";
-            // 
-            // comboBoxCheckTime
-            // 
-            this.comboBoxCheckTime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCheckTime.FormattingEnabled = true;
-            this.comboBoxCheckTime.Items.AddRange(new object[] {
-            "5",
-            "10",
-            "15",
-            "20",
-            "25",
-            "30",
-            "35",
-            "40",
-            "45",
-            "50",
-            "55",
-            "60"});
-            this.comboBoxCheckTime.Location = new System.Drawing.Point(56, 40);
-            this.comboBoxCheckTime.Name = "comboBoxCheckTime";
-            this.comboBoxCheckTime.Size = new System.Drawing.Size(49, 20);
-            this.comboBoxCheckTime.TabIndex = 1;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(111, 43);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(29, 12);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "分前";
-            // 
-            // checkBoxAutoRun
-            // 
-            this.checkBoxAutoRun.Location = new System.Drawing.Point(7, 66);
-            this.checkBoxAutoRun.Name = "checkBoxAutoRun";
-            this.checkBoxAutoRun.Size = new System.Drawing.Size(138, 32);
-            this.checkBoxAutoRun.TabIndex = 3;
-            this.checkBoxAutoRun.Text = "Windows起動時にAipoリマインダーを起動する";
-            this.checkBoxAutoRun.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxAutoLogin
-            // 
-            this.checkBoxAutoLogin.Location = new System.Drawing.Point(7, 104);
-            this.checkBoxAutoLogin.Name = "checkBoxAutoLogin";
-            this.checkBoxAutoLogin.Size = new System.Drawing.Size(133, 32);
-            this.checkBoxAutoLogin.TabIndex = 4;
-            this.checkBoxAutoLogin.Text = "ブラウザ起動時に自動ログインする";
-            this.checkBoxAutoLogin.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.Moccasin;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(15, 12);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(340, 31);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TabStop = false;
-            this.textBox1.Text = "※ほとんどの場合変更する必要はありませんが、\r\n   変更するときは、アカウント設定タブでリセットボタンを押して下さい。";
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.Color.Moccasin;
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Location = new System.Drawing.Point(15, 12);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(340, 31);
-            this.textBox2.TabIndex = 0;
-            this.textBox2.TabStop = false;
-            this.textBox2.Text = "※チェックする項目などの設定は、お知らせ設定タブで行えます。\r\n※保存ボタンを押すと、DB設定も確定されます。";
-            // 
-            // buttonInfoSettings
-            // 
-            this.buttonInfoSettings.Location = new System.Drawing.Point(137, 157);
-            this.buttonInfoSettings.Name = "buttonInfoSettings";
-            this.buttonInfoSettings.Size = new System.Drawing.Size(75, 23);
-            this.buttonInfoSettings.TabIndex = 6;
-            this.buttonInfoSettings.Text = "設定";
-            this.buttonInfoSettings.UseVisualStyleBackColor = true;
-            this.buttonInfoSettings.Click += new System.EventHandler(this.buttonInfoSettings_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -675,6 +675,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -682,11 +686,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
