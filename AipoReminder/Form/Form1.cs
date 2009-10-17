@@ -124,7 +124,8 @@ namespace AipoReminder
             // バージョン情報
             Assembly asm = Assembly.GetExecutingAssembly();
             Version ver = asm.GetName().Version;
-            textBoxVersionInfo.Text = Application.ProductName + " Version " + ver.Major + "." + ver.Minor + "." + ver.Build;
+//            textBoxVersionInfo.Text = Application.ProductName + " Version " + ver.Major + "." + ver.Minor + "." + ver.Build;
+            textBoxVersionInfo.Text = Application.ProductName + " Version " + Application.ProductVersion;
             textBoxSystemInfo1.Text = Application.ProductName + " Core Version " + Application.ProductVersion;
             textBoxSystemInfo2.Text = "Operating System Version ";
             textBoxSystemInfo3.Text = System.Environment.OSVersion.VersionString;

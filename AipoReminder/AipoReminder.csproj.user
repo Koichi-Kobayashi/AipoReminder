@@ -16,4 +16,8 @@
     <VerifyUploadedFiles>true</VerifyUploadedFiles>
     <ReferencePath>D:\products\Visual Studio 2008\AipoReminder\AipoReminder\lib\</ReferencePath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <StartArguments>
+    </StartArguments>
+  </PropertyGroup>
 </Project>
