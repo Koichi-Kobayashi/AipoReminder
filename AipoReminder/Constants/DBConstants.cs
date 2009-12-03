@@ -14,5 +14,8 @@ namespace AipoReminder.Constants
         public static int WHATS_NEW_TYPE_MSGBOARD_TOPIC = 4;    // 掲示板
         public static int WHATS_NEW_TYPE_NOTE = 5;              // 伝言メモ
         public static int WHATS_NEW_TYPE_SCHEDULE = 6;          // スケジュール
+
+        public static int AIPO_VERSION_4 = 4;        // Aipoバージョン
+        public static int AIPO_VERSION_5 = 5;        // Aipoバージョン
     }
 }

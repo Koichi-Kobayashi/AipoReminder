@@ -24,6 +24,11 @@ namespace AipoReminder.Utility
         private static string m_userPassword;
 
         /// <summary>
+        /// Aipoバージョン
+        /// </summary>
+        private static int m_aipoVersion;
+
+        /// <summary>
         /// 定期チェック(分)
         /// </summary>
         private static int m_checkTime;
@@ -108,6 +113,7 @@ namespace AipoReminder.Utility
             m_userId = Properties.Settings.Default.userId;
             m_loginName = Properties.Settings.Default.loginName;
             m_userPassword = Properties.Settings.Default.userPassword;
+            m_aipoVersion = Properties.Settings.Default.aipoVersion;
             m_checkTime = Properties.Settings.Default.checkTime;
             m_url = Properties.Settings.Default.url;
             m_checkAutoRun = Properties.Settings.Default.checkAutoRun;
@@ -175,6 +181,21 @@ namespace AipoReminder.Utility
                     return Security.UnEncryptData(m_userPassword);
                 }
             }        
+        }
+
+        /// <summary>
+        /// Aipoバージョンを取得または設定する
+        /// </summary>
+        public static int AipoVersion
+        {
+            set
+            {
+                m_aipoVersion = value;
+            }
+            get
+            {
+                return m_aipoVersion;
+            }
         }
 
         /// <summary>
@@ -440,6 +461,7 @@ namespace AipoReminder.Utility
                 Properties.Settings.Default.loginName = SettingManager.LoginName;
                 Properties.Settings.Default.userPassword = Security.EncryptData(SettingManager.UserPassword);
                 Properties.Settings.Default.url = SettingManager.URL;
+                Properties.Settings.Default.aipoVersion = SettingManager.AipoVersion;
 
                 Properties.Settings.Default.NpgsqlConnectionServer = SettingManager.NpgsqlConnectionServer;
                 Properties.Settings.Default.NpgsqlConnectionPort = SettingManager.NpgsqlConnectionPort;

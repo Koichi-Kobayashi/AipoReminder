@@ -108,35 +108,71 @@ namespace AipoReminder.DAO
         {
             System.Text.StringBuilder sqlbldr = new System.Text.StringBuilder();
 
-            sqlbldr.AppendLine("select ");
-            sqlbldr.AppendLine(" t1.whatsnew_id");
-            sqlbldr.AppendLine(", t2.request_name");
-            sqlbldr.AppendLine(", t3.category_name");
-            sqlbldr.AppendLine(", t4.last_name");
-            sqlbldr.AppendLine(", t4.first_name");
-            sqlbldr.AppendLine(", to_char(t1.update_date, 'YYYY/MM/DD') as update_date");
-            sqlbldr.AppendLine("from eip_t_whatsnew t1");
-            sqlbldr.AppendLine("    join eip_t_workflow_request t2");
-            sqlbldr.AppendLine("        on t1.entity_id = t2.request_id");
-            sqlbldr.AppendLine("    left join eip_t_workflow_category t3");
-            sqlbldr.AppendLine("        on t2.category_id = t3.category_id");
-            sqlbldr.AppendLine("    left join turbine_user t4");
-            sqlbldr.AppendLine("        on t1.user_id = t4.user_id");
-            sqlbldr.AppendLine("where 1 = 1");
-            sqlbldr.AppendLine("and t1.user_id = :user_id");
-            sqlbldr.AppendLine("and t1.portlet_type = " + DBConstants.WHATS_NEW_TYPE_WORKFLOW_REQUEST);
-            sqlbldr.AppendLine("and t2.request_id in ");
-            sqlbldr.AppendLine("    (");
-            sqlbldr.AppendLine("        select");
-            sqlbldr.AppendLine("         t1.entity_id");
-            sqlbldr.AppendLine("        from eip_t_whatsnew t1");
-            sqlbldr.AppendLine("        where 1 = 1");
-            sqlbldr.AppendLine("        and t1.user_id = :user_id");
-            sqlbldr.AppendLine("        and t1.portlet_type = " + DBConstants.WHATS_NEW_TYPE_WORKFLOW_REQUEST);
-            sqlbldr.AppendLine("    )");
-            sqlbldr.AppendLine("order by t1.update_date desc");
-            sqlbldr.AppendLine("");
-
+            if (SettingManager.AipoVersion == DBConstants.AIPO_VERSION_5)
+            {
+                sqlbldr.AppendLine("select ");
+                sqlbldr.AppendLine(" t1.whatsnew_id");
+                sqlbldr.AppendLine(", t2.request_name");
+                sqlbldr.AppendLine(", t3.category_name");
+                sqlbldr.AppendLine(", t4.last_name");
+                sqlbldr.AppendLine(", t4.first_name");
+                sqlbldr.AppendLine(", to_char(t1.update_date, 'YYYY/MM/DD') as update_date");
+                sqlbldr.AppendLine("from eip_t_whatsnew t1");
+                sqlbldr.AppendLine("    join eip_t_workflow_request t2");
+                sqlbldr.AppendLine("        on t1.entity_id = t2.request_id");
+                sqlbldr.AppendLine("    left join eip_t_workflow_category t3");
+                sqlbldr.AppendLine("        on t2.category_id = t3.category_id");
+                sqlbldr.AppendLine("    left join turbine_user t4");
+                sqlbldr.AppendLine("        on t1.user_id = t4.user_id");
+                sqlbldr.AppendLine("where 1 = 1");
+                sqlbldr.AppendLine("and t1.user_id = :user_id");
+                sqlbldr.AppendLine("and t1.portlet_type = " + DBConstants.WHATS_NEW_TYPE_WORKFLOW_REQUEST);
+                sqlbldr.AppendLine("and t2.request_id in ");
+                sqlbldr.AppendLine("    (");
+                sqlbldr.AppendLine("        select");
+                sqlbldr.AppendLine("         t1.entity_id");
+                sqlbldr.AppendLine("        from eip_t_whatsnew t1");
+                sqlbldr.AppendLine("        where 1 = 1");
+                sqlbldr.AppendLine("        and t1.user_id = :user_id");
+                sqlbldr.AppendLine("        and t1.portlet_type = " + DBConstants.WHATS_NEW_TYPE_WORKFLOW_REQUEST);
+                sqlbldr.AppendLine("    )");
+                sqlbldr.AppendLine("order by t1.update_date desc");
+                sqlbldr.AppendLine("");
+            }
+            else if (SettingManager.AipoVersion == DBConstants.AIPO_VERSION_4)
+            {
+                sqlbldr.AppendLine("select ");
+                sqlbldr.AppendLine(" t1.whatsnew_id");
+                sqlbldr.AppendLine(", t3.request_name");
+                sqlbldr.AppendLine(", t4.category_name");
+                sqlbldr.AppendLine(", t5.last_name");
+                sqlbldr.AppendLine(", t5.first_name");
+                sqlbldr.AppendLine(", to_char(t2.update_date, 'YYYY/MM/DD') as update_date");
+                sqlbldr.AppendLine("from eip_t_whatsnew t1");
+                sqlbldr.AppendLine("    join eip_t_workflow_request_map t2");
+                sqlbldr.AppendLine("        on t2.request_id = t1.entity_id");
+                sqlbldr.AppendLine("    join eip_t_workflow_request t3");
+                sqlbldr.AppendLine("        on t2.request_id = t3.request_id");
+                sqlbldr.AppendLine("    left join eip_t_workflow_category t4");
+                sqlbldr.AppendLine("        on t3.category_id = t4.category_id");
+                sqlbldr.AppendLine("    left join turbine_user t5");
+                sqlbldr.AppendLine("        on t2.user_id = t5.user_id");
+                sqlbldr.AppendLine("where 1 = 1");
+                sqlbldr.AppendLine("and t1.user_id = :user_id");
+                sqlbldr.AppendLine("and t1.portlet_type = " + DBConstants.WHATS_NEW_TYPE_WORKFLOW_REQUEST);
+                sqlbldr.AppendLine("and t2.user_id != :user_id");
+                sqlbldr.AppendLine("and t2.request_id in ");
+                sqlbldr.AppendLine("    (");
+                sqlbldr.AppendLine("        select");
+                sqlbldr.AppendLine("         t1.entity_id");
+                sqlbldr.AppendLine("        from eip_t_whatsnew t1");
+                sqlbldr.AppendLine("        where 1 = 1");
+                sqlbldr.AppendLine("        and t1.user_id = :user_id");
+                sqlbldr.AppendLine("        and t1.portlet_type = " + DBConstants.WHATS_NEW_TYPE_WORKFLOW_REQUEST);
+                sqlbldr.AppendLine("    )");
+                sqlbldr.AppendLine("order by t1.update_date desc");
+                sqlbldr.AppendLine("");
+            }
             WhatsnewDataSet.search_eip_t_whatsnewRow param = ((WhatsnewDataSet)data).search_eip_t_whatsnew[0];
 
             ArrayList paramList = new ArrayList();

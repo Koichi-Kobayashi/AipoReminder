@@ -111,6 +111,17 @@ namespace AipoReminder
             // データベース名
             textBoxDbName.Text = SettingManager.NpgsqlConnectionDatabase;
 
+            // AipoVersionコンボボックスのSelectedIndexを設定
+            switch (SettingManager.AipoVersion)
+            {
+                case 4:
+                    comboBoxAipoVersion.SelectedIndex = 0;
+                    break;
+                case 5:
+                    comboBoxAipoVersion.SelectedIndex = 1;
+                    break;
+            }
+
             // スケジュールのチェック間隔コンボボックスのSelectedIndexを設定
             for (int i = 0; i < 12; i++)
             {
@@ -162,6 +173,7 @@ namespace AipoReminder
 
             textBoxUserName.Text = SettingManager.LoginName;                // ログイン名
             textBoxURL.Text = SettingManager.URL;                           // URL
+            comboBoxAipoVersion.SelectedItem = SettingManager.AipoVersion;     // AipoVersion
             comboBoxCheckTime.SelectedItem = SettingManager.CheckTime;      // スケジュールのチェック間隔
             checkBoxAutoRun.Checked = SettingManager.AutoRun;               // 自動起動
             checkBoxAutoLogin.Checked = SettingManager.AutoLogin;           // 自動ログイン
@@ -197,6 +209,7 @@ namespace AipoReminder
                     textBoxUserName.Enabled = false;
                     textBoxPassword.Enabled = false;
                     textBoxURL.Enabled = false;
+                    comboBoxAipoVersion.Enabled = false;
                     buttonDataSave.Enabled = false;
                     textBoxServerIP.Enabled = false;
                     textBoxServerPort.Enabled = false;
@@ -262,6 +275,7 @@ namespace AipoReminder
                     SettingManager.LoginName = data.turbine_user[0].login_name;
                     SettingManager.UserPassword = textBoxPassword.Text;
                     SettingManager.URL = textBoxURL.Text;
+                    SettingManager.AipoVersion = int.Parse(comboBoxAipoVersion.SelectedItem.ToString()); ;      // AipoVersion
 
                     // 入力項目を非活性にする
                     textBoxUserName.Enabled = false;
@@ -344,6 +358,7 @@ namespace AipoReminder
             textBoxUserName.Enabled = true;
             textBoxPassword.Enabled = true;
             textBoxURL.Enabled = true;
+            comboBoxAipoVersion.Enabled = true;
             buttonDataSave.Enabled = true;
             textBoxServerIP.Enabled = true;
             textBoxServerPort.Enabled = true;

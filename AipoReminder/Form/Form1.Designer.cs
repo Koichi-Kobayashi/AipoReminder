@@ -85,6 +85,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.終了ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerTasktrayIcon = new System.Windows.Forms.Timer(this.components);
+            this.label10 = new System.Windows.Forms.Label();
+            this.comboBoxAipoVersion = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -111,6 +113,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FloralWhite;
+            this.tabPage1.Controls.Add(this.comboBoxAipoVersion);
+            this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.textBox2);
             this.tabPage1.Controls.Add(this.buttonDataReset);
             this.tabPage1.Controls.Add(this.buttonDataSave);
@@ -120,10 +124,10 @@
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(370, 195);
+            this.tabPage1.Size = new System.Drawing.Size(370, 194);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "アカウント設定";
             // 
@@ -145,7 +149,7 @@
             this.buttonDataReset.Location = new System.Drawing.Point(187, 157);
             this.buttonDataReset.Name = "buttonDataReset";
             this.buttonDataReset.Size = new System.Drawing.Size(75, 23);
-            this.buttonDataReset.TabIndex = 8;
+            this.buttonDataReset.TabIndex = 10;
             this.buttonDataReset.Text = "リセット";
             this.buttonDataReset.UseVisualStyleBackColor = true;
             this.buttonDataReset.Click += new System.EventHandler(this.buttonDataReset_Click);
@@ -155,7 +159,7 @@
             this.buttonDataSave.Location = new System.Drawing.Point(108, 157);
             this.buttonDataSave.Name = "buttonDataSave";
             this.buttonDataSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonDataSave.TabIndex = 7;
+            this.buttonDataSave.TabIndex = 9;
             this.buttonDataSave.Text = "設定";
             this.buttonDataSave.UseVisualStyleBackColor = true;
             this.buttonDataSave.Click += new System.EventHandler(this.buttonDataSave_Click);
@@ -224,9 +228,9 @@
             this.tabPage4.Controls.Add(this.label9);
             this.tabPage4.Controls.Add(this.label13);
             this.tabPage4.Controls.Add(this.groupBox2);
-            this.tabPage4.Location = new System.Drawing.Point(4, 21);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(370, 195);
+            this.tabPage4.Size = new System.Drawing.Size(370, 194);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "お知らせ設定";
             // 
@@ -387,10 +391,10 @@
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 21);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(370, 195);
+            this.tabPage2.Size = new System.Drawing.Size(370, 194);
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "DB設定";
             // 
@@ -494,10 +498,10 @@
             this.tabPage3.Controls.Add(this.textBoxVersionInfo);
             this.tabPage3.Controls.Add(this.groupBox1);
             this.tabPage3.Controls.Add(this.pictureBox1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 21);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(370, 195);
+            this.tabPage3.Size = new System.Drawing.Size(370, 194);
             this.tabPage3.TabIndex = 1;
             this.tabPage3.Text = "バージョン情報";
             // 
@@ -616,46 +620,67 @@
             this.終了ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(156, 98);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(178, 98);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.CheckOnClick = true;
             this.toolStripMenuItem1.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(155, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 22);
             this.toolStripMenuItem1.Text = "メイン画面を起動(&O)";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(155, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 22);
             this.toolStripMenuItem2.Text = "トップページを開く(&B)";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(155, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(177, 22);
             this.toolStripMenuItem3.Text = "今すぐチェックする(&S)";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(174, 6);
             // 
             // 終了ToolStripMenuItem
             // 
             this.終了ToolStripMenuItem.Name = "終了ToolStripMenuItem";
-            this.終了ToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.終了ToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.終了ToolStripMenuItem.Text = "終了(&X)";
             this.終了ToolStripMenuItem.Click += new System.EventHandler(this.終了ToolStripMenuItem_Click);
             // 
             // timerTasktrayIcon
             // 
             this.timerTasktrayIcon.Tick += new System.EventHandler(this.timerTasktrayIcon_Tick);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(27, 134);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(73, 12);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "AipoVersion：";
+            // 
+            // comboBoxAipoVersion
+            // 
+            this.comboBoxAipoVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAipoVersion.FormattingEnabled = true;
+            this.comboBoxAipoVersion.Items.AddRange(new object[] {
+            "4",
+            "5"});
+            this.comboBoxAipoVersion.Location = new System.Drawing.Point(108, 131);
+            this.comboBoxAipoVersion.Name = "comboBoxAipoVersion";
+            this.comboBoxAipoVersion.Size = new System.Drawing.Size(75, 20);
+            this.comboBoxAipoVersion.TabIndex = 8;
             // 
             // Form1
             // 
@@ -748,6 +773,8 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button buttonInfoSettings;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox comboBoxAipoVersion;
     }
 }
 
