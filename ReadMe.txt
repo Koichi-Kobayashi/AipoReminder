@@ -1,13 +1,13 @@
 ===========================================================================
-【 ソフト名 】　Aipo支援ツール「Aipoリマインダー｣ Ver 1.0.5.0
-【 登 録 名 】　AipoReminder1050.zip
+【 ソフト名 】　Aipo支援ツール「Aipoリマインダー｣ Ver 1.0.6.0
+【 登 録 名 】　AipoReminder1060.zip
 【 圧縮形式 】　zip
 【 作 成 者 】　Copyright (C) 2009 k.kobayashi
 【 HomePage 】　なし
 【  e-mail  】　tous.les.deux256@gmail.com
 【 動作環境 】　日本語版 Windows XP SP3 32bit/ 日本語版 Vista SP2 64bit
                 日本語版 Windows 7 64bit
-【 掲載月日 】　2009/12/03
+【 掲載月日 】　2009/12/06
 【 種    別 】　フリーソフトウェア
 ===========================================================================
 
@@ -67,8 +67,8 @@
 ---------------------------------------------------------------------------
 --  インストール方法  -----------------------------------------------------
 ---------------------------------------------------------------------------
-　AipoReminder1050.zipを任意のディレクトリに解凍してください。
-　解凍後のフォルダ名をAipoReminder1050からAipoReminderに変更しておくと後々
+　AipoReminder1060.zipを任意のディレクトリに解凍してください。
+　解凍後のフォルダ名をAipoReminder1060からAipoReminderに変更しておくと後々
 　のアップデート時にスムーズにアップデートが出来ます。
 
 ---------------------------------------------------------------------------
@@ -174,6 +174,7 @@
       GRANT SELECT ON eip_t_workflow_request TO aipo_reminder;
       GRANT SELECT ON eip_t_workflow_category TO aipo_reminder;
       GRANT SELECT ON eip_t_msgboard_topic TO aipo_reminder;
+      GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder;
       GRANT SELECT ON eip_t_note TO aipo_reminder;
 
       \q で切断します。
@@ -229,6 +230,7 @@
       GRANT SELECT ON eip_t_workflow_request TO aipo_reminder;
       GRANT SELECT ON eip_t_workflow_category TO aipo_reminder;
       GRANT SELECT ON eip_t_msgboard_topic TO aipo_reminder;
+      GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder;
       GRANT SELECT ON eip_t_note TO aipo_reminder;
 
       \q で切断します。
@@ -283,15 +285,24 @@
 ---------------------------------------------------------------------------
 --  既知のバグ  -----------------------------------------------------------
 ---------------------------------------------------------------------------
-■ Ver 1.0.4.0以降
-　・掲示板を作成したあとにトピックの閲覧権限(カテゴリの変更)を変更した場合に
-　　正しく閲覧制限されない
-　・掲示板の「所属メンバーのみ閲覧／返信可」カテゴリを指定した場合、新着情報
-　　が何度も表示される場合がある
 
 ---------------------------------------------------------------------------
 --  改版履歴  -------------------------------------------------------------
 ---------------------------------------------------------------------------
+■ Ver 1.0.6.0 (2009/12/06)
+　【バグ】
+　・以下のバグを修正した
+　　・掲示板を作成したあとにトピックの閲覧権限(カテゴリの変更)を変更した場合に
+　　　正しく閲覧制限されない
+　　・掲示板の「所属メンバーのみ閲覧／返信可」カテゴリを指定した場合、新着情報
+　　　が何度も表示される場合がある
+　　
+　　このバージョン以降、以下のコマンドを実行して、aipo_reminderに対して権限を
+　　付与しなければエラーが発生する(エラーログが作られる)。
+　　(前述の「制限 - ４．PostgreSQLの設定変更について」を参照)
+
+      GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder;
+
 ■ Ver 1.0.5.0 (2009/12/03)
 　【変更】
 　・Aipo5に対応した
