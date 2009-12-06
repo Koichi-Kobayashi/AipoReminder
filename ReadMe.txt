@@ -174,6 +174,7 @@
       GRANT SELECT ON eip_t_workflow_request TO aipo_reminder;
       GRANT SELECT ON eip_t_workflow_category TO aipo_reminder;
       GRANT SELECT ON eip_t_msgboard_topic TO aipo_reminder;
+      GRANT SELECT ON eip_t_msgboard_category TO aipo_reminder;
       GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder;
       GRANT SELECT ON eip_t_note TO aipo_reminder;
 
@@ -230,6 +231,7 @@
       GRANT SELECT ON eip_t_workflow_request TO aipo_reminder;
       GRANT SELECT ON eip_t_workflow_category TO aipo_reminder;
       GRANT SELECT ON eip_t_msgboard_topic TO aipo_reminder;
+      GRANT SELECT ON eip_t_msgboard_category TO aipo_reminder;
       GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder;
       GRANT SELECT ON eip_t_note TO aipo_reminder;
 
@@ -301,6 +303,7 @@
 　　付与しなければエラーが発生する(エラーログが作られる)。
 　　(前述の「制限 - ４．PostgreSQLの設定変更について」を参照)
 
+      GRANT SELECT ON eip_t_msgboard_category TO aipo_reminder;
       GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder;
 
 ■ Ver 1.0.5.0 (2009/12/03)
