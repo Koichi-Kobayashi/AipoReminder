@@ -85,7 +85,7 @@
 　２．アプリケーションデータディレクトリのAipoReminderフォルダを削除します。
 　　　【XPの場合】
 　　　C:\Documents and Settings\ユーザ名\Local Settings\Application Data\AipoReminder
-　　　【Vistaの場合】
+　　　【Vista、Windows 7の場合】
 　　　C:\Users\ユーザ名\AppData\Local\AipoReminder
 　３．「Windows起動時にAipoリマインダーを起動する」にチェックをしている場合は、
 　　　スタートアップの中のショートカットを削除します。
