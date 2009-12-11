@@ -75,9 +75,11 @@ namespace AipoReminder
                 Properties.Resources.favicon_16_blue};
 
             // 設定を読み込む
-            this.ReadUserData();
-            // ログイン試行のためのタイマーを起動
-            this.timerLogin.Enabled = true;
+            if (this.ReadUserData())
+            {
+                // ログイン試行のためのタイマーを起動
+                this.timerLogin.Enabled = true;
+            }
         }
 
         /// <summary>
@@ -102,7 +104,7 @@ namespace AipoReminder
         /// <summary>
         /// 設定情報からログイン名を取得し、ログイン名、パスワードを非活性にする
         /// </summary>
-        private void ReadUserData()
+        private bool ReadUserData()
         {
             // ウィンドウ非表示
             this.Visible = false;
@@ -174,7 +176,7 @@ namespace AipoReminder
                 checkBoxMemo.Checked = true;
 
                 this.ActiveWindow();
-                return;
+                return false;
             }
 
             textBoxUserName.Text = SettingManager.LoginName;                // ログイン名
@@ -189,6 +191,8 @@ namespace AipoReminder
             checkBoxSchedule.Checked = SettingManager.CheckSchedule;        // スケジュールの新着予定チェック
             checkBoxWorkflow.Checked = SettingManager.CheckWorkflow;        // ワークフローの新着依頼チェック
             checkBoxMemo.Checked = SettingManager.CheckMemo;                // 伝言メモの新着メモチェック
+
+            return true;
         }
 
         /// <summary>
@@ -218,18 +222,6 @@ namespace AipoReminder
                     textBoxUserName.Text = data.turbine_user[0].login_name;
                     // パスワード
                     textBoxPassword.Text = "******";
-
-                    // 入力項目を非活性にする
-                    textBoxUserName.Enabled = false;
-                    textBoxPassword.Enabled = false;
-                    textBoxURL.Enabled = false;
-                    comboBoxAipoVersion.Enabled = false;
-                    buttonDataSave.Enabled = false;
-                    textBoxServerIP.Enabled = false;
-                    textBoxServerPort.Enabled = false;
-                    textBoxDbUserId.Enabled = false;
-                    textBoxDbPassword.Enabled = false;
-                    textBoxDbName.Enabled = false;
 
                     // 自動ログイン用html作成
                     SettingManager.AutoLoginHtml = String.Format(Properties.Resources.autologin,
@@ -263,11 +255,25 @@ namespace AipoReminder
                 this.timerLogin.Interval = 10000;
             }
 
+            // 入力項目を非活性にする
+            textBoxUserName.Enabled = false;
+            textBoxPassword.Enabled = false;
+            textBoxURL.Enabled = false;
+            comboBoxAipoVersion.Enabled = false;
+            buttonDataSave.Enabled = false;
+            textBoxServerIP.Enabled = false;
+            textBoxServerPort.Enabled = false;
+            textBoxDbUserId.Enabled = false;
+            textBoxDbPassword.Enabled = false;
+            textBoxDbName.Enabled = false;
+            buttonDataReset.Enabled = false;
+            
             if (this.Login())
             {
                 // 新着情報をチェック
                 this.WhatsnewProcess(true);
                 this.timerLogin.Enabled = false;
+                buttonDataReset.Enabled = true;
             }
 
             if (this.challengeLoginCount > Form1.CHALLENGE_LOGIN_MAX_COUNT)
@@ -280,6 +286,19 @@ namespace AipoReminder
                 this.timerLogin.Enabled = false;
                 // パスワードを空白に設定
                 textBoxPassword.Text = "";
+
+                // 入力項目を活性にする
+                textBoxUserName.Enabled = true;
+                textBoxPassword.Enabled = true;
+                textBoxURL.Enabled = true;
+                comboBoxAipoVersion.Enabled = true;
+                buttonDataSave.Enabled = true;
+                textBoxServerIP.Enabled = true;
+                textBoxServerPort.Enabled = true;
+                textBoxDbUserId.Enabled = true;
+                textBoxDbPassword.Enabled = true;
+                textBoxDbName.Enabled = true;
+                buttonDataReset.Enabled = true;
             }
         }
 
