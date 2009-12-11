@@ -132,6 +132,7 @@
     <Content Include="lib\ja\Npgsql.resources.dll" />
     <Content Include="lib\log4net.dll" />
     <Content Include="lib\Mono.Security.dll" />
+    <Content Include="lib\Npgsql.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
