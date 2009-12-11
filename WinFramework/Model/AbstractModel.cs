@@ -27,6 +27,21 @@ namespace WinFramework.Model
             this.dbHelper = new DBHelper(server, port, userid, password, database);
         }
 
+        public AbstractModel(string server, string port, string userid, string password, string database, string timeout)
+        {
+            this.dbHelper = new DBHelper(server, port, userid, password, database, timeout);
+        }
+
+        public AbstractModel(string server, string port, string userid, string password, string database, string timeout, string commandTimeout)
+        {
+            this.dbHelper = new DBHelper(server, port, userid, password, database, timeout, commandTimeout);
+        }
+
+        public AbstractModel(string server, string port, string userid, string password, string database, string timeout, string commandTimeout, string connectionLifeTime)
+        {
+            this.dbHelper = new DBHelper(server, port, userid, password, database, timeout, commandTimeout, connectionLifeTime);
+        }
+
         public void Execute(DelegateMethod method, DataSet data)
         {
             try
