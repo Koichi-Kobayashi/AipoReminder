@@ -11,10 +11,13 @@ namespace AipoReminder.Model
     {
         public DbConnectionModel()
             : base(SettingManager.NpgsqlConnectionServer, 
-                   SettingManager.NpgsqlConnectionPort, 
-                   SettingManager.NpgsqlConnectionUserId, 
-                   SettingManager.NpgsqlConnectionPassword, 
-                   SettingManager.NpgsqlConnectionDatabase)
+                    SettingManager.NpgsqlConnectionPort, 
+                    SettingManager.NpgsqlConnectionUserId, 
+                    SettingManager.NpgsqlConnectionPassword, 
+                    SettingManager.NpgsqlConnectionDatabase,
+                    SettingManager.NpgsqlConnectionTimeout,
+                    SettingManager.NpgsqlConnectionTimeout + 5,
+                    SettingManager.NpgsqlConnectionTimeout)
         {
         }
     }

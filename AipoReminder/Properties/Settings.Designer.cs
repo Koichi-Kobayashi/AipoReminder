@@ -169,6 +169,18 @@ namespace AipoReminder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public string NpgsqlConnectionTimeout {
+            get {
+                return ((string)(this["NpgsqlConnectionTimeout"]));
+            }
+            set {
+                this["NpgsqlConnectionTimeout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool checkBlog {
             get {

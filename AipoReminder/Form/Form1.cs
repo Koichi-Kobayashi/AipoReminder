@@ -36,6 +36,13 @@ namespace AipoReminder
         // アニメで現在表示しているアイコンのインデックス
         private int currentTasktrayIconIndex;
 
+        // ログインフラグ(起動時にログインが成功したかどうか)
+        private bool isLogin = false;
+        // ログイン試行回数
+        private int challengeLoginCount = 0;
+        // ログイン試行回数の上限
+        private static int CHALLENGE_LOGIN_MAX_COUNT = 6;
+
 #endregion
 
 #region コンストラクタ
@@ -68,10 +75,9 @@ namespace AipoReminder
                 Properties.Resources.favicon_16_blue};
 
             // 設定を読み込む
-            this.SetUserData();
-
-            // 新着情報をチェック
-            this.WhatsnewProcess(true);
+            this.ReadUserData();
+            // ログイン試行のためのタイマーを起動
+            this.timerLogin.Enabled = true;
         }
 
         /// <summary>
@@ -96,7 +102,7 @@ namespace AipoReminder
         /// <summary>
         /// 設定情報からログイン名を取得し、ログイン名、パスワードを非活性にする
         /// </summary>
-        private void SetUserData()
+        private void ReadUserData()
         {
             // ウィンドウ非表示
             this.Visible = false;
@@ -183,7 +189,14 @@ namespace AipoReminder
             checkBoxSchedule.Checked = SettingManager.CheckSchedule;        // スケジュールの新着予定チェック
             checkBoxWorkflow.Checked = SettingManager.CheckWorkflow;        // ワークフローの新着依頼チェック
             checkBoxMemo.Checked = SettingManager.CheckMemo;                // 伝言メモの新着メモチェック
+        }
 
+        /// <summary>
+        /// ログイン
+        /// </summary>
+        /// <returns></returns>
+        private bool Login()
+        {
             string userId = SettingManager.UserId;
             string loginName = SettingManager.LoginName;
             string password = "";
@@ -191,6 +204,7 @@ namespace AipoReminder
             if (!String.IsNullOrEmpty(SettingManager.UserPassword))
             {
                 password = Security.EncryptPassword(SettingManager.UserPassword);
+                textBoxPassword.Text = "******";
             }
 
             try
@@ -224,16 +238,48 @@ namespace AipoReminder
                                                                  SettingManager.LoginName,
                                                                  SettingManager.UserPassword);
 
+                    // ログイン出来たことを覚えておく
+                    isLogin = true;
                 }
             }
             catch (DBException ex)
             {
                 Debug.Print(ex.toString());
+                return false;
+            }
 
+            return true;
+        }
+
+        /// <summary>
+        /// ログイン試行
+        /// </summary>
+        private void timerLogin_Tick(object sender, EventArgs e)
+        {
+            this.challengeLoginCount++;
+
+            if (this.challengeLoginCount == 1)
+            {
+                this.timerLogin.Interval = 10000;
+            }
+
+            if (this.Login())
+            {
+                // 新着情報をチェック
+                this.WhatsnewProcess(true);
+                this.timerLogin.Enabled = false;
+            }
+
+            if (this.challengeLoginCount > Form1.CHALLENGE_LOGIN_MAX_COUNT)
+            {
                 // エラーメッセージ
                 MessageBox.Show(MessageConstants.ERR_DB_ACCESS, MessageConstants.MSG_CAPTION_001, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 // ウィンドウを表示
                 this.ActiveWindow();
+                // タイマー停止
+                this.timerLogin.Enabled = false;
+                // パスワードを空白に設定
+                textBoxPassword.Text = "";
             }
         }
 
@@ -660,6 +706,10 @@ namespace AipoReminder
             if (String.IsNullOrEmpty(SettingManager.UserId) ||
                 String.IsNullOrEmpty(SettingManager.LoginName) ||
                 String.IsNullOrEmpty(SettingManager.UserPassword))
+            {
+                return;
+            }
+            if (!isLogin)
             {
                 return;
             }

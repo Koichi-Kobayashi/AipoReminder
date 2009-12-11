@@ -38,6 +38,9 @@
     <Setting Name="NpgsqlConnectionDatabase" Type="System.String" Scope="User">
       <Value Profile="(Default)">org001</Value>
     </Setting>
+    <Setting Name="NpgsqlConnectionTimeout" Type="System.String" Scope="User">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
     <Setting Name="checkBlog" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>

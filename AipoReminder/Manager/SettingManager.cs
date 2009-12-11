@@ -79,6 +79,11 @@ namespace AipoReminder.Utility
         private static string m_NpgsqlConnectionDatabase;
 
         /// <summary>
+        /// 接続文字列(タイムアウト)
+        /// </summary>
+        private static string m_NpgsqlConnectionTimeout;
+
+        /// <summary>
         /// ブログの新着記事をチェックする
         /// </summary>
         private static bool m_checkBlog;
@@ -123,6 +128,7 @@ namespace AipoReminder.Utility
             m_NpgsqlConnectionUserId = Properties.Settings.Default.NpgsqlConnectionUserId;
             m_NpgsqlConnectionPassword = Properties.Settings.Default.NpgsqlConnectionPassword;
             m_NpgsqlConnectionDatabase = Properties.Settings.Default.NpgsqlConnectionDatabase;
+            m_NpgsqlConnectionTimeout = Properties.Settings.Default.NpgsqlConnectionTimeout;
             m_checkBlog = Properties.Settings.Default.checkBlog;
             m_checkBlogComment = Properties.Settings.Default.checkBlogComment;
             m_checkMsgboard = Properties.Settings.Default.checkMsgboard;
@@ -357,6 +363,21 @@ namespace AipoReminder.Utility
         }
 
         /// <summary>
+        /// 接続文字列(タイムアウト)を取得または設定する
+        /// </summary>
+        public static string NpgsqlConnectionTimeout
+        {
+            set
+            {
+                m_NpgsqlConnectionTimeout = value;
+            }
+            get
+            {
+                return m_NpgsqlConnectionTimeout;
+            }
+        }
+
+        /// <summary>
         /// ブログの新着記事チェックフラグを取得または設定する
         /// </summary>
         public static bool CheckBlog
@@ -468,6 +489,7 @@ namespace AipoReminder.Utility
                 Properties.Settings.Default.NpgsqlConnectionUserId = SettingManager.NpgsqlConnectionUserId;
                 Properties.Settings.Default.NpgsqlConnectionPassword = Security.EncryptData(SettingManager.NpgsqlConnectionPassword);
                 Properties.Settings.Default.NpgsqlConnectionDatabase = SettingManager.NpgsqlConnectionDatabase;
+                Properties.Settings.Default.NpgsqlConnectionTimeout = SettingManager.NpgsqlConnectionTimeout;
 
                 Properties.Settings.Default.Save();
             }
@@ -506,6 +528,7 @@ namespace AipoReminder.Utility
             Properties.Settings.Default.NpgsqlConnectionUserId = SettingManager.NpgsqlConnectionUserId;
             Properties.Settings.Default.NpgsqlConnectionPassword = Security.EncryptData(SettingManager.NpgsqlConnectionPassword);
             Properties.Settings.Default.NpgsqlConnectionDatabase = SettingManager.NpgsqlConnectionDatabase;
+            Properties.Settings.Default.NpgsqlConnectionTimeout = SettingManager.NpgsqlConnectionTimeout;
 
             Properties.Settings.Default.Save();
         }

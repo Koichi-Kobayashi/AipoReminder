@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.comboBoxAipoVersion = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.buttonDataReset = new System.Windows.Forms.Button();
             this.buttonDataSave = new System.Windows.Forms.Button();
@@ -85,8 +87,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.終了ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerTasktrayIcon = new System.Windows.Forms.Timer(this.components);
-            this.label10 = new System.Windows.Forms.Label();
-            this.comboBoxAipoVersion = new System.Windows.Forms.ComboBox();
+            this.timerLogin = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -130,6 +131,27 @@
             this.tabPage1.Size = new System.Drawing.Size(370, 194);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "アカウント設定";
+            // 
+            // comboBoxAipoVersion
+            // 
+            this.comboBoxAipoVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAipoVersion.FormattingEnabled = true;
+            this.comboBoxAipoVersion.Items.AddRange(new object[] {
+            "4",
+            "5"});
+            this.comboBoxAipoVersion.Location = new System.Drawing.Point(108, 131);
+            this.comboBoxAipoVersion.Name = "comboBoxAipoVersion";
+            this.comboBoxAipoVersion.Size = new System.Drawing.Size(75, 20);
+            this.comboBoxAipoVersion.TabIndex = 8;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(27, 134);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(73, 12);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "AipoVersion：";
             // 
             // textBox2
             // 
@@ -661,26 +683,9 @@
             // 
             this.timerTasktrayIcon.Tick += new System.EventHandler(this.timerTasktrayIcon_Tick);
             // 
-            // label10
+            // timerLogin
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(27, 134);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(73, 12);
-            this.label10.TabIndex = 7;
-            this.label10.Text = "AipoVersion：";
-            // 
-            // comboBoxAipoVersion
-            // 
-            this.comboBoxAipoVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAipoVersion.FormattingEnabled = true;
-            this.comboBoxAipoVersion.Items.AddRange(new object[] {
-            "4",
-            "5"});
-            this.comboBoxAipoVersion.Location = new System.Drawing.Point(108, 131);
-            this.comboBoxAipoVersion.Name = "comboBoxAipoVersion";
-            this.comboBoxAipoVersion.Size = new System.Drawing.Size(75, 20);
-            this.comboBoxAipoVersion.TabIndex = 8;
+            this.timerLogin.Tick += new System.EventHandler(this.timerLogin_Tick);
             // 
             // Form1
             // 
@@ -775,6 +780,7 @@
         private System.Windows.Forms.Button buttonInfoSettings;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox comboBoxAipoVersion;
+        private System.Windows.Forms.Timer timerLogin;
     }
 }
 
