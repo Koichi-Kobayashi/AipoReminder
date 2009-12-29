@@ -17,5 +17,11 @@ namespace AipoReminder.Logic
             TurbineUserDAO dao = new TurbineUserDAO(this.dbHelper);
             dao.GetTurbineUserInfo(data);
         }
+
+        public void GetTurbineGroupUserInfo(System.Data.DataSet data)
+        {
+            TurbineUserDAO dao = new TurbineUserDAO(this.dbHelper);
+            dao.GetTurbineGroupUserInfo(data);
+        }
     }
 }

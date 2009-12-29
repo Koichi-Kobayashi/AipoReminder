@@ -6,23 +6,36 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using AipoReminder.ValueObject;
 
 namespace AipoReminder
 {
     public partial class Form2 : Form
     {
+        private List<ScheduleItem> _scheduleList = new List<ScheduleItem>();
+
         /// <summary>
         /// スケジュールの内容を取得、設定するためのプロパティ
         /// </summary>
-        public string TextBoxScheduleInfoText
+        public List<ScheduleItem> ScheduleList
         {
             get
             {
-                return textBoxScheduleInfo.Text;
+                return _scheduleList;
             }
             set
             {
-                textBoxScheduleInfo.Text = value;
+                _scheduleList = value;
+                StringBuilder sb = new StringBuilder();
+                foreach (ScheduleItem item in _scheduleList)
+                {
+                    if (!String.IsNullOrEmpty(textBoxScheduleInfo.Text))
+                    {
+                        sb.AppendLine("");
+                    }
+                    sb.Append(item.ToString());
+                }
+                textBoxScheduleInfo.Text = sb.ToString();
             }
         }
 

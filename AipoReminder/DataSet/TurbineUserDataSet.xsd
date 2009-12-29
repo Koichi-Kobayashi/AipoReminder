@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.AipoReminder.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.Odbc" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.AipoReminder.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.Odbc" />
         </Connections>
         <Tables />
         <Sources />
@@ -138,10 +138,31 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="search_turbine_group" msprop:Generator_UserTableName="search_turbine_group" msprop:Generator_RowDeletedName="search_turbine_groupRowDeleted" msprop:Generator_TableClassName="search_turbine_groupDataTable" msprop:Generator_RowChangedName="search_turbine_groupRowChanged" msprop:Generator_RowClassName="search_turbine_groupRow" msprop:Generator_RowChangingName="search_turbine_groupRowChanging" msprop:Generator_RowEvArgName="search_turbine_groupRowChangeEvent" msprop:Generator_RowEvHandlerName="search_turbine_groupRowChangeEventHandler" msprop:Generator_TablePropName="search_turbine_group" msprop:Generator_TableVarName="tablesearch_turbine_group" msprop:Generator_RowDeletingName="search_turbine_groupRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="group_id" msprop:Generator_UserColumnName="group_id" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columngroup_id" msprop:Generator_ColumnPropNameInTable="group_idColumn" msprop:Generator_ColumnPropNameInRow="group_id" type="xs:string" minOccurs="0" />
+              <xs:element name="not_disp_user_id" msprop:Generator_UserColumnName="not_disp_user_id" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnnot_disp_user_id" msprop:Generator_ColumnPropNameInTable="not_disp_user_idColumn" msprop:Generator_ColumnPropNameInRow="not_disp_user_id" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="turbine_group_user" msprop:Generator_UserTableName="turbine_group_user" msprop:Generator_RowDeletedName="turbine_group_userRowDeleted" msprop:Generator_TableClassName="turbine_group_userDataTable" msprop:Generator_RowChangedName="turbine_group_userRowChanged" msprop:Generator_RowClassName="turbine_group_userRow" msprop:Generator_RowChangingName="turbine_group_userRowChanging" msprop:Generator_RowEvArgName="turbine_group_userRowChangeEvent" msprop:Generator_RowEvHandlerName="turbine_group_userRowChangeEventHandler" msprop:Generator_TablePropName="turbine_group_user" msprop:Generator_TableVarName="tableturbine_group_user" msprop:Generator_RowDeletingName="turbine_group_userRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="user_id" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="user_id" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnuser_id" msprop:Generator_ColumnPropNameInTable="user_idColumn" msprop:Generator_ColumnPropNameInRow="user_id" type="xs:string" default="" />
+              <xs:element name="first_name" msprop:Generator_UserColumnName="first_name" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnfirst_name" msprop:Generator_ColumnPropNameInTable="first_nameColumn" msprop:Generator_ColumnPropNameInRow="first_name" type="xs:string" default="" />
+              <xs:element name="last_name" msprop:Generator_UserColumnName="last_name" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnlast_name" msprop:Generator_ColumnPropNameInTable="last_nameColumn" msprop:Generator_ColumnPropNameInRow="last_name" type="xs:string" default="" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:turbine_user" />
+      <xs:field xpath="mstns:user_id" />
+    </xs:unique>
+    <xs:unique name="turbine_group_user_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:turbine_group_user" />
       <xs:field xpath="mstns:user_id" />
     </xs:unique>
   </xs:element>

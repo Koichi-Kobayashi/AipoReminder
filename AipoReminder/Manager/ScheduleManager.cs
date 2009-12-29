@@ -4,6 +4,8 @@ using AipoReminder.DataSet;
 using AipoReminder.Model;
 using System;
 using System.Text;
+using AipoReminder.ValueObject;
+using System.Collections.Generic;
 
 namespace AipoReminder.Utility
 {
@@ -16,7 +18,7 @@ namespace AipoReminder.Utility
             this.dt = dt;
         }
 
-        public string CheckSchedule()
+        public List<ScheduleItem> CheckSchedule()
         {
             ScheduleDataSet data = new ScheduleDataSet();
 
@@ -109,11 +111,11 @@ namespace AipoReminder.Utility
 
             if (data.eip_t_schedule.Count > 0)
             {
-                // バルーン表示用文字列作成
-                return this.GetBalloonMessage(data);
+                // もうすぐ始まるスケジュールを取得
+                return this.GetSchedule(data);
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -164,6 +166,7 @@ namespace AipoReminder.Utility
             paramRow.user_id = SettingManager.UserId;
             paramRow.start_date = start_date;
             paramRow.check_time = SettingManager.CheckTime.ToString();
+            paramRow.other_user_id_list = SettingManager.GroupUserId;
 
             data.search_eip_t_schedule.Rows.Add(paramRow);
 
@@ -174,12 +177,13 @@ namespace AipoReminder.Utility
         }
 
         /// <summary>
-        /// バルーンに表示する文字列を作成
+        /// スケジュール情報の取得
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        private string GetBalloonMessage(ScheduleDataSet data)
+        private List<ScheduleItem> GetSchedule(ScheduleDataSet data)
         {
+            List<ScheduleItem> list = new List<ScheduleItem>();
             StringBuilder sb = new StringBuilder();
 
             string scheduleId = "";
@@ -188,21 +192,21 @@ namespace AipoReminder.Utility
             {
                 if (!scheduleId.Equals(row.schedule_id))
                 {
-                    if (!String.IsNullOrEmpty(scheduleId))
+                    ScheduleItem scheduleItem = new ScheduleItem();
+                    scheduleItem.ScheduleId = row.schedule_id;
+                    scheduleItem.ScheduleName = row.name;
+                    scheduleItem.StartDate = row.start_date;
+                    scheduleItem.EndDate = row.end_date;
+                    scheduleItem.UserName = row.last_name + " " + row.first_name; 
+                    if (SettingManager.UserId.Equals(row.user_id))
                     {
-                        sb.AppendLine("");
+                        scheduleItem.isMySchedule = true;
                     }
-                    sb.AppendLine("【" + row.name + "】");
-                    sb.AppendLine(String.Format("{0:D2}", row.start_date.Hour) + ":" + String.Format("{0:D2}", row.start_date.Minute) + "～" + String.Format("{0:D2}", row.end_date.Hour) + ":" + String.Format("{0:D2}", row.end_date.Minute));
-//                    sb.AppendLine(row.start_date.Substring(11, 5) + "～" + row.end_date.Substring(11, 5));
-//                    sb.AppendLine("参加者");
+                    list.Add(scheduleItem);
                 }
-//                sb.AppendLine(row.last_name + " " + row.first_name);
-
                 scheduleId = row.schedule_id;
             }
-
-            return sb.ToString();
+            return list;
         }
 
     }

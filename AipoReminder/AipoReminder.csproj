@@ -96,12 +96,18 @@
     <Compile Include="Constants\DBConstants.cs" />
     <Compile Include="Constants\MessageConstants.cs" />
     <Compile Include="DAO\ScheduleDAO.cs" />
+    <Compile Include="DAO\TurbineGroupDAO.cs" />
     <Compile Include="DAO\TurbineUserDAO.cs" />
     <Compile Include="DAO\WhatsnewDAO.cs" />
     <Compile Include="DataSet\ScheduleDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ScheduleDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet\TurbineGroupDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TurbineGroupDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="DataSet\TurbineUserDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -112,6 +118,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WhatsnewDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Form3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Form3.Designer.cs">
+      <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\Form2.cs">
       <SubType>Form</SubType>
@@ -126,11 +138,13 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Logic\ScheduleLogic.cs" />
+    <Compile Include="Logic\TurbineGroupLogic.cs" />
     <Compile Include="Logic\TurbineUserLogic.cs" />
     <Compile Include="Logic\WhatsnewLogic.cs" />
     <Compile Include="Manager\ScheduleManager.cs" />
     <Compile Include="Manager\ThreadingManager.cs" />
     <Compile Include="Model\DbConnectionModel.cs" />
+    <Compile Include="Model\GroupModel.cs" />
     <Compile Include="Model\ScheduleModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Model\WhatsnewModel.cs" />
@@ -143,6 +157,9 @@
     <EmbeddedResource Include="Form\Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Form3.resx">
+      <DependentUpon>Form3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -206,11 +223,25 @@
     <Compile Include="ValueObject\BalloonItemMsgboard.cs" />
     <Compile Include="ValueObject\BalloonItemSchedule.cs" />
     <Compile Include="ValueObject\BalloonItemWorkflow.cs" />
+    <Compile Include="ValueObject\ComboBoxGroupItem.cs" />
     <Compile Include="ValueObject\ComboBoxItem.cs" />
     <Compile Include="ValueObject\ComboItemCheckTime.cs" />
+    <Compile Include="ValueObject\ListViewItemEx.cs" />
+    <Compile Include="ValueObject\ScheduleItem.cs" />
     <Compile Include="ValueObject\UserNameObject.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DataSet\TurbineGroupDataSet.xsc">
+      <DependentUpon>TurbineGroupDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet\TurbineGroupDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TurbineGroupDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet\TurbineGroupDataSet.xss">
+      <DependentUpon>TurbineGroupDataSet.xsd</DependentUpon>
+    </None>
     <None Include="favicon-16-blue.ico" />
     <None Include="favicon-16-red.ico" />
     <None Include="favicon-16.ico" />

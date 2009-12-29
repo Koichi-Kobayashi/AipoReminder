@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TurbineGroupDataSet" targetNamespace="http://tempuri.org/TurbineGroupDataSet.xsd" xmlns:mstns="http://tempuri.org/TurbineGroupDataSet.xsd" xmlns="http://tempuri.org/TurbineGroupDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.AipoReminder.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.Odbc" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TurbineGroupDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="TurbineGroupDataSet" msprop:Generator_DataSetName="TurbineGroupDataSet" msprop:EnableTableAdapterManager="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="search_turbine_group" msprop:Generator_UserTableName="search_turbine_group" msprop:Generator_RowDeletedName="search_turbine_groupRowDeleted" msprop:Generator_RowChangedName="search_turbine_groupRowChanged" msprop:Generator_RowClassName="search_turbine_groupRow" msprop:Generator_RowChangingName="search_turbine_groupRowChanging" msprop:Generator_RowEvArgName="search_turbine_groupRowChangeEvent" msprop:Generator_RowEvHandlerName="search_turbine_groupRowChangeEventHandler" msprop:Generator_TableClassName="search_turbine_groupDataTable" msprop:Generator_TableVarName="tablesearch_turbine_group" msprop:Generator_RowDeletingName="search_turbine_groupRowDeleting" msprop:Generator_TablePropName="search_turbine_group">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="group_id" msprop:Generator_UserColumnName="group_id" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="group_id" msprop:Generator_ColumnPropNameInTable="group_idColumn" msprop:Generator_ColumnVarNameInTable="columngroup_id" type="xs:string" minOccurs="0" />
+              <xs:element name="owner_id" msprop:Generator_UserColumnName="owner_id" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnowner_id" msprop:Generator_ColumnPropNameInTable="owner_idColumn" msprop:Generator_ColumnPropNameInRow="owner_id" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="turbine_group" msprop:Generator_UserTableName="turbine_group" msprop:Generator_RowDeletedName="turbine_groupRowDeleted" msprop:Generator_RowChangedName="turbine_groupRowChanged" msprop:Generator_RowClassName="turbine_groupRow" msprop:Generator_RowChangingName="turbine_groupRowChanging" msprop:Generator_RowEvArgName="turbine_groupRowChangeEvent" msprop:Generator_RowEvHandlerName="turbine_groupRowChangeEventHandler" msprop:Generator_TableClassName="turbine_groupDataTable" msprop:Generator_TableVarName="tableturbine_group" msprop:Generator_RowDeletingName="turbine_groupRowDeleting" msprop:Generator_TablePropName="turbine_group">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="group_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="group_id" msprop:Generator_ColumnVarNameInTable="columngroup_id" msprop:Generator_ColumnPropNameInRow="group_id" msprop:Generator_ColumnPropNameInTable="group_idColumn" type="xs:int" />
+              <xs:element name="group_name" msdata:ReadOnly="true" msprop:Generator_UserColumnName="group_name" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="group_name" msprop:Generator_ColumnPropNameInTable="group_nameColumn" msprop:Generator_ColumnVarNameInTable="columngroup_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="99" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="objectdata" msdata:ReadOnly="true" msprop:Generator_UserColumnName="objectdata" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="objectdata" msprop:Generator_ColumnPropNameInTable="objectdataColumn" msprop:Generator_ColumnVarNameInTable="columnobjectdata" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="owner_id" msdata:ReadOnly="true" msprop:Generator_UserColumnName="owner_id" msprop:Generator_ColumnVarNameInTable="columnowner_id" msprop:Generator_ColumnPropNameInRow="owner_id" msprop:Generator_ColumnPropNameInTable="owner_idColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="group_alias_name" msdata:ReadOnly="true" msprop:Generator_UserColumnName="group_alias_name" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="group_alias_name" msprop:Generator_ColumnPropNameInTable="group_alias_nameColumn" msprop:Generator_ColumnVarNameInTable="columngroup_alias_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="99" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="public_flag" msdata:ReadOnly="true" msprop:Generator_UserColumnName="public_flag" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="public_flag" msprop:Generator_ColumnPropNameInTable="public_flagColumn" msprop:Generator_ColumnVarNameInTable="columnpublic_flag" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:turbine_group" />
+      <xs:field xpath="mstns:group_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

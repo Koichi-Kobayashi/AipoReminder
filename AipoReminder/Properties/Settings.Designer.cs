@@ -262,5 +262,29 @@ namespace AipoReminder.Properties {
                 this["aipoVersion"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool checkOtherSchedule {
+            get {
+                return ((bool)(this["checkOtherSchedule"]));
+            }
+            set {
+                this["checkOtherSchedule"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string checkGroupUserId {
+            get {
+                return ((string)(this["checkGroupUserId"]));
+            }
+            set {
+                this["checkGroupUserId"] = value;
+            }
+        }
     }
 }

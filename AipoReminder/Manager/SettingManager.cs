@@ -11,160 +11,142 @@ namespace AipoReminder.Utility
         /// <summary>
         /// ユーザID
         /// </summary>
-        private static string m_userId;
+        public static string UserId { get; set; }
 
         /// <summary>
         /// ログイン名
         /// </summary>
-        private static string m_loginName;
+        public static string LoginName { get; set; }
 
         /// <summary>
         /// パスワード
         /// </summary>
-        private static string m_userPassword;
+        private static string _UserPassword;
 
         /// <summary>
         /// Aipoバージョン
         /// </summary>
-        private static int m_aipoVersion;
+        public static int AipoVersion { get; set; }
 
         /// <summary>
         /// 定期チェック(分)
         /// </summary>
-        private static int m_checkTime;
+        public static int CheckTime { get; set; }
 
         /// <summary>
         /// AipoのURL
         /// </summary>
-        private static string m_url;
+        public static string Url { get; set; }
 
         /// <summary>
         /// 自動ログイン用html
         /// </summary>
-        private static string m_autoLoginHtml;
+        public static string AutoLoginHtml { get; set; }
 
         /// <summary>
         /// 自動起動フラグ
         /// </summary>
-        private static bool m_checkAutoRun;
+        public static bool AutoRun { get; set; }
 
         /// <summary>
         /// 自動ログインフラグ
         /// </summary>
-        private static bool m_checkAutoLogin;
+        public static bool AutoLogin { get; set; }
 
         /// <summary>
         /// 接続文字列(サーバIP)
         /// </summary>
-        private static string m_NpgsqlConnectionServer;
+        public static string NpgsqlConnectionServer { get; set; }
 
         /// <summary>
         /// 接続文字列(ポート)
         /// </summary>
-        private static string m_NpgsqlConnectionPort;
+        public static string NpgsqlConnectionPort { get; set; }
 
         /// <summary>
         /// 接続文字列(ユーザID)
         /// </summary>
-        private static string m_NpgsqlConnectionUserId;
+        public static string NpgsqlConnectionUserId { get; set; }
 
         /// <summary>
         /// 接続文字列(パスワード)
         /// </summary>
-        private static string m_NpgsqlConnectionPassword;
+        private static string _NpgsqlConnectionPassword;
 
         /// <summary>
         /// 接続文字列(データベース名)
         /// </summary>
-        private static string m_NpgsqlConnectionDatabase;
+        public static string NpgsqlConnectionDatabase { get; set; }
 
         /// <summary>
         /// 接続文字列(タイムアウト)
         /// </summary>
-        private static string m_NpgsqlConnectionTimeout;
+        public static string NpgsqlConnectionTimeout { get; set; }
 
         /// <summary>
         /// ブログの新着記事をチェックする
         /// </summary>
-        private static bool m_checkBlog;
+        public static bool CheckBlog { get; set; }
 
         /// <summary>
         /// ブログの新着コメントをチェックする
         /// </summary>
-        private static bool m_checkBlogComment;
+        public static bool CheckBlogComment { get; set; }
 
         /// <summary>
         /// 掲示板の新しい書き込みをチェックする
         /// </summary>
-        private static bool m_checkMsgboard;
+        public static bool CheckMsgboard { get; set; }
 
         /// <summary>
         /// スケジュールの新着予定をチェックする
         /// </summary>
-        private static bool m_checkSchedule;
+        public static bool CheckSchedule { get; set; }
 
         /// <summary>
         /// ワークフローの新着依頼をチェックする
         /// </summary>
-        private static bool m_checkWorkflow;
+        public static bool CheckWorkflow { get; set; }
 
         /// <summary>
         /// 伝言メモの新着メモをチェックする
         /// </summary>
-        private static bool m_checkMemo;
+        public static bool CheckMemo { get; set; }
+
+        /// <summary>
+        /// 他のユーザのスケジュールもチェックするかどうか
+        /// </summary>
+        public static bool CheckOtherSchedule { get; set; }
+
+        /// <summary>
+        /// チェックするユーザID一覧
+        /// </summary>
+        public static string GroupUserId { get; set; }
 
         static SettingManager()
         {
-            m_userId = Properties.Settings.Default.userId;
-            m_loginName = Properties.Settings.Default.loginName;
-            m_userPassword = Properties.Settings.Default.userPassword;
-            m_aipoVersion = Properties.Settings.Default.aipoVersion;
-            m_checkTime = Properties.Settings.Default.checkTime;
-            m_url = Properties.Settings.Default.url;
-            m_checkAutoRun = Properties.Settings.Default.checkAutoRun;
-            m_checkAutoLogin = Properties.Settings.Default.checkAutoLogin;
-            m_NpgsqlConnectionServer = Properties.Settings.Default.NpgsqlConnectionServer;
-            m_NpgsqlConnectionPort = Properties.Settings.Default.NpgsqlConnectionPort;
-            m_NpgsqlConnectionUserId = Properties.Settings.Default.NpgsqlConnectionUserId;
-            m_NpgsqlConnectionPassword = Properties.Settings.Default.NpgsqlConnectionPassword;
-            m_NpgsqlConnectionDatabase = Properties.Settings.Default.NpgsqlConnectionDatabase;
-            m_NpgsqlConnectionTimeout = Properties.Settings.Default.NpgsqlConnectionTimeout;
-            m_checkBlog = Properties.Settings.Default.checkBlog;
-            m_checkBlogComment = Properties.Settings.Default.checkBlogComment;
-            m_checkMsgboard = Properties.Settings.Default.checkMsgboard;
-            m_checkSchedule = Properties.Settings.Default.checkSchedule;
-            m_checkWorkflow = Properties.Settings.Default.checkWorkflow;
-            m_checkMemo = Properties.Settings.Default.checkMemo;
-        }
-
-        /// <summary>
-        /// ユーザIDを取得または設定する
-        /// </summary>
-        public static string UserId
-        {
-            set
-            {
-                m_userId = value;
-            }
-            get
-            {
-                return m_userId;
-            }
-        }
-
-        /// <summary>
-        /// ログイン名を取得または設定する
-        /// </summary>
-        public static string LoginName
-        {
-            set
-            {
-                m_loginName = value;
-            }
-            get
-            {
-                return m_loginName;
-            }
+            UserId = Properties.Settings.Default.userId;
+            LoginName = Properties.Settings.Default.loginName;
+            _UserPassword = Properties.Settings.Default.userPassword;
+            AipoVersion = Properties.Settings.Default.aipoVersion;
+            CheckTime = Properties.Settings.Default.checkTime;
+            Url = Properties.Settings.Default.url;
+            AutoRun = Properties.Settings.Default.checkAutoRun;
+            AutoLogin = Properties.Settings.Default.checkAutoLogin;
+            NpgsqlConnectionServer = Properties.Settings.Default.NpgsqlConnectionServer;
+            NpgsqlConnectionPort = Properties.Settings.Default.NpgsqlConnectionPort;
+            NpgsqlConnectionUserId = Properties.Settings.Default.NpgsqlConnectionUserId;
+            _NpgsqlConnectionPassword = Properties.Settings.Default.NpgsqlConnectionPassword;
+            NpgsqlConnectionDatabase = Properties.Settings.Default.NpgsqlConnectionDatabase;
+            NpgsqlConnectionTimeout = Properties.Settings.Default.NpgsqlConnectionTimeout;
+            CheckBlog = Properties.Settings.Default.checkBlog;
+            CheckBlogComment = Properties.Settings.Default.checkBlogComment;
+            CheckMsgboard = Properties.Settings.Default.checkMsgboard;
+            CheckSchedule = Properties.Settings.Default.checkSchedule;
+            CheckWorkflow = Properties.Settings.Default.checkWorkflow;
+            CheckMemo = Properties.Settings.Default.checkMemo;
+            CheckOtherSchedule = Properties.Settings.Default.checkOtherSchedule;
+            GroupUserId = Properties.Settings.Default.checkGroupUserId;
         }
 
         /// <summary>
@@ -174,154 +156,19 @@ namespace AipoReminder.Utility
         {
             set
             {
-                m_userPassword = Security.EncryptData(value);
+                _UserPassword = Security.EncryptData(value);
             }
             get
             {
-                if (String.IsNullOrEmpty(m_userPassword))
+                if (String.IsNullOrEmpty(_UserPassword))
                 {
                     return "";
                 }
                 else
                 {
-                    return Security.UnEncryptData(m_userPassword);
+                    return Security.UnEncryptData(_UserPassword);
                 }
             }        
-        }
-
-        /// <summary>
-        /// Aipoバージョンを取得または設定する
-        /// </summary>
-        public static int AipoVersion
-        {
-            set
-            {
-                m_aipoVersion = value;
-            }
-            get
-            {
-                return m_aipoVersion;
-            }
-        }
-
-        /// <summary>
-        /// 定期チェック(分)を取得または設定する
-        /// </summary>
-        public static int CheckTime
-        {
-            set
-            {
-                m_checkTime = value;
-            }
-            get
-            {
-                return m_checkTime;
-            }
-        }
-
-        /// <summary>
-        /// AipoのURLを取得または設定する
-        /// </summary>
-        public static string URL
-        {
-            set
-            {
-                m_url = value;
-            }
-            get
-            {
-                return m_url;
-            }
-        }
-
-        /// <summary>
-        /// 自動ログイン用htmlを取得または設定する
-        /// </summary>
-        public static string AutoLoginHtml
-        {
-            set
-            {
-                m_autoLoginHtml = value;
-            }
-            get
-            {
-                return m_autoLoginHtml;
-            }
-        }
-
-        /// <summary>
-        /// 自動起動フラグを取得または設定する
-        /// </summary>
-        public static bool AutoRun
-        {
-            set
-            {
-                m_checkAutoRun = value;
-            }
-            get
-            {
-                return m_checkAutoRun;
-            }
-        }
-
-        /// <summary>
-        /// 自動ログインフラグを取得または設定する
-        /// </summary>
-        public static bool AutoLogin
-        {
-            set
-            {
-                m_checkAutoLogin = value;
-            }
-            get
-            {
-                return m_checkAutoLogin;
-            }
-        }
-
-        /// <summary>
-        /// 接続文字列(サーバIP)を取得または設定する
-        /// </summary>
-        public static string NpgsqlConnectionServer
-        {
-            set
-            {
-                m_NpgsqlConnectionServer = value;
-            }
-            get
-            {
-                return m_NpgsqlConnectionServer;
-            }
-        }
-
-        /// <summary>
-        /// 接続文字列(ポート)を取得または設定する
-        /// </summary>
-        public static string NpgsqlConnectionPort
-        {
-            set
-            {
-                m_NpgsqlConnectionPort = value;
-            }
-            get
-            {
-                return m_NpgsqlConnectionPort;
-            }
-        }
-
-        /// <summary>
-        /// 接続文字列(ユーザID)を取得または設定する
-        /// </summary>
-        public static string NpgsqlConnectionUserId
-        {
-            set
-            {
-                m_NpgsqlConnectionUserId = value;
-            }
-            get
-            {
-                return m_NpgsqlConnectionUserId;
-            }
         }
 
         /// <summary>
@@ -331,139 +178,19 @@ namespace AipoReminder.Utility
         {
             set
             {
-                m_NpgsqlConnectionPassword = Security.EncryptData(value);
+                _NpgsqlConnectionPassword = Security.EncryptData(value);
             }
             get
             {
-                if (String.IsNullOrEmpty(m_NpgsqlConnectionPassword))
+                if (String.IsNullOrEmpty(_NpgsqlConnectionPassword))
                 {
-                    m_NpgsqlConnectionPassword = Security.EncryptData(aipoPassword);
+                    _NpgsqlConnectionPassword = Security.EncryptData(aipoPassword);
                     return aipoPassword;
                 }
                 else
                 {
-                    return Security.UnEncryptData(m_NpgsqlConnectionPassword);
+                    return Security.UnEncryptData(_NpgsqlConnectionPassword);
                 }
-            }
-        }
-
-        /// <summary>
-        /// 接続文字列(データベース名)を取得または設定する
-        /// </summary>
-        public static string NpgsqlConnectionDatabase
-        {
-            set
-            {
-                m_NpgsqlConnectionDatabase = value;
-            }
-            get
-            {
-                return m_NpgsqlConnectionDatabase;
-            }
-        }
-
-        /// <summary>
-        /// 接続文字列(タイムアウト)を取得または設定する
-        /// </summary>
-        public static string NpgsqlConnectionTimeout
-        {
-            set
-            {
-                m_NpgsqlConnectionTimeout = value;
-            }
-            get
-            {
-                return m_NpgsqlConnectionTimeout;
-            }
-        }
-
-        /// <summary>
-        /// ブログの新着記事チェックフラグを取得または設定する
-        /// </summary>
-        public static bool CheckBlog
-        {
-            set
-            {
-                m_checkBlog = value;
-            }
-            get
-            {
-                return m_checkBlog;
-            }
-        }
-
-        /// <summary>
-        /// ブログの新着コメントチェックフラグを取得または設定する
-        /// </summary>
-        public static bool CheckBlogComment
-        {
-            set
-            {
-                m_checkBlogComment = value;
-            }
-            get
-            {
-                return m_checkBlogComment;
-            }
-        }
-
-        /// <summary>
-        /// 掲示板の新しい書き込みチェックフラグを取得または設定する
-        /// </summary>
-        public static bool CheckMsgboard
-        {
-            set
-            {
-                m_checkMsgboard = value;
-            }
-            get
-            {
-                return m_checkMsgboard;
-            }
-        }
-
-        /// <summary>
-        /// スケジュールの新着予定チェックフラグを取得または設定する
-        /// </summary>
-        public static bool CheckSchedule
-        {
-            set
-            {
-                m_checkSchedule = value;
-            }
-            get
-            {
-                return m_checkSchedule;
-            }
-        }
-
-        /// <summary>
-        /// ワークフローの新着依頼チェックフラグを取得または設定する
-        /// </summary>
-        public static bool CheckWorkflow
-        {
-            set
-            {
-                m_checkWorkflow = value;
-            }
-            get
-            {
-                return m_checkWorkflow;
-            }
-        }
-
-        /// <summary>
-        /// 伝言メモの新着メモチェックフラグを取得または設定する
-        /// </summary>
-        public static bool CheckMemo
-        {
-            set
-            {
-                m_checkMemo = value;
-            }
-            get
-            {
-                return m_checkMemo;
             }
         }
 
@@ -476,12 +203,12 @@ namespace AipoReminder.Utility
             if (!String.IsNullOrEmpty(SettingManager.UserId) &&
                 !String.IsNullOrEmpty(SettingManager.LoginName) &&
                 !String.IsNullOrEmpty(SettingManager.UserPassword) &&
-                !String.IsNullOrEmpty(SettingManager.URL))
+                !String.IsNullOrEmpty(SettingManager.Url))
             {
                 Properties.Settings.Default.userId = SettingManager.UserId;
                 Properties.Settings.Default.loginName = SettingManager.LoginName;
                 Properties.Settings.Default.userPassword = Security.EncryptData(SettingManager.UserPassword);
-                Properties.Settings.Default.url = SettingManager.URL;
+                Properties.Settings.Default.url = SettingManager.Url;
                 Properties.Settings.Default.aipoVersion = SettingManager.AipoVersion;
 
                 Properties.Settings.Default.NpgsqlConnectionServer = SettingManager.NpgsqlConnectionServer;
@@ -513,6 +240,9 @@ namespace AipoReminder.Utility
             Properties.Settings.Default.checkSchedule = SettingManager.CheckSchedule;
             Properties.Settings.Default.checkWorkflow = SettingManager.CheckWorkflow;
             Properties.Settings.Default.checkMemo = SettingManager.CheckMemo;
+            // 他のユーザのスケジュール確認
+            Properties.Settings.Default.checkOtherSchedule = SettingManager.CheckOtherSchedule;
+            Properties.Settings.Default.checkGroupUserId = SettingManager.GroupUserId;
 
             Properties.Settings.Default.Save();
         }

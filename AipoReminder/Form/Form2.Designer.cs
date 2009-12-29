@@ -3,14 +3,14 @@
     partial class Form2
     {
         /// <summary>
-        /// Required designer variable.
+        /// 必要なデザイナ変数です。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// 使用中のリソースをすべてクリーンアップします。
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">マネージ リソースが破棄される場合 true、破棄されない場合は false です。</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Windows フォーム デザイナで生成されたコード
 
         /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// デザイナ サポートに必要なメソッドです。このメソッドの内容を
+        /// コード エディタで変更しないでください。
         /// </summary>
         private void InitializeComponent()
         {
@@ -42,8 +42,7 @@
             this.textBoxScheduleInfo.Multiline = true;
             this.textBoxScheduleInfo.Name = "textBoxScheduleInfo";
             this.textBoxScheduleInfo.ReadOnly = true;
-            this.textBoxScheduleInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxScheduleInfo.Size = new System.Drawing.Size(251, 105);
+            this.textBoxScheduleInfo.Size = new System.Drawing.Size(300, 105);
             this.textBoxScheduleInfo.TabIndex = 0;
             // 
             // label1
@@ -57,7 +56,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(100, 135);
+            this.button1.Location = new System.Drawing.Point(125, 135);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -69,7 +68,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(275, 170);
+            this.ClientSize = new System.Drawing.Size(324, 170);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxScheduleInfo);

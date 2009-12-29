@@ -14,7 +14,6 @@ using AipoReminder.Manager;
 using AipoReminder.Model;
 using AipoReminder.Utility;
 using AipoReminder.ValueObject;
-using Microsoft.Win32;
 using WinFramework.Exceptions;
 using WinFramework.Utility;
 
@@ -42,6 +41,9 @@ namespace AipoReminder
         private int challengeLoginCount = 0;
         // ログイン試行回数の上限
         private static int CHALLENGE_LOGIN_MAX_COUNT = 6;
+
+        // ユーザ選択フォームで選択したユーザをカンマ区切りで保持しておく変数
+        private string groupUserId;
 
 #endregion
 
@@ -179,18 +181,19 @@ namespace AipoReminder
                 return false;
             }
 
-            textBoxUserName.Text = SettingManager.LoginName;                // ログイン名
-            textBoxURL.Text = SettingManager.URL;                           // URL
-            comboBoxAipoVersion.SelectedItem = SettingManager.AipoVersion;     // AipoVersion
-            comboBoxCheckTime.SelectedItem = SettingManager.CheckTime;      // スケジュールのチェック間隔
-            checkBoxAutoRun.Checked = SettingManager.AutoRun;               // 自動起動
-            checkBoxAutoLogin.Checked = SettingManager.AutoLogin;           // 自動ログイン
-            checkBoxBlog.Checked = SettingManager.CheckBlog;                // ブログの新着記事チェック
-            checkBoxBlogComment.Checked = SettingManager.CheckBlogComment;  // ブログの新着コメントチェック
-            checkBoxMsgboard.Checked = SettingManager.CheckMsgboard;        // 掲示板の新しい書き込みチェック
-            checkBoxSchedule.Checked = SettingManager.CheckSchedule;        // スケジュールの新着予定チェック
-            checkBoxWorkflow.Checked = SettingManager.CheckWorkflow;        // ワークフローの新着依頼チェック
-            checkBoxMemo.Checked = SettingManager.CheckMemo;                // 伝言メモの新着メモチェック
+            textBoxUserName.Text = SettingManager.LoginName;                        // ログイン名
+            textBoxURL.Text = SettingManager.Url;                                   // URL
+            comboBoxAipoVersion.SelectedItem = SettingManager.AipoVersion;          // AipoVersion
+            comboBoxCheckTime.SelectedItem = SettingManager.CheckTime;              // スケジュールのチェック間隔
+            checkBoxAutoRun.Checked = SettingManager.AutoRun;                       // 自動起動
+            checkBoxAutoLogin.Checked = SettingManager.AutoLogin;                   // 自動ログイン
+            checkBoxBlog.Checked = SettingManager.CheckBlog;                        // ブログの新着記事チェック
+            checkBoxBlogComment.Checked = SettingManager.CheckBlogComment;          // ブログの新着コメントチェック
+            checkBoxMsgboard.Checked = SettingManager.CheckMsgboard;                // 掲示板の新しい書き込みチェック
+            checkBoxSchedule.Checked = SettingManager.CheckSchedule;                // スケジュールの新着予定チェック
+            checkBoxWorkflow.Checked = SettingManager.CheckWorkflow;                // ワークフローの新着依頼チェック
+            checkBoxMemo.Checked = SettingManager.CheckMemo;                        // 伝言メモの新着メモチェック
+            checkBoxOtherSchedule.Checked = SettingManager.CheckOtherSchedule;      // 他のユーザのスケジュールをチェックするかどうか
 
             return true;
         }
@@ -225,8 +228,8 @@ namespace AipoReminder
 
                     // 自動ログイン用html作成
                     SettingManager.AutoLoginHtml = String.Format(Properties.Resources.autologin,
-                                                                 String.Format("{0:D4}", SettingManager.URL.Length),
-                                                                 SettingManager.URL,
+                                                                 String.Format("{0:D4}", SettingManager.Url.Length),
+                                                                 SettingManager.Url,
                                                                  SettingManager.LoginName,
                                                                  SettingManager.UserPassword);
 
@@ -339,7 +342,7 @@ namespace AipoReminder
                     SettingManager.UserId = data.turbine_user[0].user_id;
                     SettingManager.LoginName = data.turbine_user[0].login_name;
                     SettingManager.UserPassword = textBoxPassword.Text;
-                    SettingManager.URL = textBoxURL.Text;
+                    SettingManager.Url = textBoxURL.Text;
                     SettingManager.AipoVersion = int.Parse(comboBoxAipoVersion.SelectedItem.ToString()); ;      // AipoVersion
 
                     // 入力項目を非活性にする
@@ -355,8 +358,8 @@ namespace AipoReminder
 
                     // 自動ログイン用html作成
                     SettingManager.AutoLoginHtml = String.Format(Properties.Resources.autologin,
-                                                                 String.Format("{0:D4}", SettingManager.URL.Length),
-                                                                 SettingManager.URL,
+                                                                 String.Format("{0:D4}", SettingManager.Url.Length),
+                                                                 SettingManager.Url,
                                                                  SettingManager.LoginName,
                                                                  SettingManager.UserPassword);
 
@@ -506,14 +509,16 @@ namespace AipoReminder
         private void buttonInfoSettings_Click(object sender, EventArgs e)
         {
             SettingManager.CheckTime = int.Parse(comboBoxCheckTime.SelectedItem.ToString()); ;      // スケジュールのチェック間隔
-            SettingManager.AutoRun = checkBoxAutoRun.Checked;               // 自動起動
-            SettingManager.AutoLogin = checkBoxAutoLogin.Checked;           // 自動ログイン
-            SettingManager.CheckBlog = checkBoxBlog.Checked;                // ブログの新着記事チェック
-            SettingManager.CheckBlogComment = checkBoxBlogComment.Checked;  // ブログの新着コメントチェック
-            SettingManager.CheckMsgboard = checkBoxMsgboard.Checked;        // 掲示板の新しい書き込みチェック
-            SettingManager.CheckSchedule = checkBoxSchedule.Checked;        // スケジュールの新着予定チェック
-            SettingManager.CheckWorkflow = checkBoxWorkflow.Checked;        // ワークフローの新着依頼チェック
-            SettingManager.CheckMemo = checkBoxMemo.Checked;                // 伝言メモの新着メモチェック
+            SettingManager.AutoRun = checkBoxAutoRun.Checked;                       // 自動起動
+            SettingManager.AutoLogin = checkBoxAutoLogin.Checked;                   // 自動ログイン
+            SettingManager.CheckBlog = checkBoxBlog.Checked;                        // ブログの新着記事チェック
+            SettingManager.CheckBlogComment = checkBoxBlogComment.Checked;          // ブログの新着コメントチェック
+            SettingManager.CheckMsgboard = checkBoxMsgboard.Checked;                // 掲示板の新しい書き込みチェック
+            SettingManager.CheckSchedule = checkBoxSchedule.Checked;                // スケジュールの新着予定チェック
+            SettingManager.CheckWorkflow = checkBoxWorkflow.Checked;                // ワークフローの新着依頼チェック
+            SettingManager.CheckMemo = checkBoxMemo.Checked;                        // 伝言メモの新着メモチェック
+            SettingManager.CheckOtherSchedule = checkBoxOtherSchedule.Checked;      // 他のユーザのスケジュールのチェックするかどうか
+            SettingManager.GroupUserId = groupUserId;                               // スケジュールをチェックするユーザ一覧(カンマ区切り)
 
             if (checkBoxAutoRun.Checked)
             {
@@ -534,6 +539,21 @@ namespace AipoReminder
             SettingManager.WhatsnewInfoSave();
 
             MessageBox.Show(MessageConstants.INFO_WHATSNEW_SETTING_OK, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        /// <summary>
+        /// ユーザ選択
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form3 f = new Form3();
+            if (f.ShowDialog(this) == DialogResult.OK)
+            {
+                groupUserId = f.GroupId;
+            }
+            f.Dispose();
         }
 
 #region old
@@ -764,14 +784,17 @@ namespace AipoReminder
 
                 // もうすぐ始まるスケジュールをチェック
                 ScheduleManager sm = new ScheduleManager(dt);
-                string msg = sm.CheckSchedule();
+                List<ScheduleItem> scheduleList = sm.CheckSchedule();
 
                 StringBuilder sb = new StringBuilder();
-                if (!String.IsNullOrEmpty(msg))
+                if (scheduleList != null)
                 {
-                    Form2 f = new Form2();
-                    f.Show();
-                    f.TextBoxScheduleInfoText = msg;
+                    if (scheduleList.Count > 0)
+                    {
+                        Form2 f = new Form2();
+                        f.Show();
+                        f.ScheduleList = scheduleList;
+                    }
                 }
 
                 // 新着情報を取得するためのDataSetと検索条件を設定

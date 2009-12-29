@@ -4,22 +4,12 @@ namespace AipoReminder.ValueObject
 {
     class ComboItemCheckTime
     {
-        private int checkTime;
+        // スケジュール確認時間
+        public int CheckTime { get; set; }
 
         public ComboItemCheckTime(int checkTime)
         {
-            this.checkTime = checkTime;
-        }
-
-        /// <summary>
-        /// スケジュール確認時間
-        /// </summary>
-        public int CheckTime
-        {
-            get
-            {
-                return checkTime;
-            }
+            CheckTime = checkTime;
         }
 
         /// <summary>
@@ -28,7 +18,7 @@ namespace AipoReminder.ValueObject
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("{0, 2}", checkTime) + "分前";
+            return String.Format("{0, 2}", CheckTime) + "分前";
         }
     }
 }

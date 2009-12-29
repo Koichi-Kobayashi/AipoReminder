@@ -1,25 +1,22 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
 namespace AipoReminder.ValueObject
 {
     /// <summary>
     /// コンボボックスに追加する項目となるクラス
     /// </summary>
-    public class ComboBoxItem
+    class ComboBoxGroupItem
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string Password { get; set; }
 
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        /// <param name="id">ID</param>
-        /// <param name="name">表示名称</param>
-        public ComboBoxItem(string id, string name, string password)
+        public ComboBoxGroupItem(int id, string name)
         {
             Id = id;
             Name = name;
-            Password = password;
         }
 
         /// <summary>
@@ -30,5 +27,6 @@ namespace AipoReminder.ValueObject
         {
             return Name;
         }
+    
     }
 }

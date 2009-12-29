@@ -60,7 +60,7 @@ namespace AipoReminder.Manager
 
             if (String.IsNullOrEmpty(targetUrl))
             {
-                arg = SettingManager.URL;
+                arg = SettingManager.Url;
             }
             else
             {
