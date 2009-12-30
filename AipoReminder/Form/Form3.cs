@@ -72,7 +72,10 @@ namespace AipoReminder
 
             // チェックボックスにチェックを入れるユーザIDをListに入れる
             List<string> list = new List<string>();
-            list.AddRange(SettingManager.GroupUserId.Split(",".ToCharArray()));
+            if (SettingManager.GroupUserId != null)
+            {
+                list.AddRange(SettingManager.GroupUserId.Split(",".ToCharArray()));
+            }
 
             TurbineUserDataSet userList = this.GetTurbineGroupUserData(group_id);
 

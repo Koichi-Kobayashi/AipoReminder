@@ -42,6 +42,7 @@
             this.textBoxScheduleInfo.Multiline = true;
             this.textBoxScheduleInfo.Name = "textBoxScheduleInfo";
             this.textBoxScheduleInfo.ReadOnly = true;
+            this.textBoxScheduleInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBoxScheduleInfo.Size = new System.Drawing.Size(300, 105);
             this.textBoxScheduleInfo.TabIndex = 0;
             // 

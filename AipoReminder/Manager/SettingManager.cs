@@ -151,7 +151,7 @@ namespace AipoReminder.Utility
             bool isNotDigit = false;
             if (!String.IsNullOrEmpty(Properties.Settings.Default.checkGroupUserId))
             {
-                foreach (string str in Properties.Settings.Default.checkGroupUserId.Split())
+                foreach (string str in Properties.Settings.Default.checkGroupUserId.Split(','))
                 {
                     for (int i = 0; i < str.Length; i++ )
                     {
