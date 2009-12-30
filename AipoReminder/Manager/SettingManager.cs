@@ -146,7 +146,27 @@ namespace AipoReminder.Utility
             CheckWorkflow = Properties.Settings.Default.checkWorkflow;
             CheckMemo = Properties.Settings.Default.checkMemo;
             CheckOtherSchedule = Properties.Settings.Default.checkOtherSchedule;
-            GroupUserId = Properties.Settings.Default.checkGroupUserId;
+
+            // カンマ区切りのユーザIDの中に数字ではない文字が含まれていた場合、ユーザIDを取得しない
+            bool isNotDigit = false;
+            if (!String.IsNullOrEmpty(Properties.Settings.Default.checkGroupUserId))
+            {
+                foreach (string str in Properties.Settings.Default.checkGroupUserId.Split())
+                {
+                    for (int i = 0; i < str.Length; i++ )
+                    {
+                        if (!Char.IsDigit(str, i))
+                        {
+                            isNotDigit = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!isNotDigit)
+            {
+                GroupUserId = Properties.Settings.Default.checkGroupUserId;
+            }
         }
 
         /// <summary>

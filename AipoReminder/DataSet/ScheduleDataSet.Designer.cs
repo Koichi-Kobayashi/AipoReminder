@@ -834,6 +834,7 @@ namespace AipoReminder.DataSet {
                 this.columnpublic_flag.DefaultValue = ((string)(""));
                 this.columnedit_flag.DefaultValue = ((string)(""));
                 this.columncheck_time.DefaultValue = ((string)(""));
+                this.columnother_user_id_list.DefaultValue = ((string)(""));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

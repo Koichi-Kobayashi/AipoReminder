@@ -16,10 +16,12 @@ namespace AipoReminder.Constants
         // エラーメッセージ
         public const string MSG_CAPTION_001 = "アカウント設定エラー";
         public const string MSG_CAPTION_002 = "DB設定エラー";
+        public const string MSG_CAPTION_003 = "エラー";
         public const string INFO_ACCOUNT_SETTING_OK = "アカウント情報を保存しました。";
         public const string INFO_WHATSNEW_SETTING_OK = "お知らせ設定を保存しました。";
         public const string ERR_PASSWORD = "パスワードが間違っています。";
         public const string ERR_DB_ACCESS = "Aipoに接続できませんでした。";
+        public const string ERR_SETTING = "設定ファイルが不正です。";
 
         // 必須
         public const string CHK_MUST = "{0}を入力して下さい。";

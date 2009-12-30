@@ -16,6 +16,7 @@ using AipoReminder.Utility;
 using AipoReminder.ValueObject;
 using WinFramework.Exceptions;
 using WinFramework.Utility;
+using System.Configuration;
 
 namespace AipoReminder
 {
@@ -44,6 +45,8 @@ namespace AipoReminder
 
         // ユーザ選択フォームで選択したユーザをカンマ区切りで保持しておく変数
         private string groupUserId;
+        // ユーザ選択フォームでOKボタンを押したかどうか
+        private bool isSetGroupUserId;
 
 #endregion
 
@@ -108,94 +111,105 @@ namespace AipoReminder
         /// </summary>
         private bool ReadUserData()
         {
-            // ウィンドウ非表示
-            this.Visible = false;
-            // サーバIP
-            textBoxServerIP.Text = SettingManager.NpgsqlConnectionServer;
-            // ポート
-            textBoxServerPort.Text = SettingManager.NpgsqlConnectionPort;
-            // ユーザID
-            textBoxDbUserId.Text = SettingManager.NpgsqlConnectionUserId;
-            // パスワード
-            textBoxDbPassword.Text = SettingManager.NpgsqlConnectionPassword;
-            // データベース名
-            textBoxDbName.Text = SettingManager.NpgsqlConnectionDatabase;
-
-            // AipoVersionコンボボックスのSelectedIndexを設定
-            switch (SettingManager.AipoVersion)
+            try
             {
-                case 4:
-                    comboBoxAipoVersion.SelectedIndex = 0;
-                    break;
-                case 5:
-                    comboBoxAipoVersion.SelectedIndex = 1;
-                    break;
-            }
+                // ウィンドウ非表示
+                this.Visible = false;
 
-            // スケジュールのチェック間隔コンボボックスのSelectedIndexを設定
-            for (int i = 0; i < 12; i++)
-            {
-                // 選択
-                if (SettingManager.CheckTime == (i * 5 + 5))
+                // バージョン情報
+                Assembly asm = Assembly.GetExecutingAssembly();
+                Version ver = asm.GetName().Version;
+                //            textBoxVersionInfo.Text = Application.ProductName + " Version " + ver.Major + "." + ver.Minor + "." + ver.Build;
+                textBoxVersionInfo.Text = Application.ProductName + " Version " + Application.ProductVersion;
+                textBoxSystemInfo1.Text = Application.ProductName + " Core Version " + Application.ProductVersion;
+                textBoxSystemInfo2.Text = "Operating System Version ";
+                textBoxSystemInfo3.Text = System.Environment.OSVersion.VersionString;
+                textBoxSystemInfo4.Text = "Internet Explorer Version " + IEUtility.GetInternetExplorerVersion();
+                // AssemblyCopyrightの取得
+                System.Reflection.AssemblyCopyrightAttribute asmcpy =
+                    (System.Reflection.AssemblyCopyrightAttribute)
+                    Attribute.GetCustomAttribute(
+                    System.Reflection.Assembly.GetExecutingAssembly(),
+                    typeof(System.Reflection.AssemblyCopyrightAttribute));
+                textBoxSystemInfo5.Text = asmcpy.Copyright;
+
+                // サーバIP
+                textBoxServerIP.Text = SettingManager.NpgsqlConnectionServer;
+                // ポート
+                textBoxServerPort.Text = SettingManager.NpgsqlConnectionPort;
+                // ユーザID
+                textBoxDbUserId.Text = SettingManager.NpgsqlConnectionUserId;
+                // パスワード
+                textBoxDbPassword.Text = SettingManager.NpgsqlConnectionPassword;
+                // データベース名
+                textBoxDbName.Text = SettingManager.NpgsqlConnectionDatabase;
+
+                // AipoVersionコンボボックスのSelectedIndexを設定
+                switch (SettingManager.AipoVersion)
                 {
-                    comboBoxCheckTime.SelectedIndex = i;
+                    case 4:
+                        comboBoxAipoVersion.SelectedIndex = 0;
+                        break;
+                    case 5:
+                        comboBoxAipoVersion.SelectedIndex = 1;
+                        break;
                 }
+
+                // スケジュールのチェック間隔コンボボックスのSelectedIndexを設定
+                for (int i = 0; i < 12; i++)
+                {
+                    // 選択
+                    if (SettingManager.CheckTime == (i * 5 + 5))
+                    {
+                        comboBoxCheckTime.SelectedIndex = i;
+                    }
+                }
+
+                if (String.IsNullOrEmpty(SettingManager.UserId) ||
+                    String.IsNullOrEmpty(SettingManager.LoginName) ||
+                    String.IsNullOrEmpty(SettingManager.UserPassword))
+                {
+                    // 新着情報はデフォルトですべてチェックしておく
+                    SettingManager.CheckBlog = true;
+                    SettingManager.CheckBlogComment = true;
+                    SettingManager.CheckMsgboard = true;
+                    SettingManager.CheckSchedule = true;
+                    SettingManager.CheckWorkflow = true;
+                    SettingManager.CheckMemo = true;
+                    checkBoxBlog.Checked = true;
+                    checkBoxBlogComment.Checked = true;
+                    checkBoxMsgboard.Checked = true;
+                    checkBoxSchedule.Checked = true;
+                    checkBoxWorkflow.Checked = true;
+                    checkBoxMemo.Checked = true;
+
+                    this.ActiveWindow();
+                    return false;
+                }
+
+                textBoxUserName.Text = SettingManager.LoginName;                        // ログイン名
+                textBoxURL.Text = SettingManager.Url;                                   // URL
+                comboBoxAipoVersion.SelectedItem = SettingManager.AipoVersion;          // AipoVersion
+                comboBoxCheckTime.SelectedItem = SettingManager.CheckTime;              // スケジュールのチェック間隔
+                checkBoxAutoRun.Checked = SettingManager.AutoRun;                       // 自動起動
+                checkBoxAutoLogin.Checked = SettingManager.AutoLogin;                   // 自動ログイン
+                checkBoxBlog.Checked = SettingManager.CheckBlog;                        // ブログの新着記事チェック
+                checkBoxBlogComment.Checked = SettingManager.CheckBlogComment;          // ブログの新着コメントチェック
+                checkBoxMsgboard.Checked = SettingManager.CheckMsgboard;                // 掲示板の新しい書き込みチェック
+                checkBoxSchedule.Checked = SettingManager.CheckSchedule;                // スケジュールの新着予定チェック
+                checkBoxWorkflow.Checked = SettingManager.CheckWorkflow;                // ワークフローの新着依頼チェック
+                checkBoxMemo.Checked = SettingManager.CheckMemo;                        // 伝言メモの新着メモチェック
+                checkBoxOtherSchedule.Checked = SettingManager.CheckOtherSchedule;      // 他のユーザのスケジュールをチェックするかどうか
+
+                return true;
             }
-
-            // バージョン情報
-            Assembly asm = Assembly.GetExecutingAssembly();
-            Version ver = asm.GetName().Version;
-//            textBoxVersionInfo.Text = Application.ProductName + " Version " + ver.Major + "." + ver.Minor + "." + ver.Build;
-            textBoxVersionInfo.Text = Application.ProductName + " Version " + Application.ProductVersion;
-            textBoxSystemInfo1.Text = Application.ProductName + " Core Version " + Application.ProductVersion;
-            textBoxSystemInfo2.Text = "Operating System Version ";
-            textBoxSystemInfo3.Text = System.Environment.OSVersion.VersionString;
-            textBoxSystemInfo4.Text = "Internet Explorer Version " + IEUtility.GetInternetExplorerVersion();
-            // AssemblyCopyrightの取得
-            System.Reflection.AssemblyCopyrightAttribute asmcpy =
-                (System.Reflection.AssemblyCopyrightAttribute)
-                Attribute.GetCustomAttribute(
-                System.Reflection.Assembly.GetExecutingAssembly(),
-                typeof(System.Reflection.AssemblyCopyrightAttribute));
-            textBoxSystemInfo5.Text = asmcpy.Copyright;
-
-            if (String.IsNullOrEmpty(SettingManager.UserId) ||
-                String.IsNullOrEmpty(SettingManager.LoginName) ||
-                String.IsNullOrEmpty(SettingManager.UserPassword))
+            catch (TypeInitializationException e)
             {
-                // 新着情報はデフォルトですべてチェックしておく
-                SettingManager.CheckBlog = true;
-                SettingManager.CheckBlogComment = true;
-                SettingManager.CheckMsgboard = true;
-                SettingManager.CheckSchedule = true;
-                SettingManager.CheckWorkflow = true;
-                SettingManager.CheckMemo = true;
-                checkBoxBlog.Checked = true;
-                checkBoxBlogComment.Checked = true;
-                checkBoxMsgboard.Checked = true;
-                checkBoxSchedule.Checked = true;
-                checkBoxWorkflow.Checked = true;
-                checkBoxMemo.Checked = true;
-
-                this.ActiveWindow();
+                LogUtility.WriteLogError(e.Message);
+                // エラーメッセージ
+                MessageBox.Show(MessageConstants.ERR_SETTING, MessageConstants.MSG_CAPTION_003, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-
-            textBoxUserName.Text = SettingManager.LoginName;                        // ログイン名
-            textBoxURL.Text = SettingManager.Url;                                   // URL
-            comboBoxAipoVersion.SelectedItem = SettingManager.AipoVersion;          // AipoVersion
-            comboBoxCheckTime.SelectedItem = SettingManager.CheckTime;              // スケジュールのチェック間隔
-            checkBoxAutoRun.Checked = SettingManager.AutoRun;                       // 自動起動
-            checkBoxAutoLogin.Checked = SettingManager.AutoLogin;                   // 自動ログイン
-            checkBoxBlog.Checked = SettingManager.CheckBlog;                        // ブログの新着記事チェック
-            checkBoxBlogComment.Checked = SettingManager.CheckBlogComment;          // ブログの新着コメントチェック
-            checkBoxMsgboard.Checked = SettingManager.CheckMsgboard;                // 掲示板の新しい書き込みチェック
-            checkBoxSchedule.Checked = SettingManager.CheckSchedule;                // スケジュールの新着予定チェック
-            checkBoxWorkflow.Checked = SettingManager.CheckWorkflow;                // ワークフローの新着依頼チェック
-            checkBoxMemo.Checked = SettingManager.CheckMemo;                        // 伝言メモの新着メモチェック
-            checkBoxOtherSchedule.Checked = SettingManager.CheckOtherSchedule;      // 他のユーザのスケジュールをチェックするかどうか
-
-            return true;
         }
 
         /// <summary>
@@ -435,53 +449,6 @@ namespace AipoReminder
             textBoxDbName.Enabled = true;
         }
 
-        ///// <summary>
-        ///// ブラウザ起動時に自動ログインする
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void checkBoxAutoLogin_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    SettingManager.AutoLogin = checkBoxAutoLogin.Checked;
-        //}
-
-        ///// <summary>
-        ///// Windows起動時にAipoリマインダーを起動する
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void checkBoxAutoRun_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    SettingManager.AutoRun = checkBoxAutoRun.Checked;
-
-        //    // 自動起動
-        //    if (checkBoxAutoRun.Checked)
-        //    {
-        //        SettingManager.AutoRun = true;
-
-        //        // ショートカットを作成
-        //        this.CreateShortcut();
-        //    }
-        //    else
-        //    {
-        //        SettingManager.AutoRun = false;
-
-        //        // ショートカットを削除
-        //        this.DeleteShortcut();
-        //    }
-        //}
-
-        ///// <summary>
-        ///// スケジュール確認コンボボックスの値を変更した場合の処理
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void comboBoxCheckTime_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //SettingManager.CheckTime = ((ComboItemCheckTime)comboBoxCheckTime.SelectedItem).CheckTime;
-        //    SettingManager.CheckTime = int.Parse(comboBoxCheckTime.SelectedItem.ToString());
-        //}
-
         /// <summary>
         /// URLテキストボックスからフォーカスが外れた場合、
         /// サーバIPの値をセットする
@@ -518,7 +485,10 @@ namespace AipoReminder
             SettingManager.CheckWorkflow = checkBoxWorkflow.Checked;                // ワークフローの新着依頼チェック
             SettingManager.CheckMemo = checkBoxMemo.Checked;                        // 伝言メモの新着メモチェック
             SettingManager.CheckOtherSchedule = checkBoxOtherSchedule.Checked;      // 他のユーザのスケジュールのチェックするかどうか
-            SettingManager.GroupUserId = groupUserId;                               // スケジュールをチェックするユーザ一覧(カンマ区切り)
+            if (isSetGroupUserId)
+            {
+                SettingManager.GroupUserId = groupUserId;                           // スケジュールをチェックするユーザ一覧(カンマ区切り)
+            }
 
             if (checkBoxAutoRun.Checked)
             {
@@ -552,6 +522,7 @@ namespace AipoReminder
             if (f.ShowDialog(this) == DialogResult.OK)
             {
                 groupUserId = f.GroupId;
+                isSetGroupUserId = true;
             }
             f.Dispose();
         }
@@ -742,13 +713,13 @@ namespace AipoReminder
         /// <param name="e"></param>
         public void WhatsnewProcess(bool isCheckNow)
         {
-            if (String.IsNullOrEmpty(SettingManager.UserId) ||
-                String.IsNullOrEmpty(SettingManager.LoginName) ||
-                String.IsNullOrEmpty(SettingManager.UserPassword))
+            if (!isLogin)
             {
                 return;
             }
-            if (!isLogin)
+            if (String.IsNullOrEmpty(SettingManager.UserId) ||
+                String.IsNullOrEmpty(SettingManager.LoginName) ||
+                String.IsNullOrEmpty(SettingManager.UserPassword))
             {
                 return;
             }
@@ -992,47 +963,6 @@ namespace AipoReminder
                 Debug.Print(ex.toString());
             }
         }
-
-#region old
-
-        ///// <summary>
-        ///// コンボボックスにユーザ情報をセット
-        ///// </summary>
-        //private void SetComboBox()
-        //{
-        //    try
-        //    {
-        //        // ユーザ一覧を取得
-        //        TurbineUserDataSet data = this.GetTurbineUserData("", "", "");
-
-        //        int selectedIndex = -1;
-        //        for (int i = 0; i < data.turbine_user.Count; i++)
-        //        {
-        //            TurbineUserDataSet.turbine_userRow row = data.turbine_user[i];
-        //            ComboBoxItem item = new ComboBoxItem(row.user_id, row.last_name + " " + row.first_name, row.password_value);
-        //            //comboBoxUserName.Items.Add(item);
-
-        //            if (row.user_id.Equals(SettingManager.UserId))
-        //            {
-        //                selectedIndex = i;
-        //            }
-        //        }
-
-        //        if (!String.IsNullOrEmpty(SettingManager.UserId) && !String.IsNullOrEmpty(SettingManager.UserPassword) && selectedIndex != -1)
-        //        {
-        //            // 既に設定ファイルが存在する場合
-        //            //comboBoxUserName.SelectedIndex = selectedIndex;
-        //        }
-
-        //    }
-        //    catch (DBException ex)
-        //    {
-        //        Debug.Print(ex.toString());
-        //    }
-
-        //}
-
-#endregion
 
 #endregion
 

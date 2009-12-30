@@ -4,6 +4,7 @@ using AipoReminder.DataSet;
 using AipoReminder.Utility;
 using NpgsqlTypes;
 using WinFramework.Utility;
+using System.Data;
 
 namespace AipoReminder.DAO
 {
@@ -225,7 +226,7 @@ namespace AipoReminder.DAO
                 sqlbldr.AppendLine("    left join turbine_user t3");
                 sqlbldr.AppendLine("        on t1.user_id = t3.user_id");
                 sqlbldr.AppendLine("where 1 = 1");
-                sqlbldr.AppendLine("and t1.user_id in (:other_user_id_list)");
+                sqlbldr.AppendLine("and t1.user_id in (" + param.other_user_id_list + ")");
                 sqlbldr.AppendLine("and t1.status != 'D'");
                 sqlbldr.AppendLine("and t2.public_flag = 'O'");
                 sqlbldr.AppendLine("and t2.start_date = :start_date");
@@ -234,7 +235,7 @@ namespace AipoReminder.DAO
                 // 毎日繰り返すスケジュール(繰り返し期間なし)
                 sqlbldr.AppendLine("or ");
                 sqlbldr.AppendLine("    (");
-                sqlbldr.AppendLine("            t1.user_id in (:other_user_id_list)");
+                sqlbldr.AppendLine("            t1.user_id in (" + param.other_user_id_list + ")");
                 sqlbldr.AppendLine("        and t1.status != 'D'");
                 sqlbldr.AppendLine("        and t2.public_flag = 'O'");
                 sqlbldr.AppendLine("        and t2.start_date like :like_start_date");
@@ -250,7 +251,7 @@ namespace AipoReminder.DAO
                 // 毎日繰り返すスケジュール(繰り返し期間あり)
                 sqlbldr.AppendLine("or ");
                 sqlbldr.AppendLine("    (");
-                sqlbldr.AppendLine("            t1.user_id in (:other_user_id_list)");
+                sqlbldr.AppendLine("            t1.user_id in ( " + param.other_user_id_list + ")");
                 sqlbldr.AppendLine("        and t1.status != 'D'");
                 sqlbldr.AppendLine("        and t2.public_flag = 'O'");
                 sqlbldr.AppendLine("        and t2.start_date like :like_start_date");
@@ -268,7 +269,7 @@ namespace AipoReminder.DAO
                 // 曜日毎に繰り返すスケジュール(繰り返し期間なし)
                 sqlbldr.AppendLine("or ");
                 sqlbldr.AppendLine("    (");
-                sqlbldr.AppendLine("            t1.user_id in (:other_user_id_list)");
+                sqlbldr.AppendLine("            t1.user_id in ( " + param.other_user_id_list + ")");
                 sqlbldr.AppendLine("        and t1.status != 'D'");
                 sqlbldr.AppendLine("        and t2.public_flag = 'O'");
                 sqlbldr.AppendLine("        and t2.start_date = :start_date");
@@ -307,7 +308,7 @@ namespace AipoReminder.DAO
                 // 曜日毎に繰り返すスケジュール(繰り返し期間あり)
                 sqlbldr.AppendLine("or ");
                 sqlbldr.AppendLine("    (");
-                sqlbldr.AppendLine("            t1.user_id in (:other_user_id_list)");
+                sqlbldr.AppendLine("            t1.user_id in ( " + param.other_user_id_list + ")");
                 sqlbldr.AppendLine("        and t1.status != 'D'");
                 sqlbldr.AppendLine("        and t2.public_flag = 'O'");
                 sqlbldr.AppendLine("        and t2.start_date like :like_start_date");
@@ -348,7 +349,7 @@ namespace AipoReminder.DAO
                 // 毎月1回繰り返すスケジュール(繰り返し期間なし)
                 sqlbldr.AppendLine("or ");
                 sqlbldr.AppendLine("    (");
-                sqlbldr.AppendLine("            t1.user_id in (:other_user_id_list)");
+                sqlbldr.AppendLine("            t1.user_id in ( " + param.other_user_id_list + ")");
                 sqlbldr.AppendLine("        and t1.status != 'D'");
                 sqlbldr.AppendLine("        and t2.public_flag = 'O'");
                 sqlbldr.AppendLine("        and t2.start_date like :like_start_date");
@@ -364,7 +365,7 @@ namespace AipoReminder.DAO
                 // 毎月1回繰り返すスケジュール(繰り返し期間あり)
                 sqlbldr.AppendLine("or ");
                 sqlbldr.AppendLine("    (");
-                sqlbldr.AppendLine("            t1.user_id in (:other_user_id_list)");
+                sqlbldr.AppendLine("            t1.user_id in ( " + param.other_user_id_list + ")");
                 sqlbldr.AppendLine("        and t1.status != 'D'");
                 sqlbldr.AppendLine("        and t2.public_flag = 'O'");
                 sqlbldr.AppendLine("        and t2.start_date like :like_start_date");
@@ -378,14 +379,9 @@ namespace AipoReminder.DAO
                 sqlbldr.AppendLine("                and '" + nowDateTime + "' between cast(t4.start_date - interval '" + param.check_time + " minutes' as timestamp) and cast(t4.end_date - interval '" + param.check_time + " minutes' as timestamp)");
                 sqlbldr.AppendLine("            )");
                 sqlbldr.AppendLine("    )");
-
-                if (!String.IsNullOrEmpty(param.other_user_id_list))
-                {
-                    paramList.Add(DBUtility.MakeParameter("other_user_id_list", param.other_user_id_list, NpgsqlDbType.Text));
-                }
             }
 
-            sqlbldr.AppendLine("order by start_date, end_date");
+            sqlbldr.AppendLine("order by start_date, end_date, schedule_id");
 
             this.dbHelper.Select(((ScheduleDataSet)data).eip_t_schedule, sqlbldr.ToString(), paramList);
         }
