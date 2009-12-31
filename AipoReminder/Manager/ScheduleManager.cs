@@ -166,7 +166,10 @@ namespace AipoReminder.Utility
             paramRow.user_id = SettingManager.UserId;
             paramRow.start_date = start_date;
             paramRow.check_time = SettingManager.CheckTime.ToString();
-            paramRow.other_user_id_list = SettingManager.GroupUserId;
+            if (SettingManager.CheckOtherSchedule)
+            {
+                paramRow.other_user_id_list = SettingManager.GroupUserId;
+            }
 
             data.search_eip_t_schedule.Rows.Add(paramRow);
 
