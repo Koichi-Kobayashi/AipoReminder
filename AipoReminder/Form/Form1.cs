@@ -16,7 +16,6 @@ using AipoReminder.Utility;
 using AipoReminder.ValueObject;
 using WinFramework.Exceptions;
 using WinFramework.Utility;
-using System.Configuration;
 
 namespace AipoReminder
 {
