@@ -209,6 +209,7 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("         t3.entity_id");
             sqlbldr.AppendLine("        from eip_t_whatsnew t3");
             sqlbldr.AppendLine("        where 1 = 1");
+            sqlbldr.AppendLine("        and t3.user_id = :user_id");
             sqlbldr.AppendLine("        and t3.parent_id = -1");
             sqlbldr.AppendLine("        and t3.portlet_type = " + DBConstants.WHATS_NEW_TYPE_MSGBOARD_TOPIC);
             sqlbldr.AppendLine("        or (");
@@ -256,6 +257,7 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("         t3.entity_id");
             sqlbldr.AppendLine("        from eip_t_whatsnew t3");
             sqlbldr.AppendLine("        where 1 = 1");
+            sqlbldr.AppendLine("        and t3.user_id = :user_id");
             sqlbldr.AppendLine("        and t3.parent_id = -1");
             sqlbldr.AppendLine("        and t3.portlet_type = " + DBConstants.WHATS_NEW_TYPE_MSGBOARD_TOPIC);
             sqlbldr.AppendLine("        or (");
@@ -274,7 +276,7 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("        )");
             sqlbldr.AppendLine("    )");
 
-            sqlbldr.AppendLine("order by update_date desc");
+            sqlbldr.AppendLine("order by update_date desc, topic_id desc");
 
             WhatsnewDataSet.search_eip_t_whatsnewRow param = ((WhatsnewDataSet)data).search_eip_t_whatsnew[0];
 
