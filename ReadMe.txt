@@ -1,13 +1,13 @@
 ===========================================================================
-【 ソフト名 】　Aipo支援ツール「Aipoリマインダー｣ Ver 1.0.6.0
-【 登 録 名 】　AipoReminder1060.zip
+【 ソフト名 】　Aipo支援ツール「Aipoリマインダー｣ Ver 1.0.7.0
+【 登 録 名 】　AipoReminder1070.zip
 【 圧縮形式 】　zip
 【 作 成 者 】　Copyright (C) 2009 k.kobayashi
 【 HomePage 】　なし
 【  e-mail  】　tous.les.deux256@gmail.com
 【 動作環境 】　日本語版 Windows XP SP3 32bit/ 日本語版 Vista SP2 64bit
                 日本語版 Windows 7 64bit
-【 掲載月日 】　2009/12/06
+【 掲載月日 】　2010/01/11
 【 種    別 】　フリーソフトウェア
 ===========================================================================
 
@@ -167,6 +167,8 @@
       GRANT SELECT ON eip_t_schedule_map TO aipo_reminder;
       GRANT SELECT ON eip_t_schedule TO aipo_reminder;
       GRANT SELECT ON turbine_user TO aipo_reminder;
+      GRANT SELECT ON turbine_group TO aipo_reminder;
+      GRANT SELECT ON turbine_user_group_role TO aipo_reminder;
       GRANT SELECT ON eip_t_whatsnew TO aipo_reminder;
       GRANT SELECT ON eip_t_blog_entry TO aipo_reminder;
       GRANT SELECT ON eip_t_blog_comment TO aipo_reminder;
@@ -224,6 +226,8 @@
       GRANT SELECT ON eip_t_schedule_map TO aipo_reminder;
       GRANT SELECT ON eip_t_schedule TO aipo_reminder;
       GRANT SELECT ON turbine_user TO aipo_reminder;
+      GRANT SELECT ON turbine_group TO aipo_reminder;
+      GRANT SELECT ON turbine_user_group_role TO aipo_reminder;
       GRANT SELECT ON eip_t_whatsnew TO aipo_reminder;
       GRANT SELECT ON eip_t_blog_entry TO aipo_reminder;
       GRANT SELECT ON eip_t_blog_comment TO aipo_reminder;
@@ -291,6 +295,35 @@
 ---------------------------------------------------------------------------
 --  改版履歴  -------------------------------------------------------------
 ---------------------------------------------------------------------------
+■ Ver 1.0.7.0 (2010/01/11)
+　【バグ】
+　・Ver 1.0.6.0で直っていなかった以下のバグを修正した
+　　・「トピックの閲覧／返信」 が「所属メンバーのみ閲覧／返信可」の場合、
+　　　所属メンバーの中で1人でもブラウザにて新着確認していないメンバーが
+　　　いる(メンバー全員が確認を終えていない)状態のとき、所属している、
+　　　していないに関係なく新着情報が表示されていた
+
+　【変更】
+　・Npgsqlのバージョンを2.0.7にアップデートした
+　・起動時にAipoに接続できなかった場合、何度かリトライした後、ログイン出来
+　　ない場合に接続失敗のメッセージを表示するようにした
+　・他のユーザのスケジュールもチェック出来るようにした(公開区分が "公開" と
+　　なっているもののみ)
+
+　　このバージョン以降、以下のコマンドを実行して、aipo_reminderに対して権限を
+　　付与しなければエラーが発生する(エラーログが作られる)。
+　　(前述の「制限 - ４．PostgreSQLの設定変更について」を参照)
+
+      GRANT SELECT ON turbine_group TO aipo_reminder;
+      GRANT SELECT ON turbine_user_group_role TO aipo_reminder;
+
+　【その他】
+　・Windows用にaipo_reminderの権限を付与するバッチ(postgres_setting.bat)を
+　　作成した
+　　【使い方】
+　　バッチファイルをテキストエディタで開き、7行目のpsql実行ファイルのパスを
+　　環境に合わせて設定し、Aipoがインストールされている環境にて実行する
+
 ■ Ver 1.0.6.0 (2009/12/06)
 　【バグ】
 　・以下のバグを修正した
