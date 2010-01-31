@@ -286,5 +286,17 @@ namespace AipoReminder.Properties {
                 this["checkGroupUserId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool checkInformation {
+            get {
+                return ((bool)(this["checkInformation"]));
+            }
+            set {
+                this["checkInformation"] = value;
+            }
+        }
     }
 }

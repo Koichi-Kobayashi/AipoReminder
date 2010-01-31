@@ -16,6 +16,7 @@ using AipoReminder.Utility;
 using AipoReminder.ValueObject;
 using WinFramework.Exceptions;
 using WinFramework.Utility;
+using Allison.AlertWindow;
 
 namespace AipoReminder
 {
@@ -199,6 +200,7 @@ namespace AipoReminder
                 checkBoxWorkflow.Checked = SettingManager.CheckWorkflow;                // ワークフローの新着依頼チェック
                 checkBoxMemo.Checked = SettingManager.CheckMemo;                        // 伝言メモの新着メモチェック
                 checkBoxOtherSchedule.Checked = SettingManager.CheckOtherSchedule;      // 他のユーザのスケジュールをチェックするかどうか
+                checkBoxInformation.Checked = SettingManager.CheckInformation;          // お知らせを吹き出しからウィンドウタイプに変更するかどうか
 
                 return true;
             }
@@ -484,6 +486,7 @@ namespace AipoReminder
             SettingManager.CheckWorkflow = checkBoxWorkflow.Checked;                // ワークフローの新着依頼チェック
             SettingManager.CheckMemo = checkBoxMemo.Checked;                        // 伝言メモの新着メモチェック
             SettingManager.CheckOtherSchedule = checkBoxOtherSchedule.Checked;      // 他のユーザのスケジュールのチェックするかどうか
+            SettingManager.CheckInformation = checkBoxInformation.Checked;          // お知らせを吹き出しからウィンドウタイプに変更するかどうか
             if (isSetGroupUserId)
             {
                 SettingManager.GroupUserId = groupUserId;                           // スケジュールをチェックするユーザ一覧(カンマ区切り)
@@ -945,11 +948,21 @@ namespace AipoReminder
                     // タスクトレイアイコンを点滅させる
                     this.AnimatedTasktrayIcon(true);
 
-                    // バルーンを表示する
-                    this.notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-                    this.notifyIcon1.BalloonTipTitle = "お知らせ";
-                    this.notifyIcon1.BalloonTipText = sb.ToString();
-                    this.notifyIcon1.ShowBalloonTip(10000);
+                    if (checkBoxInformation.Checked)
+                    {
+                        AlertWindow aw = new AlertWindow();
+                        aw.ShowCloseButton = true;
+                        aw.Time = 10000;
+                        aw.Show(sb.ToString(), "Aipoリマインダーからのお知らせ", AlertIcons.Information);
+                    }
+                    else
+                    {
+                        // バルーンを表示する
+                        this.notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                        this.notifyIcon1.BalloonTipTitle = "お知らせ";
+                        this.notifyIcon1.BalloonTipText = sb.ToString();
+                        this.notifyIcon1.ShowBalloonTip(10000);
+                    }
                 }
                 else
                 {

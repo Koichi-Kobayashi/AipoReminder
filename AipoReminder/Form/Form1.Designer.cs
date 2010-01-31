@@ -44,8 +44,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.checkBoxOtherSchedule = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.buttonInfoSettings = new System.Windows.Forms.Button();
             this.checkBoxAutoLogin = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoRun = new System.Windows.Forms.CheckBox();
@@ -90,6 +90,8 @@
             this.終了ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerTasktrayIcon = new System.Windows.Forms.Timer(this.components);
             this.timerLogin = new System.Windows.Forms.Timer(this.components);
+            this.checkBoxInformation = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -246,6 +248,8 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.FloralWhite;
+            this.tabPage4.Controls.Add(this.button2);
+            this.tabPage4.Controls.Add(this.checkBoxInformation);
             this.tabPage4.Controls.Add(this.checkBoxOtherSchedule);
             this.tabPage4.Controls.Add(this.button1);
             this.tabPage4.Controls.Add(this.buttonInfoSettings);
@@ -261,16 +265,6 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "お知らせ設定";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(184, 41);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "ユーザ選択";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // checkBoxOtherSchedule
             // 
             this.checkBoxOtherSchedule.AutoSize = true;
@@ -281,12 +275,22 @@
             this.checkBoxOtherSchedule.Text = "他のユーザのスケジュール確認";
             this.checkBoxOtherSchedule.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(184, 41);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(71, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "ユーザ選択";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // buttonInfoSettings
             // 
             this.buttonInfoSettings.Location = new System.Drawing.Point(206, 195);
             this.buttonInfoSettings.Name = "buttonInfoSettings";
             this.buttonInfoSettings.Size = new System.Drawing.Size(75, 23);
-            this.buttonInfoSettings.TabIndex = 8;
+            this.buttonInfoSettings.TabIndex = 10;
             this.buttonInfoSettings.Text = "設定";
             this.buttonInfoSettings.UseVisualStyleBackColor = true;
             this.buttonInfoSettings.Click += new System.EventHandler(this.buttonInfoSettings_Click);
@@ -360,7 +364,7 @@
             this.groupBox2.Location = new System.Drawing.Point(261, 19);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(216, 148);
-            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "新着情報";
             // 
@@ -712,6 +716,25 @@
             // 
             this.timerLogin.Tick += new System.EventHandler(this.timerLogin_Tick);
             // 
+            // checkBoxInformation
+            // 
+            this.checkBoxInformation.AutoSize = true;
+            this.checkBoxInformation.Location = new System.Drawing.Point(7, 134);
+            this.checkBoxInformation.Name = "checkBoxInformation";
+            this.checkBoxInformation.Size = new System.Drawing.Size(170, 16);
+            this.checkBoxInformation.TabIndex = 7;
+            this.checkBoxInformation.Text = "お知らせをウィンドウタイプにする";
+            this.checkBoxInformation.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(184, 130);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(71, 23);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "詳細";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -808,6 +831,8 @@
         private System.Windows.Forms.Timer timerLogin;
         private System.Windows.Forms.CheckBox checkBoxOtherSchedule;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkBoxInformation;
+        private System.Windows.Forms.Button button2;
     }
 }
 

@@ -123,6 +123,11 @@ namespace AipoReminder.Utility
         /// </summary>
         public static string GroupUserId { get; set; }
 
+        /// <summary>
+        /// お知らせを吹き出しからウィンドウタイプに変更するかどうか
+        /// </summary>
+        public static bool CheckInformation { get; set; }
+
         static SettingManager()
         {
             UserId = Properties.Settings.Default.userId;
@@ -146,6 +151,7 @@ namespace AipoReminder.Utility
             CheckWorkflow = Properties.Settings.Default.checkWorkflow;
             CheckMemo = Properties.Settings.Default.checkMemo;
             CheckOtherSchedule = Properties.Settings.Default.checkOtherSchedule;
+            CheckInformation = Properties.Settings.Default.checkInformation;
 
             // カンマ区切りのユーザIDの中に数字ではない文字が含まれていた場合、ユーザIDを取得しない
             bool isNotDigit = false;
@@ -263,6 +269,8 @@ namespace AipoReminder.Utility
             // 他のユーザのスケジュール確認
             Properties.Settings.Default.checkOtherSchedule = SettingManager.CheckOtherSchedule;
             Properties.Settings.Default.checkGroupUserId = SettingManager.GroupUserId;
+            // お知らせの表示形式(吹き出しかウィンドウか)
+            Properties.Settings.Default.checkInformation = SettingManager.CheckInformation;
 
             Properties.Settings.Default.Save();
         }
