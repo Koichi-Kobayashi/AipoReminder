@@ -422,13 +422,10 @@ namespace Allison.AlertWindow
         /// </summary>
         public void Close()
         {
-            if (awf != null)
+            if (awf != null && !isClosed && !awf.IsDisposed)
             {
-                if (!isClosed)
-                {
-                    awf.CloseWindow();
-                    isClosed = true;
-                }
+                awf.CloseWindow();
+                isClosed = true;
             }
         }
 
