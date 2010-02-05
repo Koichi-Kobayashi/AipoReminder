@@ -15,6 +15,8 @@ namespace Allison.AlertWindow
 
         private LinkLabel _DummyLinkLable;
 
+        private AlertWindowForm awf;
+
         #endregion
 
         #region コンストラクタ
@@ -333,7 +335,7 @@ namespace Allison.AlertWindow
         /// <param name="icon">アラートウィンドウに表示するアイコン</param>
         public void Show(string message, string title, AlertIcons icon)
         {
-            AlertWindowForm awf = new AlertWindowForm();
+            awf = new AlertWindowForm();
 
             // アニメーション
             awf.Animation = this.Animation;
@@ -404,6 +406,17 @@ namespace Allison.AlertWindow
 
             // アラートウィンドウを表示
             awf.Show();
+        }
+
+        /// <summary>
+        /// アラートウィンドウを閉じます。
+        /// </summary>
+        public void Close()
+        {
+            if (awf != null)
+            {
+                awf.CloseWindow();
+            }
         }
 
         #endregion

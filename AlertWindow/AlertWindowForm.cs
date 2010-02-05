@@ -145,6 +145,23 @@ namespace Allison.AlertWindow
             this.DisplayTimer.Start();
         }
 
+        // フォームを閉じる
+        public void CloseWindow()
+        {
+            this.DisplayTimer.Stop();
+
+            if (this.Animation == AnimationMode.Slide)
+            {
+                AnimateWindow(this.Handle, 400, AnimateWindowFlags.AW_HIDE | AnimateWindowFlags.AW_SLIDE | AnimateWindowFlags.AW_VER_POSITIVE);
+            }
+            else if (this.Animation == AnimationMode.Blend)
+            {
+                AnimateWindow(this.Handle, 400, AnimateWindowFlags.AW_HIDE | AnimateWindowFlags.AW_BLEND);
+            }
+
+            this.Close();
+        }
+
         #endregion
 
         #region Protected メソッド
@@ -277,23 +294,6 @@ namespace Allison.AlertWindow
                 this.TableLayout.RowStyles[2].Height = this.MinimumSize.Height - this.TableLayout.Height;
             }
             this.ClientSize = new Size(this.TableLayout.Width, this.TableLayout.Height);
-        }
-
-        // フォームを閉じる
-        private void CloseWindow()
-        {
-            this.DisplayTimer.Stop();
-
-            if (this.Animation == AnimationMode.Slide)
-            {
-                AnimateWindow(this.Handle, 400, AnimateWindowFlags.AW_HIDE | AnimateWindowFlags.AW_SLIDE | AnimateWindowFlags.AW_VER_POSITIVE);
-            }
-            else if (this.Animation == AnimationMode.Blend)
-            {
-                AnimateWindow(this.Handle, 400, AnimateWindowFlags.AW_HIDE | AnimateWindowFlags.AW_BLEND);
-            }
-
-            this.Close();
         }
 
         #endregion
