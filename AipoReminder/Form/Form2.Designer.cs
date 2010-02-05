@@ -45,7 +45,8 @@
             // 
             // richTextBoxScheduleInfo
             // 
-            this.richTextBoxScheduleInfo.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.richTextBoxScheduleInfo.BackColor = System.Drawing.Color.White;
+            this.richTextBoxScheduleInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.richTextBoxScheduleInfo.Location = new System.Drawing.Point(12, 12);
             this.richTextBoxScheduleInfo.Name = "richTextBoxScheduleInfo";
             this.richTextBoxScheduleInfo.ReadOnly = true;

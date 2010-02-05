@@ -81,7 +81,7 @@ namespace AipoReminder
                 string str = "■■□  終日スケジュール  □■■";
                 richTextBoxScheduleInfo.AppendText(str);
                 richTextBoxScheduleInfo.Select(0, str.Length);
-                richTextBoxScheduleInfo.SelectionBackColor = Color.Lavender;
+//                richTextBoxScheduleInfo.SelectionBackColor = Color.BurlyWood;
                 richTextBoxScheduleInfo.AppendText("\n");
                 richTextBoxScheduleInfo.AppendText(sbOneDaySchedule.ToString());
                 richTextBoxScheduleInfo.AppendText("\n");
@@ -93,7 +93,7 @@ namespace AipoReminder
                 string str = "■■□  もうすぐ始まるスケジュール  □■■";
                 richTextBoxScheduleInfo.AppendText(str);
                 richTextBoxScheduleInfo.Select(len, str.Length);
-                richTextBoxScheduleInfo.SelectionBackColor = Color.AliceBlue;
+//                richTextBoxScheduleInfo.SelectionBackColor = Color.AliceBlue;
                 richTextBoxScheduleInfo.AppendText("\n");
                 richTextBoxScheduleInfo.AppendText(sbSchedule.ToString());
             }
