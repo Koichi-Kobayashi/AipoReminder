@@ -20,6 +20,11 @@ namespace Allison.AlertWindow
         /// </summary>
         private AlertWindowForm awf;
 
+        /// <summary>
+        /// AlertWindowを閉じたかどうか
+        /// </summary>
+        private bool isClosed;
+
         #endregion
 
         #region コンストラクタ
@@ -339,6 +344,7 @@ namespace Allison.AlertWindow
         public void Show(string message, string title, AlertIcons icon)
         {
             awf = new AlertWindowForm();
+            isClosed = false;
 
             // アニメーション
             awf.Animation = this.Animation;
@@ -418,7 +424,11 @@ namespace Allison.AlertWindow
         {
             if (awf != null)
             {
-                awf.CloseWindow();
+                if (!isClosed)
+                {
+                    awf.CloseWindow();
+                    isClosed = true;
+                }
             }
         }
 
