@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form4));
             this.label1 = new System.Windows.Forms.Label();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -64,6 +64,14 @@
             this.shapeContainer1.TabIndex = 1;
             this.shapeContainer1.TabStop = false;
             // 
+            // lineShape2
+            // 
+            this.lineShape2.Name = "lineShape2";
+            this.lineShape2.X1 = 46;
+            this.lineShape2.X2 = 390;
+            this.lineShape2.Y1 = 75;
+            this.lineShape2.Y2 = 75;
+            // 
             // lineShape1
             // 
             this.lineShape1.Name = "lineShape1";
@@ -89,14 +97,6 @@
             this.label3.Size = new System.Drawing.Size(184, 12);
             this.label3.TabIndex = 3;
             this.label3.Text = "お知らせウィンドウの表示時間（ミリ秒）";
-            // 
-            // lineShape2
-            // 
-            this.lineShape2.Name = "lineShape2";
-            this.lineShape2.X1 = 46;
-            this.lineShape2.X2 = 390;
-            this.lineShape2.Y1 = 75;
-            this.lineShape2.Y2 = 75;
             // 
             // label4
             // 
@@ -164,6 +164,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.shapeContainer1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
