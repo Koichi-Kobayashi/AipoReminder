@@ -164,11 +164,11 @@
             // 
             this.textBox2.BackColor = System.Drawing.Color.Moccasin;
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Location = new System.Drawing.Point(15, 12);
+            this.textBox2.Location = new System.Drawing.Point(8, 12);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(465, 31);
+            this.textBox2.Size = new System.Drawing.Size(472, 31);
             this.textBox2.TabIndex = 0;
             this.textBox2.TabStop = false;
             this.textBox2.Text = "※チェックする項目などの設定は、お知らせ設定タブで行えます。\r\n※設定ボタンを押すと、DB設定も確定されます。";
