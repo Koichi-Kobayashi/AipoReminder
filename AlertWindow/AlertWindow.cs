@@ -15,6 +15,9 @@ namespace Allison.AlertWindow
 
         private LinkLabel _DummyLinkLable;
 
+        /// <summary>
+        /// AlertWindow本体
+        /// </summary>
         private AlertWindowForm awf;
 
         #endregion
@@ -301,7 +304,7 @@ namespace Allison.AlertWindow
         #region Public メソッド
 
         /// <summary>
-        /// アラートウィンドウを表示します。
+        /// アラートウィンドウを表示する
         /// </summary>
         public void Show()
         {
@@ -309,7 +312,7 @@ namespace Allison.AlertWindow
         }
 
         /// <summary>
-        /// アラートウィンドウを表示します。
+        /// アラートウィンドウを表示する
         /// </summary>
         /// <param name="message">アラートウィンドウに表示するテキスト</param>
         public void Show(string message)
@@ -318,7 +321,7 @@ namespace Allison.AlertWindow
         }
 
         /// <summary>
-        /// アラートウィンドウを表示します。
+        /// アラートウィンドウを表示する
         /// </summary>
         /// <param name="message">アラートウィンドウに表示するテキスト</param>
         /// <param name="title">アラートウィンドウのタイトルバーに表示するテキスト</param>
@@ -328,7 +331,7 @@ namespace Allison.AlertWindow
         }
 
         /// <summary>
-        /// アラートウィンドウを表示します。
+        /// アラートウィンドウを表示する
         /// </summary>
         /// <param name="message">アラートウィンドウに表示するテキスト</param>
         /// <param name="title">アラートウィンドウのタイトルバーに表示するテキスト</param>
@@ -409,13 +412,29 @@ namespace Allison.AlertWindow
         }
 
         /// <summary>
-        /// アラートウィンドウを閉じます。
+        /// アラートウィンドウを閉る
         /// </summary>
         public void Close()
         {
             if (awf != null)
             {
                 awf.CloseWindow();
+            }
+        }
+
+        /// <summary>
+        /// アラートウィンドウを表示しているかどうかを表す
+        /// </summary>
+        /// <returns>true:表示、false:非表示</returns>
+        public bool isShow()
+        {
+            if (awf != null)
+            {
+                return awf.isShow();
+            }
+            else
+            {
+                return false;
             }
         }
 

@@ -145,7 +145,9 @@ namespace Allison.AlertWindow
             this.DisplayTimer.Start();
         }
 
-        // フォームを閉じる
+        /// <summary>
+        /// AlertWindowを閉じる
+        /// </summary>
         public void CloseWindow()
         {
             this.DisplayTimer.Stop();
@@ -160,6 +162,15 @@ namespace Allison.AlertWindow
             }
 
             this.Close();
+        }
+
+        /// <summary>
+        /// AlertWindowを表示しているかどうかを表す
+        /// </summary>
+        /// <returns>true:表示、false:非表示</returns>
+        public bool isShow()
+        {
+            return this.DisplayTimer.Enabled;
         }
 
         #endregion
