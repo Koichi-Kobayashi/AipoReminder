@@ -18,6 +18,22 @@ namespace AipoReminder.Utility
             this.dt = dt;
         }
 
+        public List<ScheduleItem> CheckOneDaySchedule()
+        {
+            ScheduleDataSet data = new ScheduleDataSet();
+
+            ScheduleDataSet.search_eip_t_scheduleRow paramRow = data.search_eip_t_schedule.Newsearch_eip_t_scheduleRow();
+
+            paramRow.user_id = SettingManager.UserId;
+
+            data.search_eip_t_schedule.Rows.Add(paramRow);
+
+            ScheduleModel m = new ScheduleModel();
+            m.Execute(m.GetOneDayScheduleInfo, data);
+
+            return this.GetOneDaySchedule(data);
+        }
+
         public List<ScheduleItem> CheckSchedule()
         {
             ScheduleDataSet data = new ScheduleDataSet();
@@ -200,11 +216,45 @@ namespace AipoReminder.Utility
                     scheduleItem.ScheduleName = row.name;
                     scheduleItem.StartDate = row.start_date;
                     scheduleItem.EndDate = row.end_date;
-                    scheduleItem.UserName = row.last_name + " " + row.first_name; 
+                    scheduleItem.UserName = row.last_name + " " + row.first_name;
                     if (SettingManager.UserId.Equals(row.user_id))
                     {
                         scheduleItem.isMySchedule = true;
                     }
+                    list.Add(scheduleItem);
+                }
+                scheduleId = row.schedule_id;
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// スケジュール情報の取得
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private List<ScheduleItem> GetOneDaySchedule(ScheduleDataSet data)
+        {
+            List<ScheduleItem> list = new List<ScheduleItem>();
+            StringBuilder sb = new StringBuilder();
+
+            string scheduleId = "";
+
+            foreach (ScheduleDataSet.eip_t_scheduleRow row in data.eip_t_schedule)
+            {
+                if (!scheduleId.Equals(row.schedule_id))
+                {
+                    ScheduleItem scheduleItem = new ScheduleItem();
+                    scheduleItem.ScheduleId = row.schedule_id;
+                    scheduleItem.ScheduleName = row.name;
+                    scheduleItem.StartDate = row.start_date;
+                    scheduleItem.EndDate = row.end_date;
+                    scheduleItem.UserName = row.last_name + " " + row.first_name;
+                    if (SettingManager.UserId.Equals(row.user_id))
+                    {
+                        scheduleItem.isMySchedule = true;
+                    }
+                    scheduleItem.isOneDaySchedule = true;
                     list.Add(scheduleItem);
                 }
                 scheduleId = row.schedule_id;

@@ -12,6 +12,12 @@ namespace AipoReminder.Logic
             this.dbHelper = dbHelper;
         }
 
+        public void GetOneDayScheduleInfo(System.Data.DataSet data)
+        {
+            ScheduleDAO dao = new ScheduleDAO(this.dbHelper);
+            dao.GetOneDayScheduleInfo(data);
+        }
+
         public void GetScheduleInfo(System.Data.DataSet data)
         {
             ScheduleDAO dao = new ScheduleDAO(this.dbHelper);

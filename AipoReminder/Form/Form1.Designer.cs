@@ -44,6 +44,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
+            this.checkBoxInformation = new System.Windows.Forms.CheckBox();
             this.checkBoxOtherSchedule = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonInfoSettings = new System.Windows.Forms.Button();
@@ -90,8 +92,8 @@
             this.終了ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerTasktrayIcon = new System.Windows.Forms.Timer(this.components);
             this.timerLogin = new System.Windows.Forms.Timer(this.components);
-            this.checkBoxInformation = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.alertWindow1 = new Allison.AlertWindow.AlertWindow();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -264,6 +266,26 @@
             this.tabPage4.Size = new System.Drawing.Size(488, 248);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "お知らせ設定";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(184, 130);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(71, 23);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "詳細";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
+            // 
+            // checkBoxInformation
+            // 
+            this.checkBoxInformation.AutoSize = true;
+            this.checkBoxInformation.Location = new System.Drawing.Point(7, 134);
+            this.checkBoxInformation.Name = "checkBoxInformation";
+            this.checkBoxInformation.Size = new System.Drawing.Size(170, 16);
+            this.checkBoxInformation.TabIndex = 7;
+            this.checkBoxInformation.Text = "お知らせをウィンドウタイプにする";
+            this.checkBoxInformation.UseVisualStyleBackColor = true;
             // 
             // checkBoxOtherSchedule
             // 
@@ -716,30 +738,25 @@
             // 
             this.timerLogin.Tick += new System.EventHandler(this.timerLogin_Tick);
             // 
-            // checkBoxInformation
+            // alertWindow1
             // 
-            this.checkBoxInformation.AutoSize = true;
-            this.checkBoxInformation.Location = new System.Drawing.Point(7, 134);
-            this.checkBoxInformation.Name = "checkBoxInformation";
-            this.checkBoxInformation.Size = new System.Drawing.Size(170, 16);
-            this.checkBoxInformation.TabIndex = 7;
-            this.checkBoxInformation.Text = "お知らせをウィンドウタイプにする";
-            this.checkBoxInformation.UseVisualStyleBackColor = true;
+            this.alertWindow1.Click += new System.EventHandler(this.alertWindow1_Click);
             // 
-            // button2
+            // statusStrip1
             // 
-            this.button2.Location = new System.Drawing.Point(184, 130);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(71, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "詳細";
-            this.button2.UseVisualStyleBackColor = true;
+            this.statusStrip1.Location = new System.Drawing.Point(0, 252);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(496, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(496, 274);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -766,6 +783,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -833,6 +851,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox checkBoxInformation;
         private System.Windows.Forms.Button button2;
+        private Allison.AlertWindow.AlertWindow alertWindow1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }
 

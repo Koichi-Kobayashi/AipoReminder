@@ -17,6 +17,50 @@ namespace AipoReminder.DAO
             this.dbHelper = dbHelper;
         }
 
+        /// <summary>
+        /// 終日スケジュールの取得
+        /// </summary>
+        /// <param name="data"></param>
+        public void GetOneDayScheduleInfo(System.Data.DataSet data)
+        {
+            ScheduleDataSet.search_eip_t_scheduleRow param = ((ScheduleDataSet)data).search_eip_t_schedule[0];
+
+            string nowDateTime = DateTime.Now.ToString("yyyy-MM-dd");
+
+            System.Text.StringBuilder sqlbldr = new System.Text.StringBuilder();
+
+            sqlbldr.AppendLine("select");
+            sqlbldr.AppendLine(" t1.schedule_id");
+            sqlbldr.AppendLine(", t2.name");
+            sqlbldr.AppendLine(", t1.user_id");
+            sqlbldr.AppendLine(", t3.last_name");
+            sqlbldr.AppendLine(", t3.first_name");
+            sqlbldr.AppendLine(", t2.start_date");
+            sqlbldr.AppendLine(", t2.end_date");
+            sqlbldr.AppendLine("from eip_t_schedule_map t1");
+            sqlbldr.AppendLine("    left join eip_t_schedule t2");
+            sqlbldr.AppendLine("        on t1.schedule_id = t2.schedule_id");
+            sqlbldr.AppendLine("    left join turbine_user t3");
+            sqlbldr.AppendLine("        on t1.user_id = t3.user_id");
+            sqlbldr.AppendLine("where 1 = 1");
+            sqlbldr.AppendLine("and t1.user_id = :user_id");
+            sqlbldr.AppendLine("and t1.status != 'D'");
+            sqlbldr.AppendLine("and t2.start_date = '" + nowDateTime + " 00:00:00'");
+            sqlbldr.AppendLine("and t2.repeat_pattern = 'S'");
+
+            ArrayList paramList = new ArrayList();
+            if (!String.IsNullOrEmpty(param.user_id))
+            {
+                paramList.Add(DBUtility.MakeParameter("user_id", param.user_id, NpgsqlDbType.Integer));
+            }
+
+            this.dbHelper.Select(((ScheduleDataSet)data).eip_t_schedule, sqlbldr.ToString(), paramList);
+        }
+
+        /// <summary>
+        /// もうすぐ始まるスケジュールを取得
+        /// </summary>
+        /// <param name="data"></param>
         public void GetScheduleInfo(System.Data.DataSet data)
         {
             ScheduleDataSet.search_eip_t_scheduleRow param = ((ScheduleDataSet)data).search_eip_t_schedule[0];

@@ -13,10 +13,12 @@ namespace AipoReminder.ValueObject
         public DateTime EndDate { set; get; }
         public string UserName { set; get; }
         public bool isMySchedule { set; get; }
+        public bool isOneDaySchedule { set; get; }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
+
             if (isMySchedule)
             {
                 sb.AppendLine("【" + ScheduleName + "】");
@@ -25,7 +27,10 @@ namespace AipoReminder.ValueObject
             {
                 sb.AppendLine("【" + ScheduleName + "】(" + UserName + ")");
             }
-            sb.AppendLine(String.Format("{0:D2}", StartDate.Hour) + ":" + String.Format("{0:D2}", StartDate.Minute) + "～" + String.Format("{0:D2}", EndDate.Hour) + ":" + String.Format("{0:D2}", EndDate.Minute));
+            if (!isOneDaySchedule)
+            {
+                sb.AppendLine(String.Format("{0:D2}", StartDate.Hour) + ":" + String.Format("{0:D2}", StartDate.Minute) + "～" + String.Format("{0:D2}", EndDate.Hour) + ":" + String.Format("{0:D2}", EndDate.Minute));
+            }
             return sb.ToString();
         }
     }

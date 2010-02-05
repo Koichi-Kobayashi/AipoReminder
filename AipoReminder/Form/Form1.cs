@@ -17,6 +17,7 @@ using AipoReminder.ValueObject;
 using WinFramework.Exceptions;
 using WinFramework.Utility;
 using Allison.AlertWindow;
+using AipoReminder.Control;
 
 namespace AipoReminder
 {
@@ -78,6 +79,9 @@ namespace AipoReminder
             this.tasktrayIcons = new Icon[] {
                 Properties.Resources.favicon_16_red,
                 Properties.Resources.favicon_16_blue};
+
+            // ステータスバー
+            this.statusStrip1.Items.Add(new ToolStripLabelEx());
 
             // 設定を読み込む
             if (this.ReadUserData())
@@ -289,9 +293,11 @@ namespace AipoReminder
             if (this.Login())
             {
                 // 新着情報をチェック
-                this.WhatsnewProcess(true);
+                this.WhatsnewProcess(true, true);
+                this.timerLogin.Stop();
                 this.timerLogin.Enabled = false;
                 buttonDataReset.Enabled = true;
+                this.challengeLoginCount = 0;
             }
 
             if (this.challengeLoginCount > Form1.CHALLENGE_LOGIN_MAX_COUNT)
@@ -301,6 +307,7 @@ namespace AipoReminder
                 // ウィンドウを表示
                 this.ActiveWindow();
                 // タイマー停止
+                this.timerLogin.Stop();
                 this.timerLogin.Enabled = false;
                 // パスワードを空白に設定
                 textBoxPassword.Text = "";
@@ -317,6 +324,8 @@ namespace AipoReminder
                 textBoxDbPassword.Enabled = true;
                 textBoxDbName.Enabled = true;
                 buttonDataReset.Enabled = true;
+
+                this.challengeLoginCount = 0;
             }
         }
 
@@ -352,6 +361,7 @@ namespace AipoReminder
                 if (data.turbine_user.Count > 0)
                 {
                     // ログイン名とパスワードが一致
+                    isLogin = true;
 
                     // ユーザ情報を保存
                     SettingManager.UserId = data.turbine_user[0].user_id;
@@ -407,10 +417,11 @@ namespace AipoReminder
                     // 設定を保存
                     SettingManager.AccountInfoSave();
 
-                    MessageBox.Show(MessageConstants.INFO_ACCOUNT_SETTING_OK, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // ステータスバーにメッセージを表示
+                    ((ToolStripLabelEx)this.statusStrip1.Items[0]).DisplayMessage(MessageConstants.INFO_ACCOUNT_SETTING_OK);
 
                     // 新着情報をチェック
-                    this.WhatsnewProcess(true);
+                    this.WhatsnewProcess(true, false);
                 }
                 else
                 {
@@ -448,6 +459,14 @@ namespace AipoReminder
             textBoxDbUserId.Enabled = true;
             textBoxDbPassword.Enabled = true;
             textBoxDbName.Enabled = true;
+
+            // タスクトレイアイコンの点滅を停止
+            this.AnimatedTasktrayIcon(false);
+
+            // AlertWindowを閉じる
+            alertWindow1.Close();
+
+            isLogin = false;
         }
 
         /// <summary>
@@ -510,7 +529,14 @@ namespace AipoReminder
             // 設定を保存
             SettingManager.WhatsnewInfoSave();
 
-            MessageBox.Show(MessageConstants.INFO_WHATSNEW_SETTING_OK, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // ステータスバーにメッセージを表示
+            ((ToolStripLabelEx)this.statusStrip1.Items[0]).DisplayMessage(MessageConstants.INFO_WHATSNEW_SETTING_OK);
+
+            if (isLogin)
+            {
+                // 新着情報をチェック
+                this.WhatsnewProcess(true, false);
+            }
         }
 
         /// <summary>
@@ -663,7 +689,7 @@ namespace AipoReminder
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
             // 新着情報をチェック
-            this.WhatsnewProcess(true);
+            this.WhatsnewProcess(true, false);
         }
 
         /// <summary>
@@ -704,6 +730,23 @@ namespace AipoReminder
             thread.Start();
         }
 
+        /// <summary>
+        /// AlertWindowをクリックしたときの処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void alertWindow1_Click(object sender, EventArgs e)
+        {
+            // タスクトレイアイコンの点滅を停止
+            this.AnimatedTasktrayIcon(false);
+
+            // トップページを開く
+            this.ShowAipoTopPage();
+
+            // AlertWindowを閉じる
+            alertWindow1.Close();
+        }
+
 #endregion
 
 #region メイン処理
@@ -713,7 +756,7 @@ namespace AipoReminder
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void WhatsnewProcess(bool isCheckNow)
+        public void WhatsnewProcess(bool isCheckNow, bool isStartup)
         {
             if (!isLogin)
             {
@@ -755,19 +798,30 @@ namespace AipoReminder
             {
                 notificationDic = new Dictionary<string, BalloonItem>();
 
-                // もうすぐ始まるスケジュールをチェック
                 ScheduleManager sm = new ScheduleManager(dt);
-                List<ScheduleItem> scheduleList = sm.CheckSchedule();
-
-                StringBuilder sb = new StringBuilder();
-                if (scheduleList != null)
+                List<ScheduleItem> oneDayScheduleList = null;
+                // 終日スケジュールをチェック
+                if (isStartup)
                 {
-                    if (scheduleList.Count > 0)
+                    oneDayScheduleList = sm.CheckOneDaySchedule();
+                }
+
+                // もうすぐ始まるスケジュールをチェック
+                List<ScheduleItem> scheduleList = new List<ScheduleItem>();
+                scheduleList = sm.CheckSchedule();
+
+                if (scheduleList != null && scheduleList.Count > 0 || oneDayScheduleList != null && oneDayScheduleList.Count > 0)
+                {
+                    Form2 f = new Form2();
+                    if (scheduleList != null && scheduleList.Count > 0)
                     {
-                        Form2 f = new Form2();
-                        f.Show();
                         f.ScheduleList = scheduleList;
                     }
+                    if (oneDayScheduleList != null && oneDayScheduleList.Count > 0)
+                    {
+                        f.OneDayScheduleList = oneDayScheduleList;
+                    }
+                    f.Show();
                 }
 
                 // 新着情報を取得するためのDataSetと検索条件を設定
@@ -779,6 +833,7 @@ namespace AipoReminder
                 m.Execute(m.GetWhatsnewInfo, data);
 
                 // 新着情報を取り出す
+                StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < data.eip_t_whatsnew_blog.Count; i++)
                 {
                     if (i == 0)
@@ -950,16 +1005,22 @@ namespace AipoReminder
 
                     if (checkBoxInformation.Checked)
                     {
-                        AlertWindow aw = new AlertWindow();
-                        aw.ShowCloseButton = true;
-                        aw.Time = 10000;
-                        aw.Show(sb.ToString(), "Aipoリマインダーからのお知らせ", AlertIcons.Information);
+                        if (!alertWindow1.isShow())
+                        {
+                            alertWindow1.ShowCloseButton = true;
+                            alertWindow1.BackColor = Color.White;
+                            alertWindow1.BackColor2 = Color.FromArgb(255, 136, 0);
+                            alertWindow1.Time = 10000;
+                            alertWindow1.Icon = AlertIcons.Custom;
+                            alertWindow1.CustomIcon = Properties.Resources.information_orange;
+                            alertWindow1.Show(sb.ToString(), MessageConstants.MSG_INFORMATION_01);
+                        }
                     }
                     else
                     {
                         // バルーンを表示する
                         this.notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-                        this.notifyIcon1.BalloonTipTitle = "お知らせ";
+                        this.notifyIcon1.BalloonTipTitle = MessageConstants.MSG_INFORMATION_02;
                         this.notifyIcon1.BalloonTipText = sb.ToString();
                         this.notifyIcon1.ShowBalloonTip(10000);
                     }
@@ -1210,7 +1271,7 @@ namespace AipoReminder
 
         private void timerWhatsnew_Tick(object sender, EventArgs e)
         {
-            this.WhatsnewProcess(false);
+            this.WhatsnewProcess(false, false);
         }
 
 #endregion

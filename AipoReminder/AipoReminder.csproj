@@ -72,6 +72,8 @@
   <ItemGroup>
     <Reference Include="AlertWindow, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" />
     <Reference Include="Npgsql, Version=2.0.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -82,6 +84,7 @@
     <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Design" />
     <Reference Include="System.Security" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -96,6 +99,9 @@
   <ItemGroup>
     <Compile Include="Constants\DBConstants.cs" />
     <Compile Include="Constants\MessageConstants.cs" />
+    <Compile Include="Control\ToolStripLabelEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DAO\ScheduleDAO.cs" />
     <Compile Include="DAO\TurbineGroupDAO.cs" />
     <Compile Include="DAO\TurbineUserDAO.cs" />
@@ -119,6 +125,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WhatsnewDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Form4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Form4.Designer.cs">
+      <DependentUpon>Form4.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\Form3.cs">
       <SubType>Form</SubType>
@@ -161,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Form4.resx">
+      <DependentUpon>Form4.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -247,6 +262,8 @@
     <None Include="favicon-16-red.ico" />
     <None Include="favicon-16.ico" />
     <Content Include="favicon.ico" />
+    <Content Include="information_blue.png" />
+    <Content Include="information_orange.png" />
     <Content Include="lib\AlertWindow.dll" />
     <Content Include="lib\ja\Npgsql.resources.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

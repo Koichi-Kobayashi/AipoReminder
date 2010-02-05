@@ -339,7 +339,7 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine(", t2.name");
             sqlbldr.AppendLine(", t3.last_name");
             sqlbldr.AppendLine(", t3.first_name");
-            sqlbldr.AppendLine(", to_char(t1.update_date, 'YYYY/MM/DD') as update_date");
+            sqlbldr.AppendLine(", to_char(t2.start_date, 'YYYY/MM/DD') as update_date");
             sqlbldr.AppendLine("from eip_t_whatsnew t1");
             sqlbldr.AppendLine("    join eip_t_schedule t2");
             sqlbldr.AppendLine("        on t1.entity_id = t2.schedule_id");
@@ -355,7 +355,7 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("    where 1 = 1");
             sqlbldr.AppendLine("    and t4.portlet_type = " + DBConstants.WHATS_NEW_TYPE_SCHEDULE);
             sqlbldr.AppendLine("    and t4.parent_id = 0 )");
-            sqlbldr.AppendLine("order by t1.update_date desc");
+            sqlbldr.AppendLine("order by t2.update_date desc");
 
             WhatsnewDataSet.search_eip_t_whatsnewRow param = ((WhatsnewDataSet)data).search_eip_t_whatsnew[0];
 

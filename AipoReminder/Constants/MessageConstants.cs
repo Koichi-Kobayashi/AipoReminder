@@ -39,5 +39,9 @@ namespace AipoReminder.Constants
         public const string SUBJECT_TYPE2 = "折返しお電話ください。";
         public const string SUBJECT_TYPE3 = "連絡があったことをお伝えください。";
         public const string SUBJECT_TYPE4 = "伝言をお願いします。";
+
+        // 吹き出し
+        public const string MSG_INFORMATION_01 = "Aipoリマインダーからのお知らせ";
+        public const string MSG_INFORMATION_02 = "お知らせ";
     }
 }
