@@ -9,15 +9,15 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using AipoReminder.Constants;
+using AipoReminder.Control;
 using AipoReminder.DataSet;
 using AipoReminder.Manager;
 using AipoReminder.Model;
 using AipoReminder.Utility;
 using AipoReminder.ValueObject;
+using Allison.AlertWindow;
 using WinFramework.Exceptions;
 using WinFramework.Utility;
-using Allison.AlertWindow;
-using AipoReminder.Control;
 
 namespace AipoReminder
 {

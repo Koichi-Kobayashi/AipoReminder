@@ -210,7 +210,7 @@ namespace AipoReminder.DataSet {
         private void InitClass() {
             this.DataSetName = "TurbineGroupDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/TurbineGroupDataSet.xsd";
+            this.Namespace = "http://tempuri.org/TurbineGroupDataSet2.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tablesearch_turbine_group = new search_turbine_groupDataTable();
@@ -292,7 +292,7 @@ namespace AipoReminder.DataSet {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class search_turbine_groupDataTable : global::System.Data.TypedTableBase<search_turbine_groupRow> {
+        public partial class search_turbine_groupDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
             
             private global::System.Data.DataColumn columngroup_id;
             
@@ -379,6 +379,11 @@ namespace AipoReminder.DataSet {
                 rowsearch_turbine_groupRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsearch_turbine_groupRow);
                 return rowsearch_turbine_groupRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public virtual global::System.Collections.IEnumerator GetEnumerator() {
+                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -528,7 +533,7 @@ namespace AipoReminder.DataSet {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class turbine_groupDataTable : global::System.Data.TypedTableBase<turbine_groupRow> {
+        public partial class turbine_groupDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
             
             private global::System.Data.DataColumn columngroup_id;
             
@@ -661,6 +666,11 @@ namespace AipoReminder.DataSet {
             public turbine_groupRow FindBygroup_id(int group_id) {
                 return ((turbine_groupRow)(this.Rows.Find(new object[] {
                             group_id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public virtual global::System.Collections.IEnumerator GetEnumerator() {
+                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

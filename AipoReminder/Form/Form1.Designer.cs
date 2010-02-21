@@ -693,12 +693,12 @@
             this.終了ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(178, 98);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(178, 120);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.CheckOnClick = true;
-            this.toolStripMenuItem1.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.toolStripMenuItem1.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Bold);
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 22);
             this.toolStripMenuItem1.Text = "メイン画面を起動(&O)";

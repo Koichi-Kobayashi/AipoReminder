@@ -25,9 +25,9 @@ namespace AipoReminder.DataSet {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class ScheduleDataSet : global::System.Data.DataSet {
         
-        private eip_t_scheduleDataTable tableeip_t_schedule;
-        
         private search_eip_t_scheduleDataTable tablesearch_eip_t_schedule;
+        
+        private eip_t_scheduleDataTable tableeip_t_schedule;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -55,11 +55,11 @@ namespace AipoReminder.DataSet {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["eip_t_schedule"] != null)) {
-                    base.Tables.Add(new eip_t_scheduleDataTable(ds.Tables["eip_t_schedule"]));
-                }
                 if ((ds.Tables["search_eip_t_schedule"] != null)) {
                     base.Tables.Add(new search_eip_t_scheduleDataTable(ds.Tables["search_eip_t_schedule"]));
+                }
+                if ((ds.Tables["eip_t_schedule"] != null)) {
+                    base.Tables.Add(new eip_t_scheduleDataTable(ds.Tables["eip_t_schedule"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -82,18 +82,18 @@ namespace AipoReminder.DataSet {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public eip_t_scheduleDataTable eip_t_schedule {
+        public search_eip_t_scheduleDataTable search_eip_t_schedule {
             get {
-                return this.tableeip_t_schedule;
+                return this.tablesearch_eip_t_schedule;
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public search_eip_t_scheduleDataTable search_eip_t_schedule {
+        public eip_t_scheduleDataTable eip_t_schedule {
             get {
-                return this.tablesearch_eip_t_schedule;
+                return this.tableeip_t_schedule;
             }
         }
         
@@ -156,11 +156,11 @@ namespace AipoReminder.DataSet {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["eip_t_schedule"] != null)) {
-                    base.Tables.Add(new eip_t_scheduleDataTable(ds.Tables["eip_t_schedule"]));
-                }
                 if ((ds.Tables["search_eip_t_schedule"] != null)) {
                     base.Tables.Add(new search_eip_t_scheduleDataTable(ds.Tables["search_eip_t_schedule"]));
+                }
+                if ((ds.Tables["eip_t_schedule"] != null)) {
+                    base.Tables.Add(new eip_t_scheduleDataTable(ds.Tables["eip_t_schedule"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -192,16 +192,16 @@ namespace AipoReminder.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         internal void InitVars(bool initTable) {
-            this.tableeip_t_schedule = ((eip_t_scheduleDataTable)(base.Tables["eip_t_schedule"]));
-            if ((initTable == true)) {
-                if ((this.tableeip_t_schedule != null)) {
-                    this.tableeip_t_schedule.InitVars();
-                }
-            }
             this.tablesearch_eip_t_schedule = ((search_eip_t_scheduleDataTable)(base.Tables["search_eip_t_schedule"]));
             if ((initTable == true)) {
                 if ((this.tablesearch_eip_t_schedule != null)) {
                     this.tablesearch_eip_t_schedule.InitVars();
+                }
+            }
+            this.tableeip_t_schedule = ((eip_t_scheduleDataTable)(base.Tables["eip_t_schedule"]));
+            if ((initTable == true)) {
+                if ((this.tableeip_t_schedule != null)) {
+                    this.tableeip_t_schedule.InitVars();
                 }
             }
         }
@@ -210,22 +210,22 @@ namespace AipoReminder.DataSet {
         private void InitClass() {
             this.DataSetName = "ScheduleDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/ScheduleDataSet.xsd";
+            this.Namespace = "http://tempuri.org/ScheduleDataSet2.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableeip_t_schedule = new eip_t_scheduleDataTable();
-            base.Tables.Add(this.tableeip_t_schedule);
             this.tablesearch_eip_t_schedule = new search_eip_t_scheduleDataTable();
             base.Tables.Add(this.tablesearch_eip_t_schedule);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeeip_t_schedule() {
-            return false;
+            this.tableeip_t_schedule = new eip_t_scheduleDataTable();
+            base.Tables.Add(this.tableeip_t_schedule);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializesearch_eip_t_schedule() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeeip_t_schedule() {
             return false;
         }
         
@@ -282,9 +282,9 @@ namespace AipoReminder.DataSet {
             return type;
         }
         
-        public delegate void eip_t_scheduleRowChangeEventHandler(object sender, eip_t_scheduleRowChangeEvent e);
-        
         public delegate void search_eip_t_scheduleRowChangeEventHandler(object sender, search_eip_t_scheduleRowChangeEvent e);
+        
+        public delegate void eip_t_scheduleRowChangeEventHandler(object sender, eip_t_scheduleRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -292,7 +292,306 @@ namespace AipoReminder.DataSet {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class eip_t_scheduleDataTable : global::System.Data.TypedTableBase<eip_t_scheduleRow> {
+        public partial class search_eip_t_scheduleDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+            
+            private global::System.Data.DataColumn columnuser_id;
+            
+            private global::System.Data.DataColumn columnstart_date;
+            
+            private global::System.Data.DataColumn columnpublic_flag;
+            
+            private global::System.Data.DataColumn columnedit_flag;
+            
+            private global::System.Data.DataColumn columncheck_time;
+            
+            private global::System.Data.DataColumn columnother_user_id_list;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public search_eip_t_scheduleDataTable() {
+                this.TableName = "search_eip_t_schedule";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal search_eip_t_scheduleDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected search_eip_t_scheduleDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn user_idColumn {
+                get {
+                    return this.columnuser_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn start_dateColumn {
+                get {
+                    return this.columnstart_date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn public_flagColumn {
+                get {
+                    return this.columnpublic_flag;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn edit_flagColumn {
+                get {
+                    return this.columnedit_flag;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn check_timeColumn {
+                get {
+                    return this.columncheck_time;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn other_user_id_listColumn {
+                get {
+                    return this.columnother_user_id_list;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public search_eip_t_scheduleRow this[int index] {
+                get {
+                    return ((search_eip_t_scheduleRow)(this.Rows[index]));
+                }
+            }
+            
+            public event search_eip_t_scheduleRowChangeEventHandler search_eip_t_scheduleRowChanging;
+            
+            public event search_eip_t_scheduleRowChangeEventHandler search_eip_t_scheduleRowChanged;
+            
+            public event search_eip_t_scheduleRowChangeEventHandler search_eip_t_scheduleRowDeleting;
+            
+            public event search_eip_t_scheduleRowChangeEventHandler search_eip_t_scheduleRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Addsearch_eip_t_scheduleRow(search_eip_t_scheduleRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public search_eip_t_scheduleRow Addsearch_eip_t_scheduleRow(string user_id, string start_date, string public_flag, string edit_flag, string check_time, string other_user_id_list) {
+                search_eip_t_scheduleRow rowsearch_eip_t_scheduleRow = ((search_eip_t_scheduleRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        user_id,
+                        start_date,
+                        public_flag,
+                        edit_flag,
+                        check_time,
+                        other_user_id_list};
+                rowsearch_eip_t_scheduleRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowsearch_eip_t_scheduleRow);
+                return rowsearch_eip_t_scheduleRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public virtual global::System.Collections.IEnumerator GetEnumerator() {
+                return this.Rows.GetEnumerator();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                search_eip_t_scheduleDataTable cln = ((search_eip_t_scheduleDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new search_eip_t_scheduleDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnuser_id = base.Columns["user_id"];
+                this.columnstart_date = base.Columns["start_date"];
+                this.columnpublic_flag = base.Columns["public_flag"];
+                this.columnedit_flag = base.Columns["edit_flag"];
+                this.columncheck_time = base.Columns["check_time"];
+                this.columnother_user_id_list = base.Columns["other_user_id_list"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnuser_id = new global::System.Data.DataColumn("user_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnuser_id);
+                this.columnstart_date = new global::System.Data.DataColumn("start_date", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstart_date);
+                this.columnpublic_flag = new global::System.Data.DataColumn("public_flag", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpublic_flag);
+                this.columnedit_flag = new global::System.Data.DataColumn("edit_flag", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnedit_flag);
+                this.columncheck_time = new global::System.Data.DataColumn("check_time", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncheck_time);
+                this.columnother_user_id_list = new global::System.Data.DataColumn("other_user_id_list", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnother_user_id_list);
+                this.columnuser_id.DefaultValue = ((string)(""));
+                this.columnstart_date.DefaultValue = ((string)(""));
+                this.columnpublic_flag.DefaultValue = ((string)(""));
+                this.columnedit_flag.DefaultValue = ((string)(""));
+                this.columncheck_time.DefaultValue = ((string)(""));
+                this.columnother_user_id_list.DefaultValue = ((string)(""));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public search_eip_t_scheduleRow Newsearch_eip_t_scheduleRow() {
+                return ((search_eip_t_scheduleRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new search_eip_t_scheduleRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(search_eip_t_scheduleRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.search_eip_t_scheduleRowChanged != null)) {
+                    this.search_eip_t_scheduleRowChanged(this, new search_eip_t_scheduleRowChangeEvent(((search_eip_t_scheduleRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.search_eip_t_scheduleRowChanging != null)) {
+                    this.search_eip_t_scheduleRowChanging(this, new search_eip_t_scheduleRowChangeEvent(((search_eip_t_scheduleRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.search_eip_t_scheduleRowDeleted != null)) {
+                    this.search_eip_t_scheduleRowDeleted(this, new search_eip_t_scheduleRowChangeEvent(((search_eip_t_scheduleRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.search_eip_t_scheduleRowDeleting != null)) {
+                    this.search_eip_t_scheduleRowDeleting(this, new search_eip_t_scheduleRowChangeEvent(((search_eip_t_scheduleRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Removesearch_eip_t_scheduleRow(search_eip_t_scheduleRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                ScheduleDataSet ds = new ScheduleDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "search_eip_t_scheduleDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class eip_t_scheduleDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
             
             private global::System.Data.DataColumn columnschedule_id;
             
@@ -469,6 +768,11 @@ namespace AipoReminder.DataSet {
                 roweip_t_scheduleRow.ItemArray = columnValuesArray;
                 this.Rows.Add(roweip_t_scheduleRow);
                 return roweip_t_scheduleRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public virtual global::System.Collections.IEnumerator GetEnumerator() {
+                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -659,296 +963,167 @@ namespace AipoReminder.DataSet {
         }
         
         /// <summary>
-        ///Represents the strongly named DataTable class.
+        ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class search_eip_t_scheduleDataTable : global::System.Data.TypedTableBase<search_eip_t_scheduleRow> {
+        public partial class search_eip_t_scheduleRow : global::System.Data.DataRow {
             
-            private global::System.Data.DataColumn columnuser_id;
-            
-            private global::System.Data.DataColumn columnstart_date;
-            
-            private global::System.Data.DataColumn columnpublic_flag;
-            
-            private global::System.Data.DataColumn columnedit_flag;
-            
-            private global::System.Data.DataColumn columncheck_time;
-            
-            private global::System.Data.DataColumn columnother_user_id_list;
+            private search_eip_t_scheduleDataTable tablesearch_eip_t_schedule;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public search_eip_t_scheduleDataTable() {
-                this.TableName = "search_eip_t_schedule";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
+            internal search_eip_t_scheduleRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablesearch_eip_t_schedule = ((search_eip_t_scheduleDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal search_eip_t_scheduleDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected search_eip_t_scheduleDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn user_idColumn {
+            public string user_id {
                 get {
-                    return this.columnuser_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn start_dateColumn {
-                get {
-                    return this.columnstart_date;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn public_flagColumn {
-                get {
-                    return this.columnpublic_flag;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn edit_flagColumn {
-                get {
-                    return this.columnedit_flag;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn check_timeColumn {
-                get {
-                    return this.columncheck_time;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn other_user_id_listColumn {
-                get {
-                    return this.columnother_user_id_list;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public search_eip_t_scheduleRow this[int index] {
-                get {
-                    return ((search_eip_t_scheduleRow)(this.Rows[index]));
-                }
-            }
-            
-            public event search_eip_t_scheduleRowChangeEventHandler search_eip_t_scheduleRowChanging;
-            
-            public event search_eip_t_scheduleRowChangeEventHandler search_eip_t_scheduleRowChanged;
-            
-            public event search_eip_t_scheduleRowChangeEventHandler search_eip_t_scheduleRowDeleting;
-            
-            public event search_eip_t_scheduleRowChangeEventHandler search_eip_t_scheduleRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Addsearch_eip_t_scheduleRow(search_eip_t_scheduleRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public search_eip_t_scheduleRow Addsearch_eip_t_scheduleRow(string user_id, string start_date, string public_flag, string edit_flag, string check_time, string other_user_id_list) {
-                search_eip_t_scheduleRow rowsearch_eip_t_scheduleRow = ((search_eip_t_scheduleRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        user_id,
-                        start_date,
-                        public_flag,
-                        edit_flag,
-                        check_time,
-                        other_user_id_list};
-                rowsearch_eip_t_scheduleRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowsearch_eip_t_scheduleRow);
-                return rowsearch_eip_t_scheduleRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                search_eip_t_scheduleDataTable cln = ((search_eip_t_scheduleDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new search_eip_t_scheduleDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnuser_id = base.Columns["user_id"];
-                this.columnstart_date = base.Columns["start_date"];
-                this.columnpublic_flag = base.Columns["public_flag"];
-                this.columnedit_flag = base.Columns["edit_flag"];
-                this.columncheck_time = base.Columns["check_time"];
-                this.columnother_user_id_list = base.Columns["other_user_id_list"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnuser_id = new global::System.Data.DataColumn("user_id", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnuser_id);
-                this.columnstart_date = new global::System.Data.DataColumn("start_date", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnstart_date);
-                this.columnpublic_flag = new global::System.Data.DataColumn("public_flag", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpublic_flag);
-                this.columnedit_flag = new global::System.Data.DataColumn("edit_flag", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnedit_flag);
-                this.columncheck_time = new global::System.Data.DataColumn("check_time", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncheck_time);
-                this.columnother_user_id_list = new global::System.Data.DataColumn("other_user_id_list", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnother_user_id_list);
-                this.columnuser_id.DefaultValue = ((string)(""));
-                this.columnstart_date.DefaultValue = ((string)(""));
-                this.columnpublic_flag.DefaultValue = ((string)(""));
-                this.columnedit_flag.DefaultValue = ((string)(""));
-                this.columncheck_time.DefaultValue = ((string)(""));
-                this.columnother_user_id_list.DefaultValue = ((string)(""));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public search_eip_t_scheduleRow Newsearch_eip_t_scheduleRow() {
-                return ((search_eip_t_scheduleRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new search_eip_t_scheduleRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(search_eip_t_scheduleRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.search_eip_t_scheduleRowChanged != null)) {
-                    this.search_eip_t_scheduleRowChanged(this, new search_eip_t_scheduleRowChangeEvent(((search_eip_t_scheduleRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.search_eip_t_scheduleRowChanging != null)) {
-                    this.search_eip_t_scheduleRowChanging(this, new search_eip_t_scheduleRowChangeEvent(((search_eip_t_scheduleRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.search_eip_t_scheduleRowDeleted != null)) {
-                    this.search_eip_t_scheduleRowDeleted(this, new search_eip_t_scheduleRowChangeEvent(((search_eip_t_scheduleRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.search_eip_t_scheduleRowDeleting != null)) {
-                    this.search_eip_t_scheduleRowDeleting(this, new search_eip_t_scheduleRowChangeEvent(((search_eip_t_scheduleRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Removesearch_eip_t_scheduleRow(search_eip_t_scheduleRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                ScheduleDataSet ds = new ScheduleDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "search_eip_t_scheduleDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
+                    if (this.Isuser_idNull()) {
+                        return string.Empty;
                     }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
+                    else {
+                        return ((string)(this[this.tablesearch_eip_t_schedule.user_idColumn]));
                     }
                 }
-                xs.Add(dsSchema);
-                return type;
+                set {
+                    this[this.tablesearch_eip_t_schedule.user_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string start_date {
+                get {
+                    if (this.Isstart_dateNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tablesearch_eip_t_schedule.start_dateColumn]));
+                    }
+                }
+                set {
+                    this[this.tablesearch_eip_t_schedule.start_dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string public_flag {
+                get {
+                    if (this.Ispublic_flagNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tablesearch_eip_t_schedule.public_flagColumn]));
+                    }
+                }
+                set {
+                    this[this.tablesearch_eip_t_schedule.public_flagColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string edit_flag {
+                get {
+                    if (this.Isedit_flagNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tablesearch_eip_t_schedule.edit_flagColumn]));
+                    }
+                }
+                set {
+                    this[this.tablesearch_eip_t_schedule.edit_flagColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string check_time {
+                get {
+                    if (this.Ischeck_timeNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tablesearch_eip_t_schedule.check_timeColumn]));
+                    }
+                }
+                set {
+                    this[this.tablesearch_eip_t_schedule.check_timeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string other_user_id_list {
+                get {
+                    if (this.Isother_user_id_listNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tablesearch_eip_t_schedule.other_user_id_listColumn]));
+                    }
+                }
+                set {
+                    this[this.tablesearch_eip_t_schedule.other_user_id_listColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isuser_idNull() {
+                return this.IsNull(this.tablesearch_eip_t_schedule.user_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setuser_idNull() {
+                this[this.tablesearch_eip_t_schedule.user_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isstart_dateNull() {
+                return this.IsNull(this.tablesearch_eip_t_schedule.start_dateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setstart_dateNull() {
+                this[this.tablesearch_eip_t_schedule.start_dateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Ispublic_flagNull() {
+                return this.IsNull(this.tablesearch_eip_t_schedule.public_flagColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setpublic_flagNull() {
+                this[this.tablesearch_eip_t_schedule.public_flagColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isedit_flagNull() {
+                return this.IsNull(this.tablesearch_eip_t_schedule.edit_flagColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setedit_flagNull() {
+                this[this.tablesearch_eip_t_schedule.edit_flagColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Ischeck_timeNull() {
+                return this.IsNull(this.tablesearch_eip_t_schedule.check_timeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setcheck_timeNull() {
+                this[this.tablesearch_eip_t_schedule.check_timeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isother_user_id_listNull() {
+                return this.IsNull(this.tablesearch_eip_t_schedule.other_user_id_listColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setother_user_id_listNull() {
+                this[this.tablesearch_eip_t_schedule.other_user_id_listColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1228,167 +1403,33 @@ namespace AipoReminder.DataSet {
         }
         
         /// <summary>
-        ///Represents strongly named DataRow class.
+        ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class search_eip_t_scheduleRow : global::System.Data.DataRow {
+        public class search_eip_t_scheduleRowChangeEvent : global::System.EventArgs {
             
-            private search_eip_t_scheduleDataTable tablesearch_eip_t_schedule;
+            private search_eip_t_scheduleRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal search_eip_t_scheduleRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tablesearch_eip_t_schedule = ((search_eip_t_scheduleDataTable)(this.Table));
+            public search_eip_t_scheduleRowChangeEvent(search_eip_t_scheduleRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string user_id {
+            public search_eip_t_scheduleRow Row {
                 get {
-                    if (this.Isuser_idNull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tablesearch_eip_t_schedule.user_idColumn]));
-                    }
-                }
-                set {
-                    this[this.tablesearch_eip_t_schedule.user_idColumn] = value;
+                    return this.eventRow;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string start_date {
+            public global::System.Data.DataRowAction Action {
                 get {
-                    if (this.Isstart_dateNull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tablesearch_eip_t_schedule.start_dateColumn]));
-                    }
+                    return this.eventAction;
                 }
-                set {
-                    this[this.tablesearch_eip_t_schedule.start_dateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string public_flag {
-                get {
-                    if (this.Ispublic_flagNull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tablesearch_eip_t_schedule.public_flagColumn]));
-                    }
-                }
-                set {
-                    this[this.tablesearch_eip_t_schedule.public_flagColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string edit_flag {
-                get {
-                    if (this.Isedit_flagNull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tablesearch_eip_t_schedule.edit_flagColumn]));
-                    }
-                }
-                set {
-                    this[this.tablesearch_eip_t_schedule.edit_flagColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string check_time {
-                get {
-                    if (this.Ischeck_timeNull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tablesearch_eip_t_schedule.check_timeColumn]));
-                    }
-                }
-                set {
-                    this[this.tablesearch_eip_t_schedule.check_timeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string other_user_id_list {
-                get {
-                    if (this.Isother_user_id_listNull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tablesearch_eip_t_schedule.other_user_id_listColumn]));
-                    }
-                }
-                set {
-                    this[this.tablesearch_eip_t_schedule.other_user_id_listColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Isuser_idNull() {
-                return this.IsNull(this.tablesearch_eip_t_schedule.user_idColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setuser_idNull() {
-                this[this.tablesearch_eip_t_schedule.user_idColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Isstart_dateNull() {
-                return this.IsNull(this.tablesearch_eip_t_schedule.start_dateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setstart_dateNull() {
-                this[this.tablesearch_eip_t_schedule.start_dateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Ispublic_flagNull() {
-                return this.IsNull(this.tablesearch_eip_t_schedule.public_flagColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setpublic_flagNull() {
-                this[this.tablesearch_eip_t_schedule.public_flagColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Isedit_flagNull() {
-                return this.IsNull(this.tablesearch_eip_t_schedule.edit_flagColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setedit_flagNull() {
-                this[this.tablesearch_eip_t_schedule.edit_flagColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Ischeck_timeNull() {
-                return this.IsNull(this.tablesearch_eip_t_schedule.check_timeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setcheck_timeNull() {
-                this[this.tablesearch_eip_t_schedule.check_timeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Isother_user_id_listNull() {
-                return this.IsNull(this.tablesearch_eip_t_schedule.other_user_id_listColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setother_user_id_listNull() {
-                this[this.tablesearch_eip_t_schedule.other_user_id_listColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1410,37 +1451,6 @@ namespace AipoReminder.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public eip_t_scheduleRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class search_eip_t_scheduleRowChangeEvent : global::System.EventArgs {
-            
-            private search_eip_t_scheduleRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public search_eip_t_scheduleRowChangeEvent(search_eip_t_scheduleRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public search_eip_t_scheduleRow Row {
                 get {
                     return this.eventRow;
                 }

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AipoReminder", "AipoReminder\AipoReminder.csproj", "{8D29F70C-2B00-4CAF-B829-39D634B98C46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AipoFinder", "AipoFinder\AipoFinder.csproj", "{DE5B0DD1-DE3E-492F-9AD5-9B95AAD8CD09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,12 @@ Global
 		{8D29F70C-2B00-4CAF-B829-39D634B98C46}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8D29F70C-2B00-4CAF-B829-39D634B98C46}.Release|x86.ActiveCfg = Release|x86
 		{8D29F70C-2B00-4CAF-B829-39D634B98C46}.Release|x86.Build.0 = Release|x86
+		{DE5B0DD1-DE3E-492F-9AD5-9B95AAD8CD09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE5B0DD1-DE3E-492F-9AD5-9B95AAD8CD09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE5B0DD1-DE3E-492F-9AD5-9B95AAD8CD09}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DE5B0DD1-DE3E-492F-9AD5-9B95AAD8CD09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE5B0DD1-DE3E-492F-9AD5-9B95AAD8CD09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE5B0DD1-DE3E-492F-9AD5-9B95AAD8CD09}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

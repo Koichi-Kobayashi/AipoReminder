@@ -25,9 +25,9 @@ namespace AipoReminder.DataSet {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class TurbineUserDataSet : global::System.Data.DataSet {
         
-        private turbine_userDataTable tableturbine_user;
-        
         private search_turbine_userDataTable tablesearch_turbine_user;
+        
+        private turbine_userDataTable tableturbine_user;
         
         private search_turbine_groupDataTable tablesearch_turbine_group;
         
@@ -59,11 +59,11 @@ namespace AipoReminder.DataSet {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["turbine_user"] != null)) {
-                    base.Tables.Add(new turbine_userDataTable(ds.Tables["turbine_user"]));
-                }
                 if ((ds.Tables["search_turbine_user"] != null)) {
                     base.Tables.Add(new search_turbine_userDataTable(ds.Tables["search_turbine_user"]));
+                }
+                if ((ds.Tables["turbine_user"] != null)) {
+                    base.Tables.Add(new turbine_userDataTable(ds.Tables["turbine_user"]));
                 }
                 if ((ds.Tables["search_turbine_group"] != null)) {
                     base.Tables.Add(new search_turbine_groupDataTable(ds.Tables["search_turbine_group"]));
@@ -92,18 +92,18 @@ namespace AipoReminder.DataSet {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public turbine_userDataTable turbine_user {
+        public search_turbine_userDataTable search_turbine_user {
             get {
-                return this.tableturbine_user;
+                return this.tablesearch_turbine_user;
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public search_turbine_userDataTable search_turbine_user {
+        public turbine_userDataTable turbine_user {
             get {
-                return this.tablesearch_turbine_user;
+                return this.tableturbine_user;
             }
         }
         
@@ -184,11 +184,11 @@ namespace AipoReminder.DataSet {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["turbine_user"] != null)) {
-                    base.Tables.Add(new turbine_userDataTable(ds.Tables["turbine_user"]));
-                }
                 if ((ds.Tables["search_turbine_user"] != null)) {
                     base.Tables.Add(new search_turbine_userDataTable(ds.Tables["search_turbine_user"]));
+                }
+                if ((ds.Tables["turbine_user"] != null)) {
+                    base.Tables.Add(new turbine_userDataTable(ds.Tables["turbine_user"]));
                 }
                 if ((ds.Tables["search_turbine_group"] != null)) {
                     base.Tables.Add(new search_turbine_groupDataTable(ds.Tables["search_turbine_group"]));
@@ -226,16 +226,16 @@ namespace AipoReminder.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         internal void InitVars(bool initTable) {
-            this.tableturbine_user = ((turbine_userDataTable)(base.Tables["turbine_user"]));
-            if ((initTable == true)) {
-                if ((this.tableturbine_user != null)) {
-                    this.tableturbine_user.InitVars();
-                }
-            }
             this.tablesearch_turbine_user = ((search_turbine_userDataTable)(base.Tables["search_turbine_user"]));
             if ((initTable == true)) {
                 if ((this.tablesearch_turbine_user != null)) {
                     this.tablesearch_turbine_user.InitVars();
+                }
+            }
+            this.tableturbine_user = ((turbine_userDataTable)(base.Tables["turbine_user"]));
+            if ((initTable == true)) {
+                if ((this.tableturbine_user != null)) {
+                    this.tableturbine_user.InitVars();
                 }
             }
             this.tablesearch_turbine_group = ((search_turbine_groupDataTable)(base.Tables["search_turbine_group"]));
@@ -256,13 +256,13 @@ namespace AipoReminder.DataSet {
         private void InitClass() {
             this.DataSetName = "TurbineUserDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/TurbineUserDataSet.xsd";
+            this.Namespace = "http://tempuri.org/TurbineUserDataSet2.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableturbine_user = new turbine_userDataTable();
-            base.Tables.Add(this.tableturbine_user);
             this.tablesearch_turbine_user = new search_turbine_userDataTable();
             base.Tables.Add(this.tablesearch_turbine_user);
+            this.tableturbine_user = new turbine_userDataTable();
+            base.Tables.Add(this.tableturbine_user);
             this.tablesearch_turbine_group = new search_turbine_groupDataTable();
             base.Tables.Add(this.tablesearch_turbine_group);
             this.tableturbine_group_user = new turbine_group_userDataTable();
@@ -270,12 +270,12 @@ namespace AipoReminder.DataSet {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeturbine_user() {
+        private bool ShouldSerializesearch_turbine_user() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializesearch_turbine_user() {
+        private bool ShouldSerializeturbine_user() {
             return false;
         }
         
@@ -342,9 +342,9 @@ namespace AipoReminder.DataSet {
             return type;
         }
         
-        public delegate void turbine_userRowChangeEventHandler(object sender, turbine_userRowChangeEvent e);
-        
         public delegate void search_turbine_userRowChangeEventHandler(object sender, search_turbine_userRowChangeEvent e);
+        
+        public delegate void turbine_userRowChangeEventHandler(object sender, turbine_userRowChangeEvent e);
         
         public delegate void search_turbine_groupRowChangeEventHandler(object sender, search_turbine_groupRowChangeEvent e);
         
@@ -356,7 +356,264 @@ namespace AipoReminder.DataSet {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class turbine_userDataTable : global::System.Data.TypedTableBase<turbine_userRow> {
+        public partial class search_turbine_userDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+            
+            private global::System.Data.DataColumn columnuser_id;
+            
+            private global::System.Data.DataColumn columnlogin_name;
+            
+            private global::System.Data.DataColumn columnpassword_value;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public search_turbine_userDataTable() {
+                this.TableName = "search_turbine_user";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal search_turbine_userDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected search_turbine_userDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn user_idColumn {
+                get {
+                    return this.columnuser_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn login_nameColumn {
+                get {
+                    return this.columnlogin_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn password_valueColumn {
+                get {
+                    return this.columnpassword_value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public search_turbine_userRow this[int index] {
+                get {
+                    return ((search_turbine_userRow)(this.Rows[index]));
+                }
+            }
+            
+            public event search_turbine_userRowChangeEventHandler search_turbine_userRowChanging;
+            
+            public event search_turbine_userRowChangeEventHandler search_turbine_userRowChanged;
+            
+            public event search_turbine_userRowChangeEventHandler search_turbine_userRowDeleting;
+            
+            public event search_turbine_userRowChangeEventHandler search_turbine_userRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Addsearch_turbine_userRow(search_turbine_userRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public search_turbine_userRow Addsearch_turbine_userRow(string user_id, string login_name, string password_value) {
+                search_turbine_userRow rowsearch_turbine_userRow = ((search_turbine_userRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        user_id,
+                        login_name,
+                        password_value};
+                rowsearch_turbine_userRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowsearch_turbine_userRow);
+                return rowsearch_turbine_userRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public virtual global::System.Collections.IEnumerator GetEnumerator() {
+                return this.Rows.GetEnumerator();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                search_turbine_userDataTable cln = ((search_turbine_userDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new search_turbine_userDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnuser_id = base.Columns["user_id"];
+                this.columnlogin_name = base.Columns["login_name"];
+                this.columnpassword_value = base.Columns["password_value"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnuser_id = new global::System.Data.DataColumn("user_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnuser_id);
+                this.columnlogin_name = new global::System.Data.DataColumn("login_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlogin_name);
+                this.columnpassword_value = new global::System.Data.DataColumn("password_value", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpassword_value);
+                this.columnuser_id.DefaultValue = ((string)(""));
+                this.columnlogin_name.DefaultValue = ((string)(""));
+                this.columnpassword_value.DefaultValue = ((string)(""));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public search_turbine_userRow Newsearch_turbine_userRow() {
+                return ((search_turbine_userRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new search_turbine_userRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(search_turbine_userRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.search_turbine_userRowChanged != null)) {
+                    this.search_turbine_userRowChanged(this, new search_turbine_userRowChangeEvent(((search_turbine_userRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.search_turbine_userRowChanging != null)) {
+                    this.search_turbine_userRowChanging(this, new search_turbine_userRowChangeEvent(((search_turbine_userRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.search_turbine_userRowDeleted != null)) {
+                    this.search_turbine_userRowDeleted(this, new search_turbine_userRowChangeEvent(((search_turbine_userRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.search_turbine_userRowDeleting != null)) {
+                    this.search_turbine_userRowDeleting(this, new search_turbine_userRowChangeEvent(((search_turbine_userRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Removesearch_turbine_userRow(search_turbine_userRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                TurbineUserDataSet ds = new TurbineUserDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "search_turbine_userDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class turbine_userDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
             
             private global::System.Data.DataColumn columnuser_id;
             
@@ -707,6 +964,11 @@ namespace AipoReminder.DataSet {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public virtual global::System.Collections.IEnumerator GetEnumerator() {
+                return this.Rows.GetEnumerator();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public override global::System.Data.DataTable Clone() {
                 turbine_userDataTable cln = ((turbine_userDataTable)(base.Clone()));
                 cln.InitVars();
@@ -969,259 +1231,7 @@ namespace AipoReminder.DataSet {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class search_turbine_userDataTable : global::System.Data.TypedTableBase<search_turbine_userRow> {
-            
-            private global::System.Data.DataColumn columnuser_id;
-            
-            private global::System.Data.DataColumn columnlogin_name;
-            
-            private global::System.Data.DataColumn columnpassword_value;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public search_turbine_userDataTable() {
-                this.TableName = "search_turbine_user";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal search_turbine_userDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected search_turbine_userDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn user_idColumn {
-                get {
-                    return this.columnuser_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn login_nameColumn {
-                get {
-                    return this.columnlogin_name;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn password_valueColumn {
-                get {
-                    return this.columnpassword_value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public search_turbine_userRow this[int index] {
-                get {
-                    return ((search_turbine_userRow)(this.Rows[index]));
-                }
-            }
-            
-            public event search_turbine_userRowChangeEventHandler search_turbine_userRowChanging;
-            
-            public event search_turbine_userRowChangeEventHandler search_turbine_userRowChanged;
-            
-            public event search_turbine_userRowChangeEventHandler search_turbine_userRowDeleting;
-            
-            public event search_turbine_userRowChangeEventHandler search_turbine_userRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Addsearch_turbine_userRow(search_turbine_userRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public search_turbine_userRow Addsearch_turbine_userRow(string user_id, string login_name, string password_value) {
-                search_turbine_userRow rowsearch_turbine_userRow = ((search_turbine_userRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        user_id,
-                        login_name,
-                        password_value};
-                rowsearch_turbine_userRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowsearch_turbine_userRow);
-                return rowsearch_turbine_userRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                search_turbine_userDataTable cln = ((search_turbine_userDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new search_turbine_userDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnuser_id = base.Columns["user_id"];
-                this.columnlogin_name = base.Columns["login_name"];
-                this.columnpassword_value = base.Columns["password_value"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnuser_id = new global::System.Data.DataColumn("user_id", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnuser_id);
-                this.columnlogin_name = new global::System.Data.DataColumn("login_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnlogin_name);
-                this.columnpassword_value = new global::System.Data.DataColumn("password_value", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpassword_value);
-                this.columnuser_id.DefaultValue = ((string)(""));
-                this.columnlogin_name.DefaultValue = ((string)(""));
-                this.columnpassword_value.DefaultValue = ((string)(""));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public search_turbine_userRow Newsearch_turbine_userRow() {
-                return ((search_turbine_userRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new search_turbine_userRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(search_turbine_userRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.search_turbine_userRowChanged != null)) {
-                    this.search_turbine_userRowChanged(this, new search_turbine_userRowChangeEvent(((search_turbine_userRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.search_turbine_userRowChanging != null)) {
-                    this.search_turbine_userRowChanging(this, new search_turbine_userRowChangeEvent(((search_turbine_userRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.search_turbine_userRowDeleted != null)) {
-                    this.search_turbine_userRowDeleted(this, new search_turbine_userRowChangeEvent(((search_turbine_userRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.search_turbine_userRowDeleting != null)) {
-                    this.search_turbine_userRowDeleting(this, new search_turbine_userRowChangeEvent(((search_turbine_userRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Removesearch_turbine_userRow(search_turbine_userRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                TurbineUserDataSet ds = new TurbineUserDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "search_turbine_userDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class search_turbine_groupDataTable : global::System.Data.TypedTableBase<search_turbine_groupRow> {
+        public partial class search_turbine_groupDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
             
             private global::System.Data.DataColumn columngroup_id;
             
@@ -1308,6 +1318,11 @@ namespace AipoReminder.DataSet {
                 rowsearch_turbine_groupRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsearch_turbine_groupRow);
                 return rowsearch_turbine_groupRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public virtual global::System.Collections.IEnumerator GetEnumerator() {
+                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1457,7 +1472,7 @@ namespace AipoReminder.DataSet {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class turbine_group_userDataTable : global::System.Data.TypedTableBase<turbine_group_userRow> {
+        public partial class turbine_group_userDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
             
             private global::System.Data.DataColumn columnuser_id;
             
@@ -1560,6 +1575,11 @@ namespace AipoReminder.DataSet {
             public turbine_group_userRow FindByuser_id(string user_id) {
                 return ((turbine_group_userRow)(this.Rows.Find(new object[] {
                             user_id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public virtual global::System.Collections.IEnumerator GetEnumerator() {
+                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1714,6 +1734,96 @@ namespace AipoReminder.DataSet {
                 }
                 xs.Add(dsSchema);
                 return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class search_turbine_userRow : global::System.Data.DataRow {
+            
+            private search_turbine_userDataTable tablesearch_turbine_user;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal search_turbine_userRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablesearch_turbine_user = ((search_turbine_userDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string user_id {
+                get {
+                    if (this.Isuser_idNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tablesearch_turbine_user.user_idColumn]));
+                    }
+                }
+                set {
+                    this[this.tablesearch_turbine_user.user_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string login_name {
+                get {
+                    if (this.Islogin_nameNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tablesearch_turbine_user.login_nameColumn]));
+                    }
+                }
+                set {
+                    this[this.tablesearch_turbine_user.login_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string password_value {
+                get {
+                    if (this.Ispassword_valueNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tablesearch_turbine_user.password_valueColumn]));
+                    }
+                }
+                set {
+                    this[this.tablesearch_turbine_user.password_valueColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isuser_idNull() {
+                return this.IsNull(this.tablesearch_turbine_user.user_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setuser_idNull() {
+                this[this.tablesearch_turbine_user.user_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Islogin_nameNull() {
+                return this.IsNull(this.tablesearch_turbine_user.login_nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setlogin_nameNull() {
+                this[this.tablesearch_turbine_user.login_nameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Ispassword_valueNull() {
+                return this.IsNull(this.tablesearch_turbine_user.password_valueColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setpassword_valueNull() {
+                this[this.tablesearch_turbine_user.password_valueColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2236,96 +2346,6 @@ namespace AipoReminder.DataSet {
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class search_turbine_userRow : global::System.Data.DataRow {
-            
-            private search_turbine_userDataTable tablesearch_turbine_user;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal search_turbine_userRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tablesearch_turbine_user = ((search_turbine_userDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string user_id {
-                get {
-                    if (this.Isuser_idNull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tablesearch_turbine_user.user_idColumn]));
-                    }
-                }
-                set {
-                    this[this.tablesearch_turbine_user.user_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string login_name {
-                get {
-                    if (this.Islogin_nameNull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tablesearch_turbine_user.login_nameColumn]));
-                    }
-                }
-                set {
-                    this[this.tablesearch_turbine_user.login_nameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string password_value {
-                get {
-                    if (this.Ispassword_valueNull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tablesearch_turbine_user.password_valueColumn]));
-                    }
-                }
-                set {
-                    this[this.tablesearch_turbine_user.password_valueColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Isuser_idNull() {
-                return this.IsNull(this.tablesearch_turbine_user.user_idColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setuser_idNull() {
-                this[this.tablesearch_turbine_user.user_idColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Islogin_nameNull() {
-                return this.IsNull(this.tablesearch_turbine_user.login_nameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setlogin_nameNull() {
-                this[this.tablesearch_turbine_user.login_nameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Ispassword_valueNull() {
-                return this.IsNull(this.tablesearch_turbine_user.password_valueColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setpassword_valueNull() {
-                this[this.tablesearch_turbine_user.password_valueColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public partial class search_turbine_groupRow : global::System.Data.DataRow {
             
             private search_turbine_groupDataTable tablesearch_turbine_group;
@@ -2436,20 +2456,20 @@ namespace AipoReminder.DataSet {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class turbine_userRowChangeEvent : global::System.EventArgs {
+        public class search_turbine_userRowChangeEvent : global::System.EventArgs {
             
-            private turbine_userRow eventRow;
+            private search_turbine_userRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public turbine_userRowChangeEvent(turbine_userRow row, global::System.Data.DataRowAction action) {
+            public search_turbine_userRowChangeEvent(search_turbine_userRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public turbine_userRow Row {
+            public search_turbine_userRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -2467,20 +2487,20 @@ namespace AipoReminder.DataSet {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class search_turbine_userRowChangeEvent : global::System.EventArgs {
+        public class turbine_userRowChangeEvent : global::System.EventArgs {
             
-            private search_turbine_userRow eventRow;
+            private turbine_userRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public search_turbine_userRowChangeEvent(search_turbine_userRow row, global::System.Data.DataRowAction action) {
+            public turbine_userRowChangeEvent(turbine_userRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public search_turbine_userRow Row {
+            public turbine_userRow Row {
                 get {
                     return this.eventRow;
                 }
