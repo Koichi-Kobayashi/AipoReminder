@@ -298,5 +298,17 @@ namespace AipoReminder.Properties {
                 this["checkInformation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ckeckExtTimeCard {
+            get {
+                return ((bool)(this["ckeckExtTimeCard"]));
+            }
+            set {
+                this["ckeckExtTimeCard"] = value;
+            }
+        }
     }
 }

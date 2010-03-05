@@ -128,6 +128,11 @@ namespace AipoReminder.Utility
         /// </summary>
         public static bool CheckInformation { get; set; }
 
+        /// <summary>
+        /// タイムカードと連携するかどうか
+        /// </summary>
+        public static bool CheckExtTimeCard { get; set; }
+
         static SettingManager()
         {
             UserId = Properties.Settings.Default.userId;
@@ -152,6 +157,7 @@ namespace AipoReminder.Utility
             CheckMemo = Properties.Settings.Default.checkMemo;
             CheckOtherSchedule = Properties.Settings.Default.checkOtherSchedule;
             CheckInformation = Properties.Settings.Default.checkInformation;
+            CheckExtTimeCard = Properties.Settings.Default.ckeckExtTimeCard;
 
             // カンマ区切りのユーザIDの中に数字ではない文字が含まれていた場合、ユーザIDを取得しない
             bool isNotDigit = false;
@@ -271,6 +277,8 @@ namespace AipoReminder.Utility
             Properties.Settings.Default.checkGroupUserId = SettingManager.GroupUserId;
             // お知らせの表示形式(吹き出しかウィンドウか)
             Properties.Settings.Default.checkInformation = SettingManager.CheckInformation;
+            // タイムカードと連携
+            Properties.Settings.Default.ckeckExtTimeCard = SettingManager.CheckExtTimeCard;
 
             Properties.Settings.Default.Save();
         }

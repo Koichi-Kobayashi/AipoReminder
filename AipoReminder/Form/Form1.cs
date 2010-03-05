@@ -205,6 +205,13 @@ namespace AipoReminder
                 checkBoxMemo.Checked = SettingManager.CheckMemo;                        // 伝言メモの新着メモチェック
                 checkBoxOtherSchedule.Checked = SettingManager.CheckOtherSchedule;      // 他のユーザのスケジュールをチェックするかどうか
                 checkBoxInformation.Checked = SettingManager.CheckInformation;          // お知らせを吹き出しからウィンドウタイプに変更するかどうか
+                checkBoxExtTimeCard.Checked = SettingManager.CheckExtTimeCard;          // タイムカードと連携するかどうか
+
+                // タイムカード連携はAipoのバージョンが5以上のみ
+                if (!"5".Equals(comboBoxAipoVersion.SelectedItem.ToString()))
+                {
+                    checkBoxExtTimeCard.Enabled = false;
+                }
 
                 return true;
             }
@@ -266,6 +273,135 @@ namespace AipoReminder
         }
 
         /// <summary>
+        /// タイムカード連携(起動時)
+        /// </summary>
+        /// <returns></returns>
+        private bool LoginTimeCard()
+        {
+            try
+            {
+                ExtTimeCardDataSet data = new ExtTimeCardDataSet();
+                ExtTimeCardModel m = new ExtTimeCardModel();
+
+                DateTime dt = DateTime.Now;
+                DateTime dtUpdateDate = DateTime.Now;
+                // -----------------------
+                // 日付の変わる時刻を取得
+                // -----------------------
+                ExtTimeCardDataSet.search_eip_t_ext_timecard_systemRow systemRow = data.search_eip_t_ext_timecard_system.Newsearch_eip_t_ext_timecard_systemRow();
+                systemRow.user_id = SettingManager.UserId;
+                data.search_eip_t_ext_timecard_system.Rows.Add(systemRow);
+                m.Execute(m.GetChangeHour, data);
+                string hour = data.eip_t_ext_timecard_system[0].change_hour;
+                if (!String.IsNullOrEmpty(hour))
+                {
+                    if (dt.Hour <= int.Parse(hour))
+                    {
+                        dt = dt.AddDays(-1);
+                    }
+                }
+
+                // ------------------------------------------------------------
+                // 今日の日付のタイムカードのデータが存在するかチェックする
+                // ------------------------------------------------------------
+                ExtTimeCardDataSet.search_eip_t_ext_timecardRow paramRow = data.search_eip_t_ext_timecard.Newsearch_eip_t_ext_timecardRow();
+                paramRow.user_id = SettingManager.UserId;
+                paramRow.punch_date = dt.ToString("yyyy-MM-dd");
+                data.search_eip_t_ext_timecard.Rows.Add(paramRow);
+                m.Execute(m.GetTimeCardInfo, data);
+                if (data.eip_t_ext_timecard.Count == 0)
+                {
+                    ExtTimeCardDataSet.update_eip_t_ext_timecardRow updateRow = data.update_eip_t_ext_timecard.Newupdate_eip_t_ext_timecardRow();
+                    updateRow.user_id = SettingManager.UserId;
+                    updateRow.punch_date = dt.ToString("yyyy-MM-dd");
+                    updateRow.type = "P";
+                    updateRow.clock_in_time = dt.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                    updateRow.create_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                    updateRow.update_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                    data.update_eip_t_ext_timecard.Rows.Add(updateRow);
+                    m.Execute(m.InsertTimeCard, data);
+                }
+            }
+            catch (DBException ex)
+            {
+                Debug.Print(ex.toString());
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// タイムカード連携(終了時)
+        /// </summary>
+        /// <returns></returns>
+        private bool LogoutTimeCard()
+        {
+            try
+            {
+                ExtTimeCardDataSet data = new ExtTimeCardDataSet();
+                ExtTimeCardModel m = new ExtTimeCardModel();
+
+                DateTime dt = DateTime.Now;
+                DateTime dtUpdateDate = DateTime.Now;
+
+                // -----------------------
+                // 日付の変わる時刻を取得
+                // -----------------------
+                ExtTimeCardDataSet.search_eip_t_ext_timecard_systemRow systemRow = data.search_eip_t_ext_timecard_system.Newsearch_eip_t_ext_timecard_systemRow();
+                systemRow.user_id = SettingManager.UserId;
+                data.search_eip_t_ext_timecard_system.Rows.Add(systemRow);
+                m.Execute(m.GetChangeHour, data);
+                string hour = data.eip_t_ext_timecard_system[0].change_hour;
+                if (!String.IsNullOrEmpty(hour))
+                {
+                    if (dt.Hour <= int.Parse(hour))
+                    {
+                        dt = dt.AddDays(-1);
+                    }
+                }
+
+                // ------------------------------------------------------------
+                // 今日の日付のタイムカードのデータが存在するかチェックする
+                // ------------------------------------------------------------
+                ExtTimeCardDataSet.search_eip_t_ext_timecardRow paramRow = data.search_eip_t_ext_timecard.Newsearch_eip_t_ext_timecardRow();
+                paramRow.user_id = SettingManager.UserId;
+                paramRow.punch_date = dt.ToString("yyyy-MM-dd");
+                data.search_eip_t_ext_timecard.Rows.Add(paramRow);
+                m.Execute(m.GetTimeCardInfo, data);
+                if (data.eip_t_ext_timecard.Count == 0)
+                {
+                    ExtTimeCardDataSet.update_eip_t_ext_timecardRow updateRow = data.update_eip_t_ext_timecard.Newupdate_eip_t_ext_timecardRow();
+                    updateRow.user_id = SettingManager.UserId;
+                    updateRow.punch_date = dt.ToString("yyyy-MM-dd");
+                    updateRow.type = "P";
+                    updateRow.clock_out_time = dt.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                    updateRow.create_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                    updateRow.update_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                    data.update_eip_t_ext_timecard.Rows.Add(updateRow);
+                    m.Execute(m.InsertTimeCard, data);
+                }
+                else if (String.IsNullOrEmpty(data.eip_t_ext_timecard[0].clock_out_time))
+                {
+                    ExtTimeCardDataSet.update_eip_t_ext_timecardRow updateRow = data.update_eip_t_ext_timecard.Newupdate_eip_t_ext_timecardRow();
+                    updateRow.user_id = SettingManager.UserId;
+                    updateRow.clock_out_time = dt.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                    updateRow.update_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                    updateRow.timecard_id = data.eip_t_ext_timecard[0].timecard_id;
+                    data.update_eip_t_ext_timecard.Rows.Add(updateRow);
+                    m.Execute(m.UpdateTimeCard, data);
+                }
+            }
+            catch (DBException ex)
+            {
+                Debug.Print(ex.toString());
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// ログイン試行
         /// </summary>
         private void timerLogin_Tick(object sender, EventArgs e)
@@ -292,6 +428,12 @@ namespace AipoReminder
             
             if (this.Login())
             {
+                // タイムカード連携
+                if (checkBoxExtTimeCard.Enabled && SettingManager.CheckExtTimeCard)
+                {
+                    this.LoginTimeCard();
+                }
+
                 // 新着情報をチェック
                 this.WhatsnewProcess(true, true);
                 this.timerLogin.Stop();
@@ -506,6 +648,7 @@ namespace AipoReminder
             SettingManager.CheckMemo = checkBoxMemo.Checked;                        // 伝言メモの新着メモチェック
             SettingManager.CheckOtherSchedule = checkBoxOtherSchedule.Checked;      // 他のユーザのスケジュールのチェックするかどうか
             SettingManager.CheckInformation = checkBoxInformation.Checked;          // お知らせを吹き出しからウィンドウタイプに変更するかどうか
+            SettingManager.CheckExtTimeCard = checkBoxExtTimeCard.Checked;          // タイムカードと連携するかどうか
             if (isSetGroupUserId)
             {
                 SettingManager.GroupUserId = groupUserId;                           // スケジュールをチェックするユーザ一覧(カンマ区切り)
@@ -555,53 +698,23 @@ namespace AipoReminder
             f.Dispose();
         }
 
-#region old
-
-        //private void button3_Click(object sender, EventArgs e)
-        //{
-        //    //Clock(null, null);
-
-        //    // 作成先
-        //    string shortcutPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Aipo4 リマインダ.lnk" );
-
-        //    ShellLinkUtility shortcut = new ShellLinkUtility();
-
-        //    //shortcut.Description = "Aipo4 リマインダのショートカットです。";
-        //    shortcut.TargetPath = Assembly.GetEntryAssembly().Location;
-        //    shortcut.DisplayMode = ShellLinkUtility.ShellLinkDisplayMode.Minimized;
-        //    shortcut.WorkingDirectory = Environment.CurrentDirectory;
-
-        //    shortcut.Save(shortcutPath);
-        //    shortcut.Dispose();
-        //    shortcut = null;
-        //}
-
-        //private void buttonChangeSetting_Click(object sender, EventArgs e)
-        //{
-
-        //    if (comboBoxUserName.SelectedIndex > 0)
-        //    {
-        //        ComboBoxItem item = (ComboBoxItem)comboBoxUserName.SelectedItem;
-        //        string password = Security.EncryptPassword(textBoxPassword.Text);
-
-        //        if (item.Password.Equals(password))
-        //        {
-        //            // ComboBoxで選択されたユーザのパスワードと入力されたパスワードが一致
-        //            SettingManager.UserId = item.Id;
-        //            SettingManager.UserPassword = item.Password;
-
-        //            MessageBox.Show(MessageConstants.INFO_SETTING_OK, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        }
-        //        else
-        //        {
-        //            // パスワードが不一致
-        //            MessageBox.Show(MessageConstants.ERR_PASSWORD, MessageConstants.MSG_CAPTION_001, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        }
-        //    }
-
-        //}
-
-#endregion
+        /// <summary>
+        /// Aipoのバージョンを変更したときに、タイムカード連携のチェックボックスの有効/無効を変更する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxAipoVersion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // タイムカード連携はAipoのバージョンが5以上のみ
+            if ("5".Equals(comboBoxAipoVersion.SelectedItem.ToString()))
+            {
+                checkBoxExtTimeCard.Enabled = true;
+            }
+            else
+            {
+                checkBoxExtTimeCard.Enabled = false;
+            }
+        }
 
 #endregion
 
@@ -654,6 +767,11 @@ namespace AipoReminder
         /// <param name="e"></param>
         private void 終了ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // タイムカード連携
+            if (checkBoxExtTimeCard.Enabled && SettingManager.CheckExtTimeCard)
+            {
+                this.LogoutTimeCard();
+            }
             // タスクトレイからアイコンを取り除く
             this.notifyIcon1.Visible = false;
             // アプリケーション終了

@@ -16,7 +16,7 @@ namespace AipoReminder.DAO
             this.dbHelper = dbHelper;
         }
 
-        public void GetTurbineUserInfo(System.Data.DataSet data)
+        public int GetTurbineUserInfo(System.Data.DataSet data)
         {
             System.Text.StringBuilder sqlbldr = new System.Text.StringBuilder();
 
@@ -73,11 +73,11 @@ namespace AipoReminder.DAO
 
             sqlbldr.AppendLine("order by user_id");
 
-            this.dbHelper.Select(((TurbineUserDataSet)data).turbine_user, sqlbldr.ToString(), paramList);
+            return this.dbHelper.Select(((TurbineUserDataSet)data).turbine_user, sqlbldr.ToString(), paramList);
 
         }
 
-        public void GetTurbineGroupUserInfo(System.Data.DataSet data)
+        public int GetTurbineGroupUserInfo(System.Data.DataSet data)
         {
             System.Text.StringBuilder sqlbldr = new System.Text.StringBuilder();
 
@@ -117,7 +117,7 @@ namespace AipoReminder.DAO
 
             sqlbldr.AppendLine("order by t3.user_id");
 
-            this.dbHelper.Select(((TurbineUserDataSet)data).turbine_group_user, sqlbldr.ToString(), paramList);
+            return this.dbHelper.Select(((TurbineUserDataSet)data).turbine_group_user, sqlbldr.ToString(), paramList);
 
         }
 

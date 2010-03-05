@@ -1,6 +1,6 @@
 ===========================================================================
-【 ソフト名 】　Aipo支援ツール「Aipoリマインダー｣ Ver 1.0.8.1
-【 登 録 名 】　AipoReminder1081.zip
+【 ソフト名 】　Aipo支援ツール「Aipoリマインダー｣ Ver 1.0.9.0
+【 登 録 名 】　AipoReminder1090.zip
 【 圧縮形式 】　zip
 【 作 成 者 】　Copyright (C) 2009-2010 k.kobayashi
 【 HomePage 】　なし
@@ -8,7 +8,7 @@
 【 動作環境 】　日本語版 Windows XP SP3 32bit/ 日本語版 Vista SP2 64bit
                 日本語版 Windows 7 64bit
                 .NET Framework 2.0以上
-【 掲載月日 】　2010/02/22
+【 掲載月日 】　2010/03/06
 【 種    別 】　フリーソフトウェア
 ===========================================================================
 
@@ -56,8 +56,8 @@
 ---------------------------------------------------------------------------
 --  インストール方法  -----------------------------------------------------
 ---------------------------------------------------------------------------
-　AipoReminder1081.zipを任意のディレクトリに解凍してください。
-　解凍後のフォルダ名をAipoReminder1081からAipoReminderに変更しておくと後々のアップデート時にスムーズにアップデートが出来ます。
+　AipoReminder1090.zipを任意のディレクトリに解凍してください。
+　解凍後のフォルダ名をAipoReminder1090からAipoReminderに変更しておくと後々のアップデート時にスムーズにアップデートが出来ます。
 
 ---------------------------------------------------------------------------
 --  アップデート方法  -----------------------------------------------------
@@ -83,6 +83,7 @@
 ---------------------------------------------------------------------------
 　１．動作環境として、.NET Framework2.0以上が必要になります。
 　２．Aipo4.0.4.0以上または5.0.0.0以上が同じネットワーク上にインストールされている必要があります。
+　　　一部の機能は5.0.0.0以上で使用可能です。
 
 　以下、Aipoの管理者向けの情報です。
 　次の情報を元にPostgreSQLの設定を変更することで、本ソフトウェアが正常に動作するようになりますが、セキュリティレベルが下がります。
@@ -131,6 +132,12 @@
       (aipo_reminderの名前やパスワード(reminder)については、変更して頂いて構いませんが、
 　　　その場合は、Aipoリマインダーの「DB設定」のユーザIDやパスワードも合わせて修正して下さい。)
 
+      以下のコマンドを一気に実行するバッチを用意しています。
+　　　postgres_setting.batを実行するとコマンドを入力する手間が省けます。
+　　　【使い方】
+　　　バッチファイルをテキストエディタで開き、7行目のpsql実行ファイルのパスを環境に合わせて設定し、Aipoがインストールされている環境にて実行して下さい。
+
+　　　一つ一つ実行する場合は以下の手順で行って下さい。
       Windowsのコマンドプロンプトから実行する場合は、E:\aipo\dpl003\postgresql\bin に移動したあと、以下のコマンドを実行して下さい。
 
       psql -d org001 -U aipo_postgres
@@ -153,6 +160,10 @@
       GRANT SELECT ON eip_t_msgboard_category TO aipo_reminder;
       GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder;
       GRANT SELECT ON eip_t_note TO aipo_reminder;
+      GRANT SELECT, INSERT, UPDATE ON eip_t_ext_timecard TO aipo_reminder;
+      GRANT SELECT ON eip_t_ext_timecard_system TO aipo_reminder;
+      GRANT SELECT ON eip_t_ext_timecard_system_map TO aipo_reminder;
+      GRANT UPDATE ON eip_t_ext_timecard_timecard_id_seq TO aipo_reminder;
 
       \q で切断します。
 
@@ -210,6 +221,10 @@
       GRANT SELECT ON eip_t_msgboard_category TO aipo_reminder;
       GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder;
       GRANT SELECT ON eip_t_note TO aipo_reminder;
+      GRANT SELECT, INSERT, UPDATE ON eip_t_ext_timecard TO aipo_reminder;
+      GRANT SELECT ON eip_t_ext_timecard_system TO aipo_reminder;
+      GRANT SELECT ON eip_t_ext_timecard_system_map TO aipo_reminder;
+      GRANT UPDATE ON eip_t_ext_timecard_timecard_id_seq TO aipo_reminder;
 
       \q で切断します。
 
@@ -267,6 +282,20 @@
 ---------------------------------------------------------------------------
 --  改版履歴  -------------------------------------------------------------
 ---------------------------------------------------------------------------
+■ Ver 1.0.9.0 (2010/03/06)
+　【機能追加】
+　・リマインダーとタイムカードの連携機能を追加した(Aipoのバージョン5以降で使用可)
+　　1.リマインダー起動時に、その日のタイムカード「出勤」に登録がなければリマインダー起動時刻を自動登録
+　　2.リマインダー終了時に、その日のタイムカード「退勤」に登録がなければリマインダー終了時刻を自動登録
+
+　　このバージョン以降で、この機能を使用する場合は、以下のコマンドを実行して、aipo_reminderに対して権限を付与しなければエラーが発生する(エラーログが作られる)。
+　　(前述の「制限 - ４．PostgreSQLの設定変更について」を参照)
+
+      GRANT SELECT, INSERT, UPDATE ON eip_t_ext_timecard TO aipo_reminder;
+      GRANT SELECT ON eip_t_ext_timecard_system TO aipo_reminder;
+      GRANT SELECT ON eip_t_ext_timecard_system_map TO aipo_reminder;
+      GRANT UPDATE ON eip_t_ext_timecard_timecard_id_seq TO aipo_reminder;
+
 ■ Ver 1.0.8.1 (2010/02/22)
 　【変更】
 　・ソースを見直し、.NET Frameworkのバージョンを3.5から2.0に変更。

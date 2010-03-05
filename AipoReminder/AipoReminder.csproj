@@ -89,9 +89,15 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DAO\ScheduleDAO.cs" />
+    <Compile Include="DAO\ExtTimeCardDAO.cs" />
     <Compile Include="DAO\TurbineGroupDAO.cs" />
     <Compile Include="DAO\TurbineUserDAO.cs" />
     <Compile Include="DAO\WhatsnewDAO.cs" />
+    <Compile Include="DataSet\ExtTimeCardDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExtTimeCardDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSet\ScheduleDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -130,6 +136,7 @@
     <Compile Include="Form\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logic\ExtTimeCardLogic.cs" />
     <Compile Include="Logic\ScheduleLogic.cs" />
     <Compile Include="Logic\TurbineGroupLogic.cs" />
     <Compile Include="Logic\TurbineUserLogic.cs" />
@@ -137,6 +144,7 @@
     <Compile Include="Manager\ScheduleManager.cs" />
     <Compile Include="Manager\ThreadingManager.cs" />
     <Compile Include="Model\DbConnectionModel.cs" />
+    <Compile Include="Model\ExtTimeCardModel.cs" />
     <Compile Include="Model\GroupModel.cs" />
     <Compile Include="Model\ScheduleModel.cs" />
     <Compile Include="Model\UserModel.cs" />
@@ -224,6 +232,17 @@
     <Compile Include="ValueObject\UserNameObject.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DataSet\ExtTimeCardDataSet.xsc">
+      <DependentUpon>ExtTimeCardDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet\ExtTimeCardDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ExtTimeCardDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet\ExtTimeCardDataSet.xss">
+      <DependentUpon>ExtTimeCardDataSet.xsd</DependentUpon>
+    </None>
     <None Include="DataSet\TurbineGroupDataSet.xsc">
       <DependentUpon>TurbineGroupDataSet.xsd</DependentUpon>
     </None>

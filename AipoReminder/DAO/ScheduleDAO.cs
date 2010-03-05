@@ -21,7 +21,7 @@ namespace AipoReminder.DAO
         /// 終日スケジュールの取得
         /// </summary>
         /// <param name="data"></param>
-        public void GetOneDayScheduleInfo(System.Data.DataSet data)
+        public int GetOneDayScheduleInfo(System.Data.DataSet data)
         {
             ScheduleDataSet.search_eip_t_scheduleRow param = ((ScheduleDataSet)data).search_eip_t_schedule[0];
 
@@ -54,14 +54,14 @@ namespace AipoReminder.DAO
                 paramList.Add(DBUtility.MakeParameter("user_id", param.user_id, NpgsqlDbType.Integer));
             }
 
-            this.dbHelper.Select(((ScheduleDataSet)data).eip_t_schedule, sqlbldr.ToString(), paramList);
+            return this.dbHelper.Select(((ScheduleDataSet)data).eip_t_schedule, sqlbldr.ToString(), paramList);
         }
 
         /// <summary>
         /// もうすぐ始まるスケジュールを取得
         /// </summary>
         /// <param name="data"></param>
-        public void GetScheduleInfo(System.Data.DataSet data)
+        public int GetScheduleInfo(System.Data.DataSet data)
         {
             ScheduleDataSet.search_eip_t_scheduleRow param = ((ScheduleDataSet)data).search_eip_t_schedule[0];
 
@@ -427,7 +427,7 @@ namespace AipoReminder.DAO
 
             sqlbldr.AppendLine("order by start_date, end_date, schedule_id");
 
-            this.dbHelper.Select(((ScheduleDataSet)data).eip_t_schedule, sqlbldr.ToString(), paramList);
+            return this.dbHelper.Select(((ScheduleDataSet)data).eip_t_schedule, sqlbldr.ToString(), paramList);
         }
 
     }

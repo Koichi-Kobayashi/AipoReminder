@@ -5,16 +5,16 @@ namespace AipoReminder.Model
 {
     class UserModel : DbConnectionModel
     {
-        public void GetTurbineUserInfo(System.Data.DataSet data)
+        public int GetTurbineUserInfo(System.Data.DataSet data)
         {
             TurbineUserLogic logic = new TurbineUserLogic(this.dbHelper);
-            logic.GetTurbineUserInfo(data);
+            return logic.GetTurbineUserInfo(data);
         }
 
-        public void GetTurbineGroupUserInfo(System.Data.DataSet data)
+        public int GetTurbineGroupUserInfo(System.Data.DataSet data)
         {
             TurbineUserLogic logic = new TurbineUserLogic(this.dbHelper);
-            logic.GetTurbineGroupUserInfo(data);
+            return logic.GetTurbineGroupUserInfo(data);
         }
     }
 }

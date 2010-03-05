@@ -5,16 +5,16 @@ namespace AipoReminder.Model
 {
     class ScheduleModel : DbConnectionModel
     {
-        public void GetOneDayScheduleInfo(System.Data.DataSet data)
+        public int GetOneDayScheduleInfo(System.Data.DataSet data)
         {
             ScheduleLogic logic = new ScheduleLogic(this.dbHelper);
-            logic.GetOneDayScheduleInfo(data);
+            return logic.GetOneDayScheduleInfo(data);
         }
 
-        public void GetScheduleInfo(System.Data.DataSet data)
+        public int GetScheduleInfo(System.Data.DataSet data)
         {
             ScheduleLogic logic = new ScheduleLogic(this.dbHelper);
-            logic.GetScheduleInfo(data);
+            return logic.GetScheduleInfo(data);
         }
     }
 }

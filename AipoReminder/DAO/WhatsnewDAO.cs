@@ -21,7 +21,7 @@ namespace AipoReminder.DAO
         /// [ ブログ ] 新着記事を取得
         /// </summary>
         /// <param name="data"></param>
-        public void GetWhatsnewBlogInfo(System.Data.DataSet data)
+        public int GetWhatsnewBlogInfo(System.Data.DataSet data)
         {
             System.Text.StringBuilder sqlbldr = new System.Text.StringBuilder();
 
@@ -59,14 +59,14 @@ namespace AipoReminder.DAO
                 paramList.Add(DBUtility.MakeParameter("user_id", param.user_id, NpgsqlDbType.Integer));
             }
 
-            this.dbHelper.Select(((WhatsnewDataSet)data).eip_t_whatsnew_blog, sqlbldr.ToString(), paramList);
+            return this.dbHelper.Select(((WhatsnewDataSet)data).eip_t_whatsnew_blog, sqlbldr.ToString(), paramList);
         }
 
         /// <summary>
         /// [ ブログ ] 新着コメントを取得
         /// </summary>
         /// <param name="data"></param>
-        public void GetWhatsnewBlogCommentInfo(System.Data.DataSet data)
+        public int GetWhatsnewBlogCommentInfo(System.Data.DataSet data)
         {
             System.Text.StringBuilder sqlbldr = new System.Text.StringBuilder();
 
@@ -97,14 +97,14 @@ namespace AipoReminder.DAO
                 paramList.Add(DBUtility.MakeParameter("user_id", param.user_id, NpgsqlDbType.Integer));
             }
 
-            this.dbHelper.Select(((WhatsnewDataSet)data).eip_t_whatsnew_blog_comment, sqlbldr.ToString(), paramList);
+            return this.dbHelper.Select(((WhatsnewDataSet)data).eip_t_whatsnew_blog_comment, sqlbldr.ToString(), paramList);
         }
 
         /// <summary>
         /// [ ワークフロー ] 新着依頼を取得
         /// </summary>
         /// <param name="data"></param>
-        public void GetWhatsnewWorkflowInfo(System.Data.DataSet data)
+        public int GetWhatsnewWorkflowInfo(System.Data.DataSet data)
         {
             System.Text.StringBuilder sqlbldr = new System.Text.StringBuilder();
 
@@ -181,14 +181,14 @@ namespace AipoReminder.DAO
                 paramList.Add(DBUtility.MakeParameter("user_id", param.user_id, NpgsqlDbType.Integer));
             }
 
-            this.dbHelper.Select(((WhatsnewDataSet)data).eip_t_whatsnew_workflow, sqlbldr.ToString(), paramList);
+            return this.dbHelper.Select(((WhatsnewDataSet)data).eip_t_whatsnew_workflow, sqlbldr.ToString(), paramList);
         }
 
         /// <summary>
         /// [ 掲示板 ]  新しい書き込みを取得
         /// </summary>
         /// <param name="data"></param>
-        public void GetWhatsnewMsgboardInfo(System.Data.DataSet data)
+        public int GetWhatsnewMsgboardInfo(System.Data.DataSet data)
         {
             System.Text.StringBuilder sqlbldr = new System.Text.StringBuilder();
 
@@ -286,14 +286,14 @@ namespace AipoReminder.DAO
                 paramList.Add(DBUtility.MakeParameter("user_id", param.user_id, NpgsqlDbType.Integer));
             }
 
-            this.dbHelper.Select(((WhatsnewDataSet)data).eip_t_whatsnew_msgboard, sqlbldr.ToString(), paramList);
+            return this.dbHelper.Select(((WhatsnewDataSet)data).eip_t_whatsnew_msgboard, sqlbldr.ToString(), paramList);
         }
 
         /// <summary>
         /// [ 伝言メモ ]  新着メモを取得
         /// </summary>
         /// <param name="data"></param>
-        public void GetWhatsnewMemoInfo(System.Data.DataSet data)
+        public int GetWhatsnewMemoInfo(System.Data.DataSet data)
         {
             System.Text.StringBuilder sqlbldr = new System.Text.StringBuilder();
 
@@ -323,14 +323,14 @@ namespace AipoReminder.DAO
                 paramList.Add(DBUtility.MakeParameter("user_id", param.user_id, NpgsqlDbType.Integer));
             }
 
-            this.dbHelper.Select(((WhatsnewDataSet)data).eip_t_whatsnew_memo, sqlbldr.ToString(), paramList);
+            return this.dbHelper.Select(((WhatsnewDataSet)data).eip_t_whatsnew_memo, sqlbldr.ToString(), paramList);
         }
 
         /// <summary>
         /// [ スケジュール ] 新着予定を取得
         /// </summary>
         /// <param name="data"></param>
-        public void GetWhatsnewScheduleInfo(System.Data.DataSet data)
+        public int GetWhatsnewScheduleInfo(System.Data.DataSet data)
         {
             System.Text.StringBuilder sqlbldr = new System.Text.StringBuilder();
 
@@ -365,7 +365,7 @@ namespace AipoReminder.DAO
                 paramList.Add(DBUtility.MakeParameter("user_id", param.user_id, NpgsqlDbType.Integer));
             }
 
-            this.dbHelper.Select(((WhatsnewDataSet)data).eip_t_whatsnew_schedule, sqlbldr.ToString(), paramList);
+            return this.dbHelper.Select(((WhatsnewDataSet)data).eip_t_whatsnew_schedule, sqlbldr.ToString(), paramList);
         }
 
     }

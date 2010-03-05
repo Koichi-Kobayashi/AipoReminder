@@ -28,7 +28,11 @@ set role_cmd=%role_cmd% GRANT SELECT ON eip_t_workflow_category TO aipo_reminder
 set role_cmd=%role_cmd% GRANT SELECT ON eip_t_msgboard_topic TO aipo_reminder; 
 set role_cmd=%role_cmd% GRANT SELECT ON eip_t_msgboard_category TO aipo_reminder; 
 set role_cmd=%role_cmd% GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder; 
-set role_cmd=%role_cmd% GRANT SELECT ON eip_t_note TO aipo_reminder; "
+set role_cmd=%role_cmd% GRANT SELECT ON eip_t_note TO aipo_reminder;
+set role_cmd=%role_cmd% GRANT SELECT, INSERT, UPDATE ON eip_t_ext_timecard TO aipo_reminder;
+set role_cmd=%role_cmd% GRANT SELECT ON eip_t_ext_timecard_system TO aipo_reminder;
+set role_cmd=%role_cmd% GRANT SELECT ON eip_t_ext_timecard_system_map TO aipo_reminder;
+set role_cmd=%role_cmd% GRANT SELECT ON eip_t_ext_timecard_timecard_id_seq TO aipo_reminder; "
 
 rem ƒ[ƒ‹ŒŸõ
 %psql% "SELECT * FROM pg_roles where rolname = 'aipo_reminder';" | findstr "aipo_reminder" > %result%

@@ -12,16 +12,16 @@ namespace AipoReminder.Logic
             this.dbHelper = dbHelper;
         }
 
-        public void GetTurbineUserInfo(System.Data.DataSet data)
+        public int GetTurbineUserInfo(System.Data.DataSet data)
         {
             TurbineUserDAO dao = new TurbineUserDAO(this.dbHelper);
-            dao.GetTurbineUserInfo(data);
+            return dao.GetTurbineUserInfo(data);
         }
 
-        public void GetTurbineGroupUserInfo(System.Data.DataSet data)
+        public int GetTurbineGroupUserInfo(System.Data.DataSet data)
         {
             TurbineUserDAO dao = new TurbineUserDAO(this.dbHelper);
-            dao.GetTurbineGroupUserInfo(data);
+            return dao.GetTurbineGroupUserInfo(data);
         }
     }
 }

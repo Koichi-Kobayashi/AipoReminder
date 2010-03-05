@@ -44,6 +44,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.checkBoxExtTimeCard = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.checkBoxInformation = new System.Windows.Forms.CheckBox();
             this.checkBoxOtherSchedule = new System.Windows.Forms.CheckBox();
@@ -150,6 +151,7 @@
             this.comboBoxAipoVersion.Name = "comboBoxAipoVersion";
             this.comboBoxAipoVersion.Size = new System.Drawing.Size(75, 20);
             this.comboBoxAipoVersion.TabIndex = 8;
+            this.comboBoxAipoVersion.SelectedIndexChanged += new System.EventHandler(this.comboBoxAipoVersion_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -250,6 +252,7 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.FloralWhite;
+            this.tabPage4.Controls.Add(this.checkBoxExtTimeCard);
             this.tabPage4.Controls.Add(this.button2);
             this.tabPage4.Controls.Add(this.checkBoxInformation);
             this.tabPage4.Controls.Add(this.checkBoxOtherSchedule);
@@ -267,9 +270,19 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "お知らせ設定";
             // 
+            // checkBoxExtTimeCard
+            // 
+            this.checkBoxExtTimeCard.AutoSize = true;
+            this.checkBoxExtTimeCard.Location = new System.Drawing.Point(7, 133);
+            this.checkBoxExtTimeCard.Name = "checkBoxExtTimeCard";
+            this.checkBoxExtTimeCard.Size = new System.Drawing.Size(130, 16);
+            this.checkBoxExtTimeCard.TabIndex = 11;
+            this.checkBoxExtTimeCard.Text = "タイムカードと連携する";
+            this.checkBoxExtTimeCard.UseVisualStyleBackColor = true;
+            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(184, 130);
+            this.button2.Location = new System.Drawing.Point(184, 107);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(71, 23);
             this.button2.TabIndex = 8;
@@ -280,7 +293,7 @@
             // checkBoxInformation
             // 
             this.checkBoxInformation.AutoSize = true;
-            this.checkBoxInformation.Location = new System.Drawing.Point(7, 134);
+            this.checkBoxInformation.Location = new System.Drawing.Point(7, 111);
             this.checkBoxInformation.Name = "checkBoxInformation";
             this.checkBoxInformation.Size = new System.Drawing.Size(170, 16);
             this.checkBoxInformation.TabIndex = 7;
@@ -319,18 +332,20 @@
             // 
             // checkBoxAutoLogin
             // 
-            this.checkBoxAutoLogin.Location = new System.Drawing.Point(7, 96);
+            this.checkBoxAutoLogin.AutoSize = true;
+            this.checkBoxAutoLogin.Location = new System.Drawing.Point(7, 89);
             this.checkBoxAutoLogin.Name = "checkBoxAutoLogin";
-            this.checkBoxAutoLogin.Size = new System.Drawing.Size(242, 32);
+            this.checkBoxAutoLogin.Size = new System.Drawing.Size(184, 16);
             this.checkBoxAutoLogin.TabIndex = 6;
             this.checkBoxAutoLogin.Text = "ブラウザ起動時に自動ログインする";
             this.checkBoxAutoLogin.UseVisualStyleBackColor = true;
             // 
             // checkBoxAutoRun
             // 
-            this.checkBoxAutoRun.Location = new System.Drawing.Point(7, 65);
+            this.checkBoxAutoRun.AutoSize = true;
+            this.checkBoxAutoRun.Location = new System.Drawing.Point(7, 67);
             this.checkBoxAutoRun.Name = "checkBoxAutoRun";
-            this.checkBoxAutoRun.Size = new System.Drawing.Size(242, 32);
+            this.checkBoxAutoRun.Size = new System.Drawing.Size(241, 16);
             this.checkBoxAutoRun.TabIndex = 5;
             this.checkBoxAutoRun.Text = "Windows起動時にAipoリマインダーを起動する";
             this.checkBoxAutoRun.UseVisualStyleBackColor = true;
@@ -693,7 +708,7 @@
             this.終了ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(178, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(178, 98);
             // 
             // toolStripMenuItem1
             // 
@@ -855,6 +870,7 @@
         private System.Windows.Forms.Button button2;
         private Allison.AlertWindow.AlertWindow alertWindow1;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.CheckBox checkBoxExtTimeCard;
     }
 }
 
