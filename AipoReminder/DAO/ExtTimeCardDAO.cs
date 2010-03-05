@@ -90,14 +90,30 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("      user_id");
             sqlbldr.AppendLine("    , punch_date");
             sqlbldr.AppendLine("    , type");
-            sqlbldr.AppendLine("    , clock_in_time");
+            if (!String.IsNullOrEmpty(param.clock_in_time))
+            {
+                sqlbldr.AppendLine("    , clock_in_time");
+            }
+            if (!String.IsNullOrEmpty(param.clock_out_time))
+            {
+                sqlbldr.AppendLine("    , clock_out_time");
+            }
             sqlbldr.AppendLine("    , create_date");
             sqlbldr.AppendLine("    , update_date");
             sqlbldr.AppendLine(") values (");
             sqlbldr.AppendLine("      :user_id");
             sqlbldr.AppendLine("    , :punch_date");
             sqlbldr.AppendLine("    , :type");
-            sqlbldr.AppendLine("    , :clock_in_time");
+            if (!String.IsNullOrEmpty(param.clock_in_time))
+            {
+                sqlbldr.AppendLine("    , :clock_in_time");
+                paramList.Add(DBUtility.MakeParameter("clock_in_time", param.clock_in_time, NpgsqlDbType.Timestamp));
+            }
+            if (!String.IsNullOrEmpty(param.clock_out_time))
+            {
+                sqlbldr.AppendLine("    , :clock_out_time");
+                paramList.Add(DBUtility.MakeParameter("clock_out_time", param.clock_out_time, NpgsqlDbType.Timestamp));
+            }
             sqlbldr.AppendLine("    , :create_date");
             sqlbldr.AppendLine("    , :update_date");
             sqlbldr.AppendLine(");");
@@ -105,7 +121,6 @@ namespace AipoReminder.DAO
             paramList.Add(DBUtility.MakeParameter("user_id", param.user_id, NpgsqlDbType.Integer));
             paramList.Add(DBUtility.MakeParameter("punch_date", param.punch_date, NpgsqlDbType.Date));
             paramList.Add(DBUtility.MakeParameter("type", param.type, NpgsqlDbType.Char));
-            paramList.Add(DBUtility.MakeParameter("clock_in_time", param.clock_in_time, NpgsqlDbType.Timestamp));
             paramList.Add(DBUtility.MakeParameter("create_date", param.create_date, NpgsqlDbType.Date));
             paramList.Add(DBUtility.MakeParameter("update_date", param.update_date, NpgsqlDbType.Timestamp));
 
