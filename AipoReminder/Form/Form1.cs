@@ -562,6 +562,12 @@ namespace AipoReminder
                     // ステータスバーにメッセージを表示
                     ((ToolStripLabelEx)this.statusStrip1.Items[0]).DisplayMessage(MessageConstants.INFO_ACCOUNT_SETTING_OK);
 
+                    // タイムカード連携
+                    if (checkBoxExtTimeCard.Enabled && SettingManager.CheckExtTimeCard)
+                    {
+                        this.LoginTimeCard();
+                    }
+
                     // 新着情報をチェック
                     this.WhatsnewProcess(true, false);
                 }
@@ -677,6 +683,12 @@ namespace AipoReminder
 
             if (isLogin)
             {
+                // タイムカード連携
+                if (checkBoxExtTimeCard.Enabled && SettingManager.CheckExtTimeCard)
+                {
+                    this.LoginTimeCard();
+                }
+
                 // 新着情報をチェック
                 this.WhatsnewProcess(true, false);
             }
