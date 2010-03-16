@@ -18,6 +18,12 @@ namespace AipoReminder.Logic
             return dao.GetChangeHour(data);
         }
 
+        public int GetChangeHourDefault(System.Data.DataSet data)
+        {
+            ExtTimeCardDAO dao = new ExtTimeCardDAO(this.dbHelper);
+            return dao.GetChangeHourDefault(data);
+        }
+
         public int GetTimeCardInfo(System.Data.DataSet data)
         {
             ExtTimeCardDAO dao = new ExtTimeCardDAO(this.dbHelper);

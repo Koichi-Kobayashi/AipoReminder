@@ -11,6 +11,12 @@ namespace AipoReminder.Model
             return logic.GetChangeHour(data);
         }
 
+        public int GetChangeHourDefault(System.Data.DataSet data)
+        {
+            ExtTimeCardLogic logic = new ExtTimeCardLogic(this.dbHelper);
+            return logic.GetChangeHourDefault(data);
+        }
+
         public int GetTimeCardInfo(System.Data.DataSet data)
         {
             ExtTimeCardLogic logic = new ExtTimeCardLogic(this.dbHelper);

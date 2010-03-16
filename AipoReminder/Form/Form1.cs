@@ -291,13 +291,28 @@ namespace AipoReminder
                 ExtTimeCardDataSet.search_eip_t_ext_timecard_systemRow systemRow = data.search_eip_t_ext_timecard_system.Newsearch_eip_t_ext_timecard_systemRow();
                 systemRow.user_id = SettingManager.UserId;
                 data.search_eip_t_ext_timecard_system.Rows.Add(systemRow);
-                m.Execute(m.GetChangeHour, data);
-                string hour = data.eip_t_ext_timecard_system[0].change_hour;
-                if (!String.IsNullOrEmpty(hour))
+                int result = m.Execute(m.GetChangeHour, data);
+                if (result > 0)
                 {
-                    if (dt.Hour <= int.Parse(hour))
+                    string hour = data.eip_t_ext_timecard_system[0].change_hour;
+                    if (!String.IsNullOrEmpty(hour))
                     {
-                        dt = dt.AddDays(-1);
+                        if (dt.Hour <= int.Parse(hour))
+                        {
+                            dt = dt.AddDays(-1);
+                        }
+                    }
+                }
+                else
+                {
+                    m.Execute(m.GetChangeHourDefault, data);
+                    string hour = data.eip_t_ext_timecard_system[0].change_hour;
+                    if (!String.IsNullOrEmpty(hour))
+                    {
+                        if (dt.Hour <= int.Parse(hour))
+                        {
+                            dt = dt.AddDays(-1);
+                        }
                     }
                 }
 
@@ -351,13 +366,28 @@ namespace AipoReminder
                 ExtTimeCardDataSet.search_eip_t_ext_timecard_systemRow systemRow = data.search_eip_t_ext_timecard_system.Newsearch_eip_t_ext_timecard_systemRow();
                 systemRow.user_id = SettingManager.UserId;
                 data.search_eip_t_ext_timecard_system.Rows.Add(systemRow);
-                m.Execute(m.GetChangeHour, data);
-                string hour = data.eip_t_ext_timecard_system[0].change_hour;
-                if (!String.IsNullOrEmpty(hour))
+                int result = m.Execute(m.GetChangeHour, data);
+                if (result > 0)
                 {
-                    if (dt.Hour <= int.Parse(hour))
+                    string hour = data.eip_t_ext_timecard_system[0].change_hour;
+                    if (!String.IsNullOrEmpty(hour))
                     {
-                        dt = dt.AddDays(-1);
+                        if (dt.Hour <= int.Parse(hour))
+                        {
+                            dt = dt.AddDays(-1);
+                        }
+                    }
+                }
+                else
+                {
+                    m.Execute(m.GetChangeHourDefault, data);
+                    string hour = data.eip_t_ext_timecard_system[0].change_hour;
+                    if (!String.IsNullOrEmpty(hour))
+                    {
+                        if (dt.Hour <= int.Parse(hour))
+                        {
+                            dt = dt.AddDays(-1);
+                        }
                     }
                 }
 

@@ -18,7 +18,7 @@ namespace AipoReminder.DAO
         }
 
         /// <summary>
-        /// タイムカードの日付変更時刻を取得
+        /// ユーザに紐付いているタイムカードの日付変更時刻を取得
         /// </summary>
         /// <param name="data"></param>
         public int GetChangeHour(System.Data.DataSet data)
@@ -31,6 +31,8 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("        on t1.system_id = t2.system_id");
             sqlbldr.AppendLine("where 1 = 1");
             sqlbldr.AppendLine("and t2.user_id = :user_id");
+            sqlbldr.AppendLine("order by t1.system_id desc");
+            sqlbldr.AppendLine("offset 0 limit 1");
 
             ExtTimeCardDataSet.search_eip_t_ext_timecard_systemRow param = ((ExtTimeCardDataSet)data).search_eip_t_ext_timecard_system[0];
 
@@ -44,7 +46,23 @@ namespace AipoReminder.DAO
         }
 
         /// <summary>
-        /// タイムカードの日付変更時刻を取得
+        /// 標準のタイムカードの日付変更時刻を取得
+        /// </summary>
+        /// <param name="data"></param>
+        public int GetChangeHourDefault(System.Data.DataSet data)
+        {
+            System.Text.StringBuilder sqlbldr = new System.Text.StringBuilder();
+
+            sqlbldr.AppendLine("select t1.change_hour ");
+            sqlbldr.AppendLine("from eip_t_ext_timecard_system t1");
+            sqlbldr.AppendLine("where 1 = 1");
+            sqlbldr.AppendLine("and t1.system_id = '1'");
+
+            return this.dbHelper.Select(((ExtTimeCardDataSet)data).eip_t_ext_timecard_system, sqlbldr.ToString(), null);
+        }
+
+        /// <summary>
+        /// タイムカード情報を取得
         /// </summary>
         /// <param name="data"></param>
         public int GetTimeCardInfo(System.Data.DataSet data)
