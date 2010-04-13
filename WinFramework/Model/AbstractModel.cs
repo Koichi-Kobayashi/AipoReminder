@@ -13,7 +13,7 @@ namespace WinFramework.Model
 {
     public class AbstractModel
     {
-        public delegate void DelegateMethod(DataSet data);
+        public delegate int DelegateMethod(DataSet data);
 
         protected DBHelper dbHelper;
 
@@ -42,13 +42,14 @@ namespace WinFramework.Model
             this.dbHelper = new DBHelper(server, port, userid, password, database, timeout, commandTimeout, connectionLifeTime);
         }
 
-        public void Execute(DelegateMethod method, DataSet data)
+        public int Execute(DelegateMethod method, DataSet data)
         {
+            int ret = -1;
             try
             {
                 this.dbHelper.Open();
                 this.dbHelper.BeginTransaction();
-                method.Invoke(data);
+                ret = method.Invoke(data);
                 this.dbHelper.Commit();
             }
 #if Npgsql
@@ -76,6 +77,7 @@ namespace WinFramework.Model
             {
                 this.dbHelper.Close();
             }
+            return ret;
         }
     }
 }

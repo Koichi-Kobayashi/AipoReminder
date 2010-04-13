@@ -383,7 +383,7 @@ namespace WinFramework.Utility
 
 #endregion
 
-#region SQL実行
+#region Select実行
 
         /// <summary>
         /// Select文発行
@@ -391,7 +391,7 @@ namespace WinFramework.Utility
         /// <param name="data"></param>
         /// <param name="commandText"></param>
         /// <param name="param"></param>
-        public void Select(DataTable data, string commandText, ArrayList paramList)
+        public int Select(DataTable data, string commandText, ArrayList paramList)
         {
 #if Npgsql
             NpgsqlCommand command;
@@ -425,18 +425,136 @@ namespace WinFramework.Utility
                 Debug.WriteLine("【SQL】");
                 Debug.WriteLine(ParamForLogString(command));
 #endif
-                dataAdapter.Fill(data);
+                return dataAdapter.Fill(data);
 
             }
 #if Npgsql
             catch (NpgsqlException e)
             {
                 LogUtility.WriteLogError("" , e);
+                return -1;
             }
 #endif
             catch (Exception e)
             {
                 LogUtility.WriteLogError("", e);
+                return -1;
+            }
+
+        }
+
+#endregion
+
+#region Insert実行
+
+        /// <summary>
+        /// Insert文発行
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="commandText"></param>
+        /// <param name="param"></param>
+        public int Insert(DataTable data, string commandText, ArrayList paramList)
+        {
+#if Npgsql
+            NpgsqlCommand command;
+#else
+            NpgsqlCommand command;
+#endif
+
+            try
+            {
+                command = this.connection.CreateCommand();
+                command.Transaction = this.transaction;
+                command.CommandText = commandText;
+
+                if (paramList != null)
+                {
+#if Npgsql
+                    foreach (NpgsqlParameter param in paramList)
+#else
+                    foreach (NpgsqlParameter param in paramList)
+#endif
+                    {
+                        command.Parameters.Add(param);
+                    }
+                }
+
+#if DEBUG
+                Debug.WriteLine("【SQL】");
+                Debug.WriteLine(ParamForLogString(command));
+#endif
+                return command.ExecuteNonQuery();
+
+            }
+#if Npgsql
+            catch (NpgsqlException e)
+            {
+                LogUtility.WriteLogError("", e);
+                return -1;
+            }
+#endif
+            catch (Exception e)
+            {
+                LogUtility.WriteLogError("", e);
+                return -1;
+            }
+
+        }
+
+#endregion
+
+#region Update実行
+
+        /// <summary>
+        /// Insert文発行
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="commandText"></param>
+        /// <param name="param"></param>
+        public int Update(DataTable data, string commandText, ArrayList paramList)
+        {
+#if Npgsql
+            NpgsqlCommand command;
+#else
+            NpgsqlCommand command;
+#endif
+
+            try
+            {
+                command = this.connection.CreateCommand();
+                command.Transaction = this.transaction;
+                command.CommandText = commandText;
+
+                if (paramList != null)
+                {
+#if Npgsql
+                    foreach (NpgsqlParameter param in paramList)
+#else
+                    foreach (NpgsqlParameter param in paramList)
+#endif
+                    {
+                        command.Parameters.Add(param);
+                    }
+                }
+
+#if DEBUG
+                Debug.WriteLine("【SQL】");
+                Debug.WriteLine(ParamForLogString(command));
+#endif
+                return command.ExecuteNonQuery();
+
+            }
+#if Npgsql
+            catch (NpgsqlException e)
+            {
+                LogUtility.WriteLogError("", e);
+                return -1;
+            }
+#endif
+            catch (Exception e)
+            {
+                LogUtility.WriteLogError("", e);
+                return -1;
             }
 
         }
@@ -446,39 +564,39 @@ namespace WinFramework.Utility
 #region SQLログ
 
 #if Npgsql
-        /// <summary>
-        /// SQLのバインド変数を値に変換する
-        /// </summary>
-        /// <param name="command">NpgsqlCommand</param>
-        /// <returns></returns>
-        private string ParamForLogString(NpgsqlCommand command)
+    /// <summary>
+    /// SQLのバインド変数を値に変換する
+    /// </summary>
+    /// <param name="command">NpgsqlCommand</param>
+    /// <returns></returns>
+    private string ParamForLogString(NpgsqlCommand command)
+    {
+        string str = command.CommandText;
+
+        foreach (DbParameter param in command.Parameters)
         {
-            string str = command.CommandText;
-
-            foreach (DbParameter param in command.Parameters)
-            {
-                str = str.Replace(param.ParameterName, param.Value.ToString());
-            }
-
-            return str;
+            str = str.Replace(param.ParameterName, param.Value.ToString());
         }
+
+        return str;
+    }
 #else
-        /// <summary>
-        /// SQLのバインド変数を値に変換する
-        /// </summary>
-        /// <param name="command">NpgsqlCommand</param>
-        /// <returns></returns>
-        private string ParamForLogString(NpgsqlCommand command)
+    /// <summary>
+    /// SQLのバインド変数を値に変換する
+    /// </summary>
+    /// <param name="command">NpgsqlCommand</param>
+    /// <returns></returns>
+    private string ParamForLogString(NpgsqlCommand command)
+    {
+        string str = command.CommandText;
+
+        foreach (DbParameter param in command.Parameters)
         {
-            string str = command.CommandText;
-
-            foreach (DbParameter param in command.Parameters)
-            {
-                str = str.Replace(param.ParameterName, param.Value.ToString());
-            }
-
-            return str;
+            str = str.Replace(param.ParameterName, param.Value.ToString());
         }
+
+        return str;
+    }
 #endif
 
 #endregion
