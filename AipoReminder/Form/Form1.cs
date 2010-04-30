@@ -16,6 +16,7 @@ using AipoReminder.Model;
 using AipoReminder.Utility;
 using AipoReminder.ValueObject;
 using Allison.AlertWindow;
+using Microsoft.Win32;
 using WinFramework.Exceptions;
 using WinFramework.Utility;
 
@@ -69,6 +70,11 @@ namespace AipoReminder
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
+            // イベントをイベントハンドラに関連付ける
+            // フォームコンストラクタなどの適当な位置に記述してもよい
+            SystemEvents.SessionEnding +=
+                new SessionEndingEventHandler(SystemEvents_SessionEnding);
+
             // タスクトレイアイコン用タイマーを無効にしておく（初めはアニメしない）
             this.timerTasktrayIcon.Enabled = false;
             // アニメ時は、1秒毎にアイコンを変更する
@@ -107,6 +113,33 @@ namespace AipoReminder
             {
                 // タスクトレイからアイコンを取り除く
                 this.notifyIcon1.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// 終了後の処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // イベントを開放する
+            // フォームDisposeメソッド内の基本クラスのDisposeメソッド呼び出しの前に
+            // 記述してもよい
+            SystemEvents.SessionEnding -=
+                new SessionEndingEventHandler(SystemEvents_SessionEnding);
+        }
+
+        /// <summary>
+        /// ログオフ、シャットダウンしようとしているとき
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SystemEvents_SessionEnding(object sender, SessionEndingEventArgs e)
+        {
+            if (e.Reason == SessionEndReasons.Logoff || e.Reason == SessionEndReasons.SystemShutdown)
+            {
+                this.shutdown();
             }
         }
 
@@ -808,6 +841,14 @@ namespace AipoReminder
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void 終了ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.shutdown();
+        }
+
+        /// <summary>
+        /// 終了処理
+        /// </summary>
+        private void shutdown()
         {
             // タイムカード連携
             if (checkBoxExtTimeCard.Enabled && SettingManager.CheckExtTimeCard)
