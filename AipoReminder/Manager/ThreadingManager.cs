@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using AipoReminder.Utility;
 using WinFramework.Utility;
+using System.Reflection;
 
 namespace AipoReminder.Manager
 {
@@ -27,8 +28,9 @@ namespace AipoReminder.Manager
             {
                 // 自動ログイン用のファイルを作成
                 string fullPath = Path.GetTempPath();
+                fullPath += @"AipoReminder\";
                 string fileName = Path.GetRandomFileName();
-                fullPath = fullPath + fileName;
+                fullPath += fileName;
                 string changeFileName = Path.ChangeExtension(fullPath, ".html");
 
                 // Shift-Jisでファイルを作成
@@ -43,12 +45,6 @@ namespace AipoReminder.Manager
 
                 // ブラウザで表示
                 this.OpenUrl("\"" + changeFileName + "\"");
-
-                // 一時停止
-                //Thread.Sleep(30000);
-
-                // 後始末
-                File.Delete(changeFileName);
             }
             else
             {

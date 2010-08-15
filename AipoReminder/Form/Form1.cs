@@ -89,6 +89,9 @@ namespace AipoReminder
             // ステータスバー
             this.statusStrip1.Items.Add(new ToolStripLabelEx());
 
+            // 一時ディレクトリの作成と一時ファイルの削除
+            this.initTempDir();
+
             // 設定を読み込む
             if (this.ReadUserData())
             {
@@ -113,6 +116,8 @@ namespace AipoReminder
             {
                 // タスクトレイからアイコンを取り除く
                 this.notifyIcon1.Visible = false;
+                // 一時ファイルの削除
+                this.terminateTempDir();
             }
         }
 
@@ -566,6 +571,32 @@ namespace AipoReminder
                 ComboBoxBrowserItem item = listBrowserItem[i];
                 item.Id = i + 1;
                 comboBoxBrowser.Items.Add(item);
+            }
+        }
+
+        private void initTempDir()
+        {
+            string tmpPath = Path.GetTempPath();
+            tmpPath += @"AipoReminder\";
+
+            if (!Directory.Exists(tmpPath))
+            {
+                Directory.CreateDirectory(tmpPath);
+            }
+        }
+
+        private void terminateTempDir()
+        {
+            string tmpPath = Path.GetTempPath();
+            tmpPath += @"AipoReminder\";
+
+            if (Directory.Exists(tmpPath))
+            {
+                string[] files = Directory.GetFiles(tmpPath);
+                foreach (string s in files)
+                {
+                    File.Delete(s);
+                }
             }
         }
 
