@@ -44,6 +44,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.comboBoxBrowser = new System.Windows.Forms.ComboBox();
             this.checkBoxExtTimeCard = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.checkBoxInformation = new System.Windows.Forms.CheckBox();
@@ -95,6 +96,7 @@
             this.timerLogin = new System.Windows.Forms.Timer(this.components);
             this.alertWindow1 = new Allison.AlertWindow.AlertWindow();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -252,6 +254,8 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.FloralWhite;
+            this.tabPage4.Controls.Add(this.label11);
+            this.tabPage4.Controls.Add(this.comboBoxBrowser);
             this.tabPage4.Controls.Add(this.checkBoxExtTimeCard);
             this.tabPage4.Controls.Add(this.button2);
             this.tabPage4.Controls.Add(this.checkBoxInformation);
@@ -270,10 +274,19 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "お知らせ設定";
             // 
+            // comboBoxBrowser
+            // 
+            this.comboBoxBrowser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxBrowser.FormattingEnabled = true;
+            this.comboBoxBrowser.Location = new System.Drawing.Point(122, 111);
+            this.comboBoxBrowser.Name = "comboBoxBrowser";
+            this.comboBoxBrowser.Size = new System.Drawing.Size(133, 20);
+            this.comboBoxBrowser.TabIndex = 12;
+            // 
             // checkBoxExtTimeCard
             // 
             this.checkBoxExtTimeCard.AutoSize = true;
-            this.checkBoxExtTimeCard.Location = new System.Drawing.Point(7, 133);
+            this.checkBoxExtTimeCard.Location = new System.Drawing.Point(7, 163);
             this.checkBoxExtTimeCard.Name = "checkBoxExtTimeCard";
             this.checkBoxExtTimeCard.Size = new System.Drawing.Size(130, 16);
             this.checkBoxExtTimeCard.TabIndex = 11;
@@ -282,7 +295,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(184, 107);
+            this.button2.Location = new System.Drawing.Point(184, 137);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(71, 23);
             this.button2.TabIndex = 8;
@@ -293,7 +306,7 @@
             // checkBoxInformation
             // 
             this.checkBoxInformation.AutoSize = true;
-            this.checkBoxInformation.Location = new System.Drawing.Point(7, 111);
+            this.checkBoxInformation.Location = new System.Drawing.Point(7, 141);
             this.checkBoxInformation.Name = "checkBoxInformation";
             this.checkBoxInformation.Size = new System.Drawing.Size(170, 16);
             this.checkBoxInformation.TabIndex = 7;
@@ -766,6 +779,15 @@
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(35, 114);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(71, 12);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "ブラウザ指定：";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -872,6 +894,8 @@
         private Allison.AlertWindow.AlertWindow alertWindow1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.CheckBox checkBoxExtTimeCard;
+        private System.Windows.Forms.ComboBox comboBoxBrowser;
+        private System.Windows.Forms.Label label11;
     }
 }
 

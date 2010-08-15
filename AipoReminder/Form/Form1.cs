@@ -202,6 +202,9 @@ namespace AipoReminder
                     }
                 }
 
+                // 指定ブラウザComboboxの初期設定
+                SetComboBoxBrowserItems();
+
                 if (String.IsNullOrEmpty(SettingManager.UserId) ||
                     String.IsNullOrEmpty(SettingManager.LoginName) ||
                     String.IsNullOrEmpty(SettingManager.UserPassword))
@@ -239,6 +242,13 @@ namespace AipoReminder
                 checkBoxOtherSchedule.Checked = SettingManager.CheckOtherSchedule;      // 他のユーザのスケジュールをチェックするかどうか
                 checkBoxInformation.Checked = SettingManager.CheckInformation;          // お知らせを吹き出しからウィンドウタイプに変更するかどうか
                 checkBoxExtTimeCard.Checked = SettingManager.CheckExtTimeCard;          // タイムカードと連携するかどうか
+                foreach (ComboBoxBrowserItem browserItem in comboBoxBrowser.Items)      // 指定ブラウザの設定
+                {
+                    if (SettingManager.BrowserName.Equals(browserItem.Name))
+                    {
+                        comboBoxBrowser.SelectedItem = browserItem;
+                    }
+                }
 
                 // タイムカード連携はAipoのバージョンが5以上のみ
                 if (!"5".Equals(comboBoxAipoVersion.SelectedItem.ToString()))
@@ -362,8 +372,10 @@ namespace AipoReminder
                     ExtTimeCardDataSet.update_eip_t_ext_timecardRow updateRow = data.update_eip_t_ext_timecard.Newupdate_eip_t_ext_timecardRow();
                     updateRow.user_id = SettingManager.UserId;
                     updateRow.punch_date = dt.ToString("yyyy-MM-dd");
+//                    updateRow.punch_date = dt;
                     updateRow.type = "P";
                     updateRow.clock_in_time = dt.ToString("yyyy-MM-dd HH:mm:ss.fff");
+//                    updateRow.clock_in_time = dt;
                     updateRow.create_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
                     updateRow.update_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
                     data.update_eip_t_ext_timecard.Rows.Add(updateRow);
@@ -437,8 +449,10 @@ namespace AipoReminder
                     ExtTimeCardDataSet.update_eip_t_ext_timecardRow updateRow = data.update_eip_t_ext_timecard.Newupdate_eip_t_ext_timecardRow();
                     updateRow.user_id = SettingManager.UserId;
                     updateRow.punch_date = dt.ToString("yyyy-MM-dd");
+//                    updateRow.punch_date = dt;
                     updateRow.type = "P";
                     updateRow.clock_out_time = dt.ToString("yyyy-MM-dd HH:mm:ss.fff");
+//                    updateRow.clock_out_time = dt;
                     updateRow.create_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
                     updateRow.update_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
                     data.update_eip_t_ext_timecard.Rows.Add(updateRow);
@@ -449,6 +463,7 @@ namespace AipoReminder
                     ExtTimeCardDataSet.update_eip_t_ext_timecardRow updateRow = data.update_eip_t_ext_timecard.Newupdate_eip_t_ext_timecardRow();
                     updateRow.user_id = SettingManager.UserId;
                     updateRow.clock_out_time = dt.ToString("yyyy-MM-dd HH:mm:ss.fff");
+//                    updateRow.clock_out_time = dt;
                     updateRow.update_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
                     updateRow.timecard_id = data.eip_t_ext_timecard[0].timecard_id;
                     data.update_eip_t_ext_timecard.Rows.Add(updateRow);
@@ -531,6 +546,26 @@ namespace AipoReminder
                 buttonDataReset.Enabled = true;
 
                 this.challengeLoginCount = 0;
+            }
+        }
+
+        /// <summary>
+        /// グループ一覧をComboBoxに設定
+        /// </summary>
+        private void SetComboBoxBrowserItems()
+        {
+            ComboBoxBrowserItem defaultItem = new ComboBoxBrowserItem(0, "デフォルト", "");
+            comboBoxBrowser.Items.Add(defaultItem);
+            comboBoxBrowser.SelectedIndex = 0;
+
+            AipoReminder.Utility.RegistryUtility regUtil = new AipoReminder.Utility.RegistryUtility();
+            List<ComboBoxBrowserItem> listBrowserItem = regUtil.getBrowserComboItem();
+
+            for (int i = 0; i < listBrowserItem.Count; i++)
+            {
+                ComboBoxBrowserItem item = listBrowserItem[i];
+                item.Id = i + 1;
+                comboBoxBrowser.Items.Add(item);
             }
         }
 
@@ -718,6 +753,9 @@ namespace AipoReminder
             SettingManager.CheckOtherSchedule = checkBoxOtherSchedule.Checked;      // 他のユーザのスケジュールのチェックするかどうか
             SettingManager.CheckInformation = checkBoxInformation.Checked;          // お知らせを吹き出しからウィンドウタイプに変更するかどうか
             SettingManager.CheckExtTimeCard = checkBoxExtTimeCard.Checked;          // タイムカードと連携するかどうか
+            ComboBoxBrowserItem bItem = (ComboBoxBrowserItem)comboBoxBrowser.SelectedItem;
+            SettingManager.BrowserName = bItem.Name;                                // 指定ブラウザ名
+
             if (isSetGroupUserId)
             {
                 SettingManager.GroupUserId = groupUserId;                           // スケジュールをチェックするユーザ一覧(カンマ区切り)
@@ -925,7 +963,8 @@ namespace AipoReminder
         private void ShowAipoTopPage()
         {
             ThreadingManager threadingManager = new ThreadingManager();
-
+            ComboBoxBrowserItem item = (ComboBoxBrowserItem)comboBoxBrowser.SelectedItem;
+            threadingManager.setBrowserPath(item.Path);
             Thread thread = new Thread(new ThreadStart(threadingManager.Run));
 
             thread.Start();

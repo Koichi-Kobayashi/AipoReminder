@@ -10,8 +10,15 @@ namespace AipoReminder.Manager
 {
     class ThreadingManager
     {
+        private string path = "";
+
         public ThreadingManager()
         {
+        }
+
+        public void setBrowserPath(string path)
+        {
+            this.path = path;
         }
 
         public void Run()
@@ -38,7 +45,7 @@ namespace AipoReminder.Manager
                 this.OpenUrl("\"" + changeFileName + "\"");
 
                 // 一時停止
-                Thread.Sleep(20000);
+                //Thread.Sleep(30000);
 
                 // 後始末
                 File.Delete(changeFileName);
@@ -70,10 +77,19 @@ namespace AipoReminder.Manager
             ProcessStartInfo info = new ProcessStartInfo();
             Process p = null;
 
-            info.FileName = RegistryUtility.GetDefaultBrowserExePath();
-            info.WorkingDirectory = Path.GetDirectoryName(RegistryUtility.GetDefaultBrowserExePath());
+            if ("".Equals(path))
+            {
+                info.FileName = WinFramework.Utility.RegistryUtility.GetDefaultBrowserExePath();
+                info.WorkingDirectory = Path.GetDirectoryName(WinFramework.Utility.RegistryUtility.GetDefaultBrowserExePath());
+            }
+            else
+            {
+                info.FileName = path;
+                info.WorkingDirectory = Path.GetDirectoryName(path);
+            }
             info.Arguments = arg;
             p = Process.Start(info);
+            p.WaitForInputIdle(60000);
         }
     }
 }

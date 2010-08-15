@@ -133,6 +133,11 @@ namespace AipoReminder.Utility
         /// </summary>
         public static bool CheckExtTimeCard { get; set; }
 
+        /// <summary>
+        /// 指定ブラウザの名称
+        /// </summary>
+        public static string BrowserName { get; set; }
+
         static SettingManager()
         {
             UserId = Properties.Settings.Default.userId;
@@ -158,6 +163,7 @@ namespace AipoReminder.Utility
             CheckOtherSchedule = Properties.Settings.Default.checkOtherSchedule;
             CheckInformation = Properties.Settings.Default.checkInformation;
             CheckExtTimeCard = Properties.Settings.Default.ckeckExtTimeCard;
+            BrowserName = Properties.Settings.Default.browserName;
 
             // カンマ区切りのユーザIDの中に数字ではない文字が含まれていた場合、ユーザIDを取得しない
             bool isNotDigit = false;
@@ -279,6 +285,8 @@ namespace AipoReminder.Utility
             Properties.Settings.Default.checkInformation = SettingManager.CheckInformation;
             // タイムカードと連携
             Properties.Settings.Default.ckeckExtTimeCard = SettingManager.CheckExtTimeCard;
+            // 指定ブラウザ名
+            Properties.Settings.Default.browserName = SettingManager.BrowserName;
 
             Properties.Settings.Default.Save();
         }

@@ -76,7 +76,7 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("from eip_t_ext_timecard t1");
             sqlbldr.AppendLine("where 1 = 1");
             sqlbldr.AppendLine("and t1.user_id = :user_id");
-            sqlbldr.AppendLine("and t1.punch_date = :punch_date");
+            sqlbldr.AppendLine("and t1.punch_date = to_date(:punch_date, 'YYYY-MM-DD')");
 
             ExtTimeCardDataSet.search_eip_t_ext_timecardRow param = ((ExtTimeCardDataSet)data).search_eip_t_ext_timecard[0];
 
@@ -87,7 +87,7 @@ namespace AipoReminder.DAO
             }
             if (!String.IsNullOrEmpty(param.punch_date))
             {
-                paramList.Add(DBUtility.MakeParameter("punch_date", param.punch_date, NpgsqlDbType.Date));
+                paramList.Add(DBUtility.MakeParameter("punch_date", param.punch_date, NpgsqlDbType.Varchar));
             }
 
             return this.dbHelper.Select(((ExtTimeCardDataSet)data).eip_t_ext_timecard, sqlbldr.ToString(), paramList);
@@ -120,27 +120,27 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("    , update_date");
             sqlbldr.AppendLine(") values (");
             sqlbldr.AppendLine("      :user_id");
-            sqlbldr.AppendLine("    , :punch_date");
+            sqlbldr.AppendLine("    , to_date(:punch_date, 'YYYY-MM-DD')");
             sqlbldr.AppendLine("    , :type");
             if (!String.IsNullOrEmpty(param.clock_in_time))
             {
-                sqlbldr.AppendLine("    , :clock_in_time");
-                paramList.Add(DBUtility.MakeParameter("clock_in_time", param.clock_in_time, NpgsqlDbType.Timestamp));
+                sqlbldr.AppendLine("    , to_timestamp(:clock_in_time, 'YYYY-MM-DD HH24:MI:SS.MS')");
+                paramList.Add(DBUtility.MakeParameter("clock_in_time", param.clock_in_time, NpgsqlDbType.Varchar));
             }
             if (!String.IsNullOrEmpty(param.clock_out_time))
             {
-                sqlbldr.AppendLine("    , :clock_out_time");
-                paramList.Add(DBUtility.MakeParameter("clock_out_time", param.clock_out_time, NpgsqlDbType.Timestamp));
+                sqlbldr.AppendLine("    , to_timestamp(:clock_out_time, 'YYYY-MM-DD HH24:MI:SS.MS')");
+                paramList.Add(DBUtility.MakeParameter("clock_out_time", param.clock_out_time, NpgsqlDbType.Varchar));
             }
-            sqlbldr.AppendLine("    , :create_date");
-            sqlbldr.AppendLine("    , :update_date");
+            sqlbldr.AppendLine("    , to_date(:create_date, 'YYYY-MM-DD')");
+            sqlbldr.AppendLine("    , to_timestamp(:update_date, 'YYYY-MM-DD HH24:MI:SS.MS')");
             sqlbldr.AppendLine(");");
 
             paramList.Add(DBUtility.MakeParameter("user_id", param.user_id, NpgsqlDbType.Integer));
-            paramList.Add(DBUtility.MakeParameter("punch_date", param.punch_date, NpgsqlDbType.Date));
+            paramList.Add(DBUtility.MakeParameter("punch_date", param.punch_date, NpgsqlDbType.Varchar));
             paramList.Add(DBUtility.MakeParameter("type", param.type, NpgsqlDbType.Char));
-            paramList.Add(DBUtility.MakeParameter("create_date", param.create_date, NpgsqlDbType.Date));
-            paramList.Add(DBUtility.MakeParameter("update_date", param.update_date, NpgsqlDbType.Timestamp));
+            paramList.Add(DBUtility.MakeParameter("create_date", param.create_date, NpgsqlDbType.Varchar));
+            paramList.Add(DBUtility.MakeParameter("update_date", param.update_date, NpgsqlDbType.Varchar));
 
             return this.dbHelper.Insert(((ExtTimeCardDataSet)data).eip_t_ext_timecard, sqlbldr.ToString(), paramList);
         }
@@ -156,13 +156,13 @@ namespace AipoReminder.DAO
             ArrayList paramList = new ArrayList();
 
             sqlbldr.AppendLine("update eip_t_ext_timecard set ");
-            sqlbldr.AppendLine("clock_out_time = :clock_out_time");
-            sqlbldr.AppendLine(", update_date = :update_date");
+            sqlbldr.AppendLine("clock_out_time = to_timestamp(:clock_out_time, 'YYYY-MM-DD HH24:MI:SS.MS')");
+            sqlbldr.AppendLine(", update_date = to_timestamp(:update_date, 'YYYY-MM-DD HH24:MI:SS.MS')");
             sqlbldr.AppendLine("where 1 = 1");
             sqlbldr.AppendLine("and timecard_id = :timecard_id");
 
-            paramList.Add(DBUtility.MakeParameter("clock_out_time", param.clock_out_time, NpgsqlDbType.Timestamp));
-            paramList.Add(DBUtility.MakeParameter("update_date", param.update_date, NpgsqlDbType.Timestamp));
+            paramList.Add(DBUtility.MakeParameter("clock_out_time", param.clock_out_time, NpgsqlDbType.Varchar));
+            paramList.Add(DBUtility.MakeParameter("update_date", param.update_date, NpgsqlDbType.Varchar));
             paramList.Add(DBUtility.MakeParameter("timecard_id", param.timecard_id, NpgsqlDbType.Integer));
 
             return this.dbHelper.Update(((ExtTimeCardDataSet)data).eip_t_ext_timecard, sqlbldr.ToString(), paramList);
