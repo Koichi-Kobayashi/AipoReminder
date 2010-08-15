@@ -1,6 +1,6 @@
 ===========================================================================
 y ƒ\ƒtƒg–¼ z@Aipox‰‡ƒc[ƒ‹uAipoƒŠƒ}ƒCƒ“ƒ_[£ Ver 1.0.10.0
-y “o ˜^ –¼ z@AipoReminder1010.zip
+y “o ˜^ –¼ z@AipoReminder1.0.10.0.zip
 y ˆ³kŒ`® z@zip
 y ì ¬ Ò z@Copyright (C) 2009-2010 k.kobayashi
 y HomePage z@‚È‚µ
