@@ -1055,10 +1055,10 @@ namespace AipoReminder
             {
                 case 4:
                 case 5:
-                    this.WhatsnewProcess(false, false);
+                    this.WhatsnewProcess(isCheckNow, isStartup);
                     break;
                 case 6:
-                    this.WhatsnewProcessV6(false, false);
+                    this.WhatsnewProcessV6(isCheckNow, isStartup);
                     break;
             }
         }
@@ -1775,8 +1775,6 @@ namespace AipoReminder
         }
 
 #endregion
-
-
 
     }
 }

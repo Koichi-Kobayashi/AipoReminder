@@ -34,6 +34,7 @@ namespace AipoReminder.ValueObject
         {
             StringBuilder sb = new StringBuilder();
 
+            sb.Append("・");
             sb.Append(this.title);
             sb.Append(" (");
             sb.Append(this.last_name + " " + this.first_name);
