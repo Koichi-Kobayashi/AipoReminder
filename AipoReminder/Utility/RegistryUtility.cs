@@ -13,7 +13,7 @@ namespace AipoReminder.Utility
         private static string Firefox = "Firefox";
         private static string Lunascape = "Lunascape";
         private static string Opera = "Opera";
-        private static string Safari = "Safari";
+//        private static string Safari = "Safari";
 
         public List<ComboBoxBrowserItem> getBrowserComboItem()
         {
@@ -38,7 +38,7 @@ namespace AipoReminder.Utility
                             string path = rKey2.GetValue(insPath).ToString();
                             path += @"\bin\Sleipnir.exe";
                             FileVersionInfo vi = FileVersionInfo.GetVersionInfo(path);
-                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(vi.ProductName + " " + vi.ProductVersion, path);
+                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(vi.ProductName + " (" + vi.ProductVersion + ")", path);
                             listSoftware.Add(item);
                             continue;
                         }
@@ -48,7 +48,7 @@ namespace AipoReminder.Utility
                             string path = rKey2.GetValue(insPath).ToString();
                             path += @"\firefox.exe";
                             FileVersionInfo vi = FileVersionInfo.GetVersionInfo(path);
-                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(vi.ProductName + " " + vi.ProductVersion, path);
+                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(vi.ProductName + " (" + vi.ProductVersion + ")", path);
                             listSoftware.Add(item);
                             continue;
                         }
@@ -58,7 +58,7 @@ namespace AipoReminder.Utility
                             string path = rKey2.GetValue(insPath).ToString();
                             path += @"\Luna.exe";
                             FileVersionInfo vi = FileVersionInfo.GetVersionInfo(path);
-                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(vi.ProductName + " " + vi.ProductVersion, path);
+                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(vi.ProductName + " (" + vi.ProductVersion + ")", path);
                             listSoftware.Add(item);
                             continue;
                         }
@@ -68,7 +68,7 @@ namespace AipoReminder.Utility
                             string path = rKey2.GetValue(insPath).ToString();
                             path += @"\Opera.exe";
                             FileVersionInfo vi = FileVersionInfo.GetVersionInfo(path);
-                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(vi.ProductName + " " + vi.ProductVersion, path);
+                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(vi.ProductName + " (" + vi.ProductVersion + ")", path);
                             listSoftware.Add(item);
                             continue;
                         }

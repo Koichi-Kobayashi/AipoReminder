@@ -298,9 +298,9 @@
             this.checkBoxExtTimeCard.AutoSize = true;
             this.checkBoxExtTimeCard.Location = new System.Drawing.Point(7, 163);
             this.checkBoxExtTimeCard.Name = "checkBoxExtTimeCard";
-            this.checkBoxExtTimeCard.Size = new System.Drawing.Size(130, 16);
+            this.checkBoxExtTimeCard.Size = new System.Drawing.Size(179, 16);
             this.checkBoxExtTimeCard.TabIndex = 11;
-            this.checkBoxExtTimeCard.Text = "タイムカードと連携する";
+            this.checkBoxExtTimeCard.Text = "タイムカードと連携する(Aipo5～)";
             this.checkBoxExtTimeCard.UseVisualStyleBackColor = true;
             // 
             // button2
@@ -426,7 +426,7 @@
             this.groupBox2.Size = new System.Drawing.Size(216, 148);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "新着情報";
+            this.groupBox2.Text = "新着情報(Aipo4～5)";
             // 
             // checkBoxMemo
             // 

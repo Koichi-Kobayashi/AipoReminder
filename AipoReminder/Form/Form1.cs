@@ -161,7 +161,6 @@ namespace AipoReminder
                 // バージョン情報
                 Assembly asm = Assembly.GetExecutingAssembly();
                 Version ver = asm.GetName().Version;
-                //            textBoxVersionInfo.Text = Application.ProductName + " Version " + ver.Major + "." + ver.Minor + "." + ver.Build;
                 textBoxVersionInfo.Text = Application.ProductName + " Version " + Application.ProductVersion;
                 textBoxSystemInfo1.Text = Application.ProductName + " Core Version " + Application.ProductVersion;
                 textBoxSystemInfo2.Text = "Operating System Version ";
@@ -213,6 +212,9 @@ namespace AipoReminder
                 // 指定ブラウザComboboxの初期設定
                 SetComboBoxBrowserItems();
 
+                // Aipoのバージョン依存項目の設定
+                InitAipoVersionConfig();
+            
                 if (String.IsNullOrEmpty(SettingManager.UserId) ||
                     String.IsNullOrEmpty(SettingManager.LoginName) ||
                     String.IsNullOrEmpty(SettingManager.UserPassword))
@@ -380,10 +382,8 @@ namespace AipoReminder
                     ExtTimeCardDataSet.update_eip_t_ext_timecardRow updateRow = data.update_eip_t_ext_timecard.Newupdate_eip_t_ext_timecardRow();
                     updateRow.user_id = SettingManager.UserId;
                     updateRow.punch_date = dt.ToString("yyyy-MM-dd");
-//                    updateRow.punch_date = dt;
                     updateRow.type = "P";
                     updateRow.clock_in_time = dt.ToString("yyyy-MM-dd HH:mm:ss.fff");
-//                    updateRow.clock_in_time = dt;
                     updateRow.create_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
                     updateRow.update_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
                     data.update_eip_t_ext_timecard.Rows.Add(updateRow);
@@ -457,10 +457,8 @@ namespace AipoReminder
                     ExtTimeCardDataSet.update_eip_t_ext_timecardRow updateRow = data.update_eip_t_ext_timecard.Newupdate_eip_t_ext_timecardRow();
                     updateRow.user_id = SettingManager.UserId;
                     updateRow.punch_date = dt.ToString("yyyy-MM-dd");
-//                    updateRow.punch_date = dt;
                     updateRow.type = "P";
                     updateRow.clock_out_time = dt.ToString("yyyy-MM-dd HH:mm:ss.fff");
-//                    updateRow.clock_out_time = dt;
                     updateRow.create_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
                     updateRow.update_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
                     data.update_eip_t_ext_timecard.Rows.Add(updateRow);
@@ -500,18 +498,8 @@ namespace AipoReminder
             }
 
             // 入力項目を非活性にする
-            textBoxUserName.Enabled = false;
-            textBoxPassword.Enabled = false;
-            textBoxURL.Enabled = false;
-            comboBoxAipoVersion.Enabled = false;
-            buttonDataSave.Enabled = false;
-            textBoxServerIP.Enabled = false;
-            textBoxServerPort.Enabled = false;
-            textBoxDbUserId.Enabled = false;
-            textBoxDbPassword.Enabled = false;
-            textBoxDbName.Enabled = false;
-            buttonDataReset.Enabled = false;
-            
+            InitBasicConfigEnabled(false);
+
             if (this.Login())
             {
                 // タイムカード連携
@@ -541,20 +529,61 @@ namespace AipoReminder
                 textBoxPassword.Text = "";
 
                 // 入力項目を活性にする
-                textBoxUserName.Enabled = true;
-                textBoxPassword.Enabled = true;
-                textBoxURL.Enabled = true;
-                comboBoxAipoVersion.Enabled = true;
-                buttonDataSave.Enabled = true;
-                textBoxServerIP.Enabled = true;
-                textBoxServerPort.Enabled = true;
-                textBoxDbUserId.Enabled = true;
-                textBoxDbPassword.Enabled = true;
-                textBoxDbName.Enabled = true;
-                buttonDataReset.Enabled = true;
+                InitBasicConfigEnabled(true);
 
                 this.challengeLoginCount = 0;
             }
+        }
+
+        /// <summary>
+        /// 基本設定の活性/非活性化
+        /// </summary>
+        /// <param name="isEnabled">true:活性、false:非活性</param>
+        private void InitBasicConfigEnabled(bool isEnabled)
+        {
+            textBoxUserName.Enabled = isEnabled;
+            textBoxPassword.Enabled = isEnabled;
+            textBoxURL.Enabled = isEnabled;
+            comboBoxAipoVersion.Enabled = isEnabled;
+            buttonDataSave.Enabled = isEnabled;
+            textBoxServerIP.Enabled = isEnabled;
+            textBoxServerPort.Enabled = isEnabled;
+            textBoxDbUserId.Enabled = isEnabled;
+            textBoxDbPassword.Enabled = isEnabled;
+            textBoxDbName.Enabled = isEnabled;
+            buttonDataReset.Enabled = isEnabled;
+        }
+
+        /// <summary>
+        /// 新着情報のチェックボックスの設定
+        /// Aipoのバージョンによって活性/非活性を切り替える
+        /// </summary>
+        private void InitWhatsnewConfigEnabled()
+        {
+            switch (SettingManager.AipoVersion)
+            {
+                case 4:
+                case 5:
+                    InitWhatsnewConfigEnabled(true);
+                    break;
+                case 6:
+                    InitWhatsnewConfigEnabled(false);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 新着情報のチェックボックスの活性/非活性を切り替える
+        /// </summary>
+        /// <param name="isEnabled">true:活性、false:非活性</param>
+        private void InitWhatsnewConfigEnabled(bool isEnabled)
+        {
+            checkBoxBlog.Enabled = isEnabled;
+            checkBoxBlogComment.Enabled = isEnabled;
+            checkBoxMsgboard.Enabled = isEnabled;
+            checkBoxSchedule.Enabled = isEnabled;
+            checkBoxWorkflow.Enabled = isEnabled;
+            checkBoxMemo.Enabled = isEnabled;
         }
 
         /// <summary>
@@ -729,16 +758,10 @@ namespace AipoReminder
             SettingManager.UserPassword = "";
 
             // 入力項目を活性にする
-            textBoxUserName.Enabled = true;
-            textBoxPassword.Enabled = true;
-            textBoxURL.Enabled = true;
-            comboBoxAipoVersion.Enabled = true;
-            buttonDataSave.Enabled = true;
-            textBoxServerIP.Enabled = true;
-            textBoxServerPort.Enabled = true;
-            textBoxDbUserId.Enabled = true;
-            textBoxDbPassword.Enabled = true;
-            textBoxDbName.Enabled = true;
+            InitBasicConfigEnabled(true);
+
+            // Aipoのバージョン依存項目の設定
+            InitAipoVersionConfig();
 
             // タスクトレイアイコンの点滅を停止
             this.AnimatedTasktrayIcon(false);
@@ -852,14 +875,36 @@ namespace AipoReminder
         /// <param name="e"></param>
         private void comboBoxAipoVersion_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Aipoのバージョン依存項目の設定
+            InitAipoVersionConfig();
+        }
+        
+        /// <summary>
+        /// Aipoのバージョン依存機能の初期化
+        /// Aipoのバージョンによって初期化する内容を変更する
+        /// </summary>
+        private void InitAipoVersionConfig()
+        {
+            int selectedAipoVersion = int.Parse(comboBoxAipoVersion.SelectedItem.ToString());
+            
             // タイムカード連携はAipoのバージョンが5以上のみ
-            if (5 <= int.Parse(comboBoxAipoVersion.SelectedItem.ToString()))
+            if (5 <= selectedAipoVersion)
             {
                 checkBoxExtTimeCard.Enabled = true;
             }
             else
             {
                 checkBoxExtTimeCard.Enabled = false;
+            }
+
+            // Aipoのバージョンが6以上の場合は新着情報のチェックボックスを非活性にする
+            if (6 <= selectedAipoVersion)
+            {
+                InitWhatsnewConfigEnabled(false);
+            }
+            else
+            {
+                InitWhatsnewConfigEnabled(true);
             }
         }
 
