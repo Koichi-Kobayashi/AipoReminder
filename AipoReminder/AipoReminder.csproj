@@ -73,7 +73,7 @@
     <Reference Include="AlertWindow, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86" />
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL" />
     <Reference Include="Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" />
-    <Reference Include="Npgsql, Version=2.0.10.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL" />
+    <Reference Include="Npgsql, Version=2.0.11.91, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -88,11 +88,17 @@
     <Compile Include="Control\ToolStripLabelEx.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DAO\ActivityDAO.cs" />
     <Compile Include="DAO\ScheduleDAO.cs" />
     <Compile Include="DAO\ExtTimeCardDAO.cs" />
     <Compile Include="DAO\TurbineGroupDAO.cs" />
     <Compile Include="DAO\TurbineUserDAO.cs" />
     <Compile Include="DAO\WhatsnewDAO.cs" />
+    <Compile Include="DataSet\ActivityDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ActivityDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSet\ExtTimeCardDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -136,6 +142,7 @@
     <Compile Include="Form\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logic\ActivityLogic.cs" />
     <Compile Include="Logic\ExtTimeCardLogic.cs" />
     <Compile Include="Logic\ScheduleLogic.cs" />
     <Compile Include="Logic\TurbineGroupLogic.cs" />
@@ -143,6 +150,7 @@
     <Compile Include="Logic\WhatsnewLogic.cs" />
     <Compile Include="Manager\ScheduleManager.cs" />
     <Compile Include="Manager\ThreadingManager.cs" />
+    <Compile Include="Model\ActivityModel.cs" />
     <Compile Include="Model\DbConnectionModel.cs" />
     <Compile Include="Model\ExtTimeCardModel.cs" />
     <Compile Include="Model\GroupModel.cs" />
@@ -218,6 +226,7 @@
     <Compile Include="Utility\DBUtility.cs" />
     <Compile Include="Manager\SettingManager.cs" />
     <Compile Include="Utility\RegistryUtility.cs" />
+    <Compile Include="ValueObject\ActivityItem.cs" />
     <Compile Include="ValueObject\BalloonItem.cs" />
     <Compile Include="ValueObject\BalloonItemBlog.cs" />
     <Compile Include="ValueObject\BalloonItemBlogComment.cs" />
@@ -234,6 +243,17 @@
     <Compile Include="ValueObject\UserNameObject.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DataSet\ActivityDataSet.xsc">
+      <DependentUpon>ActivityDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet\ActivityDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ActivityDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSet\ActivityDataSet.xss">
+      <DependentUpon>ActivityDataSet.xsd</DependentUpon>
+    </None>
     <None Include="DataSet\ExtTimeCardDataSet.xsc">
       <DependentUpon>ExtTimeCardDataSet.xsd</DependentUpon>
     </None>

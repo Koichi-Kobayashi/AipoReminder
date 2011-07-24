@@ -195,6 +195,9 @@ namespace AipoReminder
                     case 5:
                         comboBoxAipoVersion.SelectedIndex = 1;
                         break;
+                    case 6:
+                        comboBoxAipoVersion.SelectedIndex = 2;
+                        break;
                 }
 
                 // スケジュールのチェック間隔コンボボックスのSelectedIndexを設定
@@ -256,7 +259,7 @@ namespace AipoReminder
                 }
 
                 // タイムカード連携はAipoのバージョンが5以上のみ
-                if (!"5".Equals(comboBoxAipoVersion.SelectedItem.ToString()))
+                if (5 <= int.Parse(comboBoxAipoVersion.SelectedItem.ToString()))
                 {
                     checkBoxExtTimeCard.Enabled = false;
                 }
@@ -518,7 +521,7 @@ namespace AipoReminder
                 }
 
                 // 新着情報をチェック
-                this.WhatsnewProcess(true, true);
+                this.PreWhatsnewProcess(true, true);
                 this.timerLogin.Stop();
                 this.timerLogin.Enabled = false;
                 buttonDataReset.Enabled = true;
@@ -698,7 +701,7 @@ namespace AipoReminder
                     }
 
                     // 新着情報をチェック
-                    this.WhatsnewProcess(true, false);
+                    this.PreWhatsnewProcess(true, false);
                 }
                 else
                 {
@@ -822,7 +825,7 @@ namespace AipoReminder
                 }
 
                 // 新着情報をチェック
-                this.WhatsnewProcess(true, false);
+                this.PreWhatsnewProcess(true, false);
             }
         }
 
@@ -850,7 +853,7 @@ namespace AipoReminder
         private void comboBoxAipoVersion_SelectedIndexChanged(object sender, EventArgs e)
         {
             // タイムカード連携はAipoのバージョンが5以上のみ
-            if ("5".Equals(comboBoxAipoVersion.SelectedItem.ToString()))
+            if (5 <= int.Parse(comboBoxAipoVersion.SelectedItem.ToString()))
             {
                 checkBoxExtTimeCard.Enabled = true;
             }
@@ -860,6 +863,25 @@ namespace AipoReminder
             }
         }
 
+        /// <summary>
+        /// テキストボックスでEnterを押すと次のテキストボックスへフォーカスを移動
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (e.Shift)
+                {
+                    ProcessTabKey(false);
+                }
+                else
+                {
+                    ProcessTabKey(true);
+                }
+            }
+        }
 #endregion
 
 #region DB関連処理
@@ -959,7 +981,7 @@ namespace AipoReminder
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
             // 新着情報をチェック
-            this.WhatsnewProcess(true, false);
+            this.PreWhatsnewProcess(true, false);
         }
 
         /// <summary>
@@ -1024,6 +1046,25 @@ namespace AipoReminder
 
         /// <summary>
         /// 定期実行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void PreWhatsnewProcess(bool isCheckNow, bool isStartup)
+        {
+            switch (SettingManager.AipoVersion)
+            {
+                case 4:
+                case 5:
+                    this.WhatsnewProcess(false, false);
+                    break;
+                case 6:
+                    this.WhatsnewProcessV6(false, false);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 定期実行(Aipo4,5)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1308,6 +1349,139 @@ namespace AipoReminder
             }
         }
 
+        /// <summary>
+        /// 定期実行(Aipo6)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void WhatsnewProcessV6(bool isCheckNow, bool isStartup)
+        {
+            if (!isLogin)
+            {
+                return;
+            }
+            if (String.IsNullOrEmpty(SettingManager.UserId) ||
+                String.IsNullOrEmpty(SettingManager.LoginName) ||
+                String.IsNullOrEmpty(SettingManager.UserPassword))
+            {
+                return;
+            }
+
+            DateTime dt = DateTime.Now;
+            /*
+             * タイマーで5分間隔で新着情報をチェックするため、現在の時刻が5分、10分…55分かチェックし、
+             * 5分、10分…55分の場合のみ、以降の処理を実行する。
+             * ただし、isCheckNowがtrueの場合(起動時や設定保存時、今すぐチェックする場合)はそのまま以降の処理を実行する。
+             */
+            if (!isCheckNow)
+            {
+                if (dt.Minute != 0 &&
+                    dt.Minute != 5 &&
+                    dt.Minute != 10 &&
+                    dt.Minute != 15 &&
+                    dt.Minute != 20 &&
+                    dt.Minute != 25 &&
+                    dt.Minute != 30 &&
+                    dt.Minute != 35 &&
+                    dt.Minute != 40 &&
+                    dt.Minute != 45 &&
+                    dt.Minute != 50 &&
+                    dt.Minute != 55)
+                {
+                    return;
+                }
+            }
+
+            try
+            {
+                notificationDic = new Dictionary<string, BalloonItem>();
+
+                ScheduleManager sm = new ScheduleManager(dt);
+                List<ScheduleItem> oneDayScheduleList = null;
+                // 終日スケジュールをチェック
+                if (isStartup)
+                {
+                    oneDayScheduleList = sm.CheckOneDaySchedule();
+                }
+
+                // もうすぐ始まるスケジュールをチェック
+                List<ScheduleItem> scheduleList = new List<ScheduleItem>();
+                scheduleList = sm.CheckSchedule();
+
+                if (scheduleList != null && scheduleList.Count > 0 || oneDayScheduleList != null && oneDayScheduleList.Count > 0)
+                {
+                    Form2 f = new Form2();
+                    if (scheduleList != null && scheduleList.Count > 0)
+                    {
+                        f.ScheduleList = scheduleList;
+                    }
+                    if (oneDayScheduleList != null && oneDayScheduleList.Count > 0)
+                    {
+                        f.OneDayScheduleList = oneDayScheduleList;
+                    }
+                    f.Show();
+                }
+
+                // あなた宛てのお知らせを取得するためのDataSetと検索条件を設定
+                ActivityDataSet data = new ActivityDataSet();
+                ActivityDataSet.search_activityRow paramRow = data.search_activity.Newsearch_activityRow();
+                paramRow.login_name = SettingManager.LoginName;
+                data.search_activity.Rows.Add(paramRow);
+                ActivityModel m = new ActivityModel();
+                m.Execute(m.GetActivityInfo, data);
+
+                // 新着情報を取り出す
+                StringBuilder sb = new StringBuilder();
+                foreach (ActivityDataSet.activityRow activity in data.activity)
+                {
+                    // リストに詰める
+                    ActivityItem item = new ActivityItem(activity.id,
+                                                         activity.last_name,
+                                                         activity.first_name,
+                                                         activity.title, 
+                                                         activity.update_date);
+                    sb.AppendLine(item.ToString());
+                }
+
+                if (!String.IsNullOrEmpty(sb.ToString()))
+                {
+                    // タスクトレイアイコンを点滅させる
+                    this.AnimatedTasktrayIcon(true);
+
+                    if (checkBoxInformation.Checked)
+                    {
+                        if (!alertWindow1.isShow())
+                        {
+                            alertWindow1.ShowCloseButton = true;
+                            alertWindow1.BackColor = Color.White;
+                            alertWindow1.BackColor2 = Color.FromArgb(255, 136, 0);
+                            alertWindow1.Time = 10000;
+                            alertWindow1.Icon = AlertIcons.Custom;
+                            alertWindow1.CustomIcon = Properties.Resources.information_orange;
+                            alertWindow1.Show(sb.ToString(), MessageConstants.MSG_INFORMATION_01);
+                        }
+                    }
+                    else
+                    {
+                        // バルーンを表示する
+                        this.notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                        this.notifyIcon1.BalloonTipTitle = MessageConstants.MSG_INFORMATION_02;
+                        this.notifyIcon1.BalloonTipText = sb.ToString();
+                        this.notifyIcon1.ShowBalloonTip(10000);
+                    }
+                }
+                else
+                {
+                    // タスクトレイアイコンの点滅を停止
+                    this.AnimatedTasktrayIcon(false);
+                }
+            }
+            catch (DBException ex)
+            {
+                Debug.Print(ex.toString());
+            }
+        }
+
 #endregion
 
 #region 入力チェック関連
@@ -1542,7 +1716,7 @@ namespace AipoReminder
 
         private void timerWhatsnew_Tick(object sender, EventArgs e)
         {
-            this.WhatsnewProcess(false, false);
+            this.PreWhatsnewProcess(false, false);
         }
 
 #endregion
@@ -1601,6 +1775,8 @@ namespace AipoReminder
         }
 
 #endregion
+
+
 
     }
 }

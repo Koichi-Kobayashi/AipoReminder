@@ -89,7 +89,7 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("where 1 = 1");
             sqlbldr.AppendLine("and t1.user_id = :user_id");
             sqlbldr.AppendLine("and t1.status != 'D'");
-            sqlbldr.AppendLine("and t2.start_date = :start_date");
+            sqlbldr.AppendLine("and to_char(t2.start_date, 'YYYY-MM-DD HH24:MI:SS') = :start_date");
             sqlbldr.AppendLine("and t2.repeat_pattern = 'N'");
 
             // 毎日繰り返すスケジュール(繰り返し期間なし)
@@ -97,7 +97,7 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("    (");
             sqlbldr.AppendLine("            t1.user_id = :user_id");
             sqlbldr.AppendLine("        and t1.status != 'D'");
-            sqlbldr.AppendLine("        and t2.start_date like to_timestamp(:like_start_date, 'HH24:MI:SS')");
+            sqlbldr.AppendLine("        and to_char(t2.start_date, 'HH24:MI:SS') = :like_start_date");
             sqlbldr.AppendLine("        and t2.repeat_pattern = 'DN'");
             sqlbldr.AppendLine("        and not exists");
             sqlbldr.AppendLine("            (");
@@ -112,15 +112,15 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("    (");
             sqlbldr.AppendLine("            t1.user_id = :user_id");
             sqlbldr.AppendLine("        and t1.status != 'D'");
-            sqlbldr.AppendLine("        and t2.start_date like to_timestamp(:like_start_date, 'HH24:MI:SS')");
-            sqlbldr.AppendLine("        and '" + nowDateTime + "' between cast(t2.start_date - interval '" + param.check_time + " minutes' as timestamp) and cast(t2.end_date - interval '" + param.check_time + " minutes' as timestamp)");
+            sqlbldr.AppendLine("        and to_char(t2.start_date, 'HH24:MI:SS') = :like_start_date");
+            sqlbldr.AppendLine("        and '" + nowDateTime + "' between to_char(cast(t2.start_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS') and to_char(cast(t2.end_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS')");
             sqlbldr.AppendLine("        and t2.repeat_pattern = 'DL'");
             sqlbldr.AppendLine("        and not exists");
             sqlbldr.AppendLine("            (");
             sqlbldr.AppendLine("                select * from eip_t_schedule t4");
             sqlbldr.AppendLine("                where 1 = 1");
             sqlbldr.AppendLine("                and t4.parent_id = t1.schedule_id");
-            sqlbldr.AppendLine("                and '" + nowDateTime + "' between cast(t4.start_date - interval '" + param.check_time + " minutes' as timestamp) and cast(t4.end_date - interval '" + param.check_time + " minutes' as timestamp)");
+            sqlbldr.AppendLine("                and '" + nowDateTime + "' between to_char(cast(t4.start_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS') and to_char(cast(t4.end_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS')");
             sqlbldr.AppendLine("            )");
             sqlbldr.AppendLine("    )");
 
@@ -129,7 +129,7 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("    (");
             sqlbldr.AppendLine("            t1.user_id = :user_id");
             sqlbldr.AppendLine("        and t1.status != 'D'");
-            sqlbldr.AppendLine("        and t2.start_date = to_timestamp(:start_date, 'YYYY-MM-DD HH24:MI:SS')");
+            sqlbldr.AppendLine("        and to_char(t2.start_date, 'YYYY-MM-DD HH24:MI:SS') = :start_date");
             switch (weekday)
             {
                 case DayOfWeek.Sunday:
@@ -167,8 +167,8 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("    (");
             sqlbldr.AppendLine("            t1.user_id = :user_id");
             sqlbldr.AppendLine("        and t1.status != 'D'");
-            sqlbldr.AppendLine("        and t2.start_date like to_timestamp(:like_start_date, 'HH24:MI:SS')");
-            sqlbldr.AppendLine("        and '" + nowDateTime + "' between cast(t2.start_date - interval '" + param.check_time + " minutes' as timestamp) and cast(t2.end_date - interval '" + param.check_time + " minutes' as timestamp)");
+            sqlbldr.AppendLine("        and to_char(t2.start_date, 'HH24:MI:SS') = :like_start_date");
+            sqlbldr.AppendLine("        and '" + nowDateTime + "' between to_char(cast(t2.start_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS') and to_char(cast(t2.end_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS')");
             switch (weekday)
             {
                 case DayOfWeek.Sunday:
@@ -198,7 +198,7 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("                select * from eip_t_schedule t4");
             sqlbldr.AppendLine("                where 1 = 1");
             sqlbldr.AppendLine("                and t4.parent_id = t1.schedule_id");
-            sqlbldr.AppendLine("                and '" + nowDateTime + "' between cast(t4.start_date - interval '" + param.check_time + " minutes' as timestamp) and cast(t4.end_date - interval '" + param.check_time + " minutes' as timestamp)");
+            sqlbldr.AppendLine("                and '" + nowDateTime + "' between to_char(cast(t4.start_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS') and to_char(cast(t4.end_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS')");
             sqlbldr.AppendLine("            )");
             sqlbldr.AppendLine("    )");
 
@@ -207,7 +207,7 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("    (");
             sqlbldr.AppendLine("            t1.user_id = :user_id");
             sqlbldr.AppendLine("        and t1.status != 'D'");
-            sqlbldr.AppendLine("        and t2.start_date like to_timestamp(:like_start_date, 'HH24:MI:SS')");
+            sqlbldr.AppendLine("        and to_char(t2.start_date, 'HH24:MI:SS') = :like_start_date");
             sqlbldr.AppendLine("        and t2.repeat_pattern = 'M" + String.Format("{0:D2}", dt.Day) + "N'");
             sqlbldr.AppendLine("        and not exists");
             sqlbldr.AppendLine("            (");
@@ -222,15 +222,15 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("    (");
             sqlbldr.AppendLine("            t1.user_id = :user_id");
             sqlbldr.AppendLine("        and t1.status != 'D'");
-            sqlbldr.AppendLine("        and to_timestamp(t2.start_date, 'HH24:MI:SS') like to_timestamp(:like_start_date, 'HH24:MI:SS')");
-            sqlbldr.AppendLine("        and to_timestamp('" + nowDateTime + "', 'YYYY-MM-DD HH24:MI:SS') between cast(t2.start_date - interval '" + param.check_time + " minutes' as timestamp) and cast(t2.end_date - interval '" + param.check_time + " minutes' as timestamp)");
+            sqlbldr.AppendLine("        and to_char(t2.start_date, 'HH24:MI:SS') = :like_start_date");
+            sqlbldr.AppendLine("        and '" + nowDateTime + "' between to_char(cast(t2.start_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS') and to_char(cast(t2.end_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS')");
             sqlbldr.AppendLine("        and t2.repeat_pattern = 'M" + String.Format("{0:D2}", dt.Day) + "L'");
             sqlbldr.AppendLine("        and not exists");
             sqlbldr.AppendLine("            (");
             sqlbldr.AppendLine("                select * from eip_t_schedule t4");
             sqlbldr.AppendLine("                where 1 = 1");
             sqlbldr.AppendLine("                and t4.parent_id = t1.schedule_id");
-            sqlbldr.AppendLine("                and to_timestamp('" + nowDateTime + "', 'YYYY-MM-DD HH24:MI:SS') between cast(t4.start_date - interval '" + param.check_time + " minutes' as timestamp) and cast(t4.end_date - interval '" + param.check_time + " minutes' as timestamp)");
+            sqlbldr.AppendLine("                and '" + nowDateTime + "' between to_char(cast(t4.start_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS') and to_char(cast(t4.end_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS')");
             sqlbldr.AppendLine("            )");
             sqlbldr.AppendLine("    )");
 
@@ -247,7 +247,7 @@ namespace AipoReminder.DAO
             {
                 // 日付部分と'%HH:MM:SS'形式に分ける
                 String[] start_date_split = param.start_date.Split(' ');
-                string start_date_time = "%" + start_date_split[1];
+                string start_date_time = start_date_split[1];
 
                 paramList.Add(DBUtility.MakeParameter("like_start_date", start_date_time, NpgsqlDbType.Varchar));
             }
@@ -273,7 +273,7 @@ namespace AipoReminder.DAO
                 sqlbldr.AppendLine("and t1.user_id in (" + param.other_user_id_list + ")");
                 sqlbldr.AppendLine("and t1.status != 'D'");
                 sqlbldr.AppendLine("and t2.public_flag = 'O'");
-                sqlbldr.AppendLine("and t2.start_date = to_timestamp(:start_date, 'YYYY-MM-DD HH24:MI:SS')");
+                sqlbldr.AppendLine("and to_char(t2.start_date, 'YYYY-MM-DD HH24:MI:SS') = :start_date");
                 sqlbldr.AppendLine("and t2.repeat_pattern = 'N'");
 
                 // 毎日繰り返すスケジュール(繰り返し期間なし)
@@ -282,7 +282,7 @@ namespace AipoReminder.DAO
                 sqlbldr.AppendLine("            t1.user_id in (" + param.other_user_id_list + ")");
                 sqlbldr.AppendLine("        and t1.status != 'D'");
                 sqlbldr.AppendLine("        and t2.public_flag = 'O'");
-                sqlbldr.AppendLine("        and t2.start_date like to_timestamp(:like_start_date, 'HH24:MI:SS')");
+                sqlbldr.AppendLine("        and to_char(t2.start_date, 'HH24:MI:SS') = :like_start_date");
                 sqlbldr.AppendLine("        and t2.repeat_pattern = 'DN'");
                 sqlbldr.AppendLine("        and not exists");
                 sqlbldr.AppendLine("            (");
@@ -298,15 +298,15 @@ namespace AipoReminder.DAO
                 sqlbldr.AppendLine("            t1.user_id in ( " + param.other_user_id_list + ")");
                 sqlbldr.AppendLine("        and t1.status != 'D'");
                 sqlbldr.AppendLine("        and t2.public_flag = 'O'");
-                sqlbldr.AppendLine("        and t2.start_date like to_timestamp(:like_start_date, 'HH24:MI:SS')");
-                sqlbldr.AppendLine("        and '" + nowDateTime + "' between cast(t2.start_date - interval '" + param.check_time + " minutes' as timestamp) and cast(t2.end_date - interval '" + param.check_time + " minutes' as timestamp)");
+                sqlbldr.AppendLine("        and to_char(t2.start_date, 'HH24:MI:SS') = :like_start_date");
+                sqlbldr.AppendLine("        and '" + nowDateTime + "' between to_char(cast(t2.start_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS') and to_char(cast(t2.end_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS')");
                 sqlbldr.AppendLine("        and t2.repeat_pattern = 'DL'");
                 sqlbldr.AppendLine("        and not exists");
                 sqlbldr.AppendLine("            (");
                 sqlbldr.AppendLine("                select * from eip_t_schedule t4");
                 sqlbldr.AppendLine("                where 1 = 1");
                 sqlbldr.AppendLine("                and t4.parent_id = t1.schedule_id");
-                sqlbldr.AppendLine("                and '" + nowDateTime + "' between cast(t4.start_date - interval '" + param.check_time + " minutes' as timestamp) and cast(t4.end_date - interval '" + param.check_time + " minutes' as timestamp)");
+                sqlbldr.AppendLine("                and '" + nowDateTime + "' between to_char(cast(t4.start_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS') and to_char(cast(t4.end_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS')");
                 sqlbldr.AppendLine("            )");
                 sqlbldr.AppendLine("    )");
 
@@ -316,7 +316,7 @@ namespace AipoReminder.DAO
                 sqlbldr.AppendLine("            t1.user_id in ( " + param.other_user_id_list + ")");
                 sqlbldr.AppendLine("        and t1.status != 'D'");
                 sqlbldr.AppendLine("        and t2.public_flag = 'O'");
-                sqlbldr.AppendLine("        and t2.start_date = to_timestamp(:start_date, 'YYYY-MM-DD HH24:MI:SS')");
+                sqlbldr.AppendLine("        and to_char(t2.start_date, 'YYYY-MM-DD HH24:MI:SS') = :start_date");
                 switch (weekday)
                 {
                     case DayOfWeek.Sunday:
@@ -355,8 +355,8 @@ namespace AipoReminder.DAO
                 sqlbldr.AppendLine("            t1.user_id in ( " + param.other_user_id_list + ")");
                 sqlbldr.AppendLine("        and t1.status != 'D'");
                 sqlbldr.AppendLine("        and t2.public_flag = 'O'");
-                sqlbldr.AppendLine("        and t2.start_date like to_timestamp(:like_start_date, 'HH24:MI:SS')");
-                sqlbldr.AppendLine("        and '" + nowDateTime + "' between cast(t2.start_date - interval '" + param.check_time + " minutes' as timestamp) and cast(t2.end_date - interval '" + param.check_time + " minutes' as timestamp)");
+                sqlbldr.AppendLine("        and to_char(t2.start_date, 'HH24:MI:SS') = :like_start_date");
+                sqlbldr.AppendLine("        and '" + nowDateTime + "' between to_char(cast(t2.start_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS') and to_char(cast(t2.end_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS')");
                 switch (weekday)
                 {
                     case DayOfWeek.Sunday:
@@ -386,7 +386,7 @@ namespace AipoReminder.DAO
                 sqlbldr.AppendLine("                select * from eip_t_schedule t4");
                 sqlbldr.AppendLine("                where 1 = 1");
                 sqlbldr.AppendLine("                and t4.parent_id = t1.schedule_id");
-                sqlbldr.AppendLine("                and '" + nowDateTime + "' between cast(t4.start_date - interval '" + param.check_time + " minutes' as timestamp) and cast(t4.end_date - interval '" + param.check_time + " minutes' as timestamp)");
+                sqlbldr.AppendLine("                and '" + nowDateTime + "' between to_char(cast(t4.start_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS') and to_char(cast(t4.end_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS')");
                 sqlbldr.AppendLine("            )");
                 sqlbldr.AppendLine("    )");
 
@@ -396,7 +396,7 @@ namespace AipoReminder.DAO
                 sqlbldr.AppendLine("            t1.user_id in ( " + param.other_user_id_list + ")");
                 sqlbldr.AppendLine("        and t1.status != 'D'");
                 sqlbldr.AppendLine("        and t2.public_flag = 'O'");
-                sqlbldr.AppendLine("        and t2.start_date like to_timestamp(:like_start_date, 'HH24:MI:SS')");
+                sqlbldr.AppendLine("        and to_char(t2.start_date, 'HH24:MI:SS') = :like_start_date");
                 sqlbldr.AppendLine("        and t2.repeat_pattern = 'M" + String.Format("{0:D2}", dt.Day) + "N'");
                 sqlbldr.AppendLine("        and not exists");
                 sqlbldr.AppendLine("            (");
@@ -412,15 +412,15 @@ namespace AipoReminder.DAO
                 sqlbldr.AppendLine("            t1.user_id in ( " + param.other_user_id_list + ")");
                 sqlbldr.AppendLine("        and t1.status != 'D'");
                 sqlbldr.AppendLine("        and t2.public_flag = 'O'");
-                sqlbldr.AppendLine("        and t2.start_date like to_timestamp(:like_start_date, 'HH24:MI:SS')");
-                sqlbldr.AppendLine("        and '" + nowDateTime + "' between cast(t2.start_date - interval '" + param.check_time + " minutes' as timestamp) and cast(t2.end_date - interval '" + param.check_time + " minutes' as timestamp)");
+                sqlbldr.AppendLine("        and to_char(t2.start_date, 'HH24:MI:SS') = :like_start_date");
+                sqlbldr.AppendLine("        and '" + nowDateTime + "' between to_char(cast(t2.start_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS') and to_char(cast(t2.end_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS')");
                 sqlbldr.AppendLine("        and t2.repeat_pattern = 'M" + String.Format("{0:D2}", dt.Day) + "L'");
                 sqlbldr.AppendLine("        and not exists");
                 sqlbldr.AppendLine("            (");
                 sqlbldr.AppendLine("                select * from eip_t_schedule t4");
                 sqlbldr.AppendLine("                where 1 = 1");
                 sqlbldr.AppendLine("                and t4.parent_id = t1.schedule_id");
-                sqlbldr.AppendLine("                and '" + nowDateTime + "' between cast(t4.start_date - interval '" + param.check_time + " minutes' as timestamp) and cast(t4.end_date - interval '" + param.check_time + " minutes' as timestamp)");
+                sqlbldr.AppendLine("                and '" + nowDateTime + "' between to_char(cast(t4.start_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS') and to_char(cast(t4.end_date - interval '" + param.check_time + " minutes' as timestamp), 'YYYY-MM-DD HH24:MI:SS')");
                 sqlbldr.AppendLine("            )");
                 sqlbldr.AppendLine("    )");
             }

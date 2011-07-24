@@ -44,6 +44,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
             this.comboBoxBrowser = new System.Windows.Forms.ComboBox();
             this.checkBoxExtTimeCard = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -96,7 +97,6 @@
             this.timerLogin = new System.Windows.Forms.Timer(this.components);
             this.alertWindow1 = new Allison.AlertWindow.AlertWindow();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -148,7 +148,8 @@
             this.comboBoxAipoVersion.FormattingEnabled = true;
             this.comboBoxAipoVersion.Items.AddRange(new object[] {
             "4",
-            "5"});
+            "5",
+            "6"});
             this.comboBoxAipoVersion.Location = new System.Drawing.Point(209, 141);
             this.comboBoxAipoVersion.Name = "comboBoxAipoVersion";
             this.comboBoxAipoVersion.Size = new System.Drawing.Size(75, 20);
@@ -273,6 +274,15 @@
             this.tabPage4.Size = new System.Drawing.Size(488, 248);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "お知らせ設定";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(35, 114);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(71, 12);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "ブラウザ指定：";
             // 
             // comboBoxBrowser
             // 
@@ -779,15 +789,6 @@
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(35, 114);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(71, 12);
-            this.label11.TabIndex = 13;
-            this.label11.Text = "ブラウザ指定：";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -797,6 +798,7 @@
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
@@ -807,6 +809,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

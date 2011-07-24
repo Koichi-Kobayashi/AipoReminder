@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Win32;
 using AipoReminder.ValueObject;
+using System.Diagnostics;
 
 namespace AipoReminder.Utility
 {
@@ -11,6 +12,8 @@ namespace AipoReminder.Utility
         private static string Sleipnir = "Sleipnir";
         private static string Firefox = "Firefox";
         private static string Lunascape = "Lunascape";
+        private static string Opera = "Opera";
+        private static string Safari = "Safari";
 
         public List<ComboBoxBrowserItem> getBrowserComboItem()
         {
@@ -34,7 +37,8 @@ namespace AipoReminder.Utility
                         {
                             string path = rKey2.GetValue(insPath).ToString();
                             path += @"\bin\Sleipnir.exe";
-                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(Sleipnir, path);
+                            FileVersionInfo vi = FileVersionInfo.GetVersionInfo(path);
+                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(vi.ProductName + " " + vi.ProductVersion, path);
                             listSoftware.Add(item);
                             continue;
                         }
@@ -43,7 +47,8 @@ namespace AipoReminder.Utility
                         {
                             string path = rKey2.GetValue(insPath).ToString();
                             path += @"\firefox.exe";
-                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(Firefox, path);
+                            FileVersionInfo vi = FileVersionInfo.GetVersionInfo(path);
+                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(vi.ProductName + " " + vi.ProductVersion, path);
                             listSoftware.Add(item);
                             continue;
                         }
@@ -52,10 +57,30 @@ namespace AipoReminder.Utility
                         {
                             string path = rKey2.GetValue(insPath).ToString();
                             path += @"\Luna.exe";
-                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(Lunascape, path);
+                            FileVersionInfo vi = FileVersionInfo.GetVersionInfo(path);
+                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(vi.ProductName + " " + vi.ProductVersion, path);
                             listSoftware.Add(item);
                             continue;
                         }
+
+                        if (rName.IndexOf(Opera) != -1)
+                        {
+                            string path = rKey2.GetValue(insPath).ToString();
+                            path += @"\Opera.exe";
+                            FileVersionInfo vi = FileVersionInfo.GetVersionInfo(path);
+                            ComboBoxBrowserItem item = new ComboBoxBrowserItem(vi.ProductName + " " + vi.ProductVersion, path);
+                            listSoftware.Add(item);
+                            continue;
+                        }
+
+                        //if (rName.IndexOf(Safari) != -1)
+                        //{
+                        //    string path = rKey2.GetValue(insPath).ToString();
+                        //    path += @"\Safari.exe";
+                        //    ComboBoxBrowserItem item = new ComboBoxBrowserItem(Safari, path);
+                        //    listSoftware.Add(item);
+                        //    continue;
+                        //}
                     }
                 }
                 rKey2.Close();
