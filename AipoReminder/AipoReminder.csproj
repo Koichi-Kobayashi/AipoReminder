@@ -282,7 +282,9 @@
     <Content Include="favicon.ico" />
     <Content Include="information_blue.png" />
     <Content Include="information_orange.png" />
-    <Content Include="lib\AlertWindow.dll" />
+    <Content Include="lib\AlertWindow.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="lib\ja\Npgsql.resources.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -295,7 +297,9 @@
     <Content Include="lib\Npgsql.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="lib\WinFramework.dll" />
+    <Content Include="lib\WinFramework.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\favicon_16_red.ico" />
     <None Include="app.config.org" />
     <None Include="Resources\autologin.html" />

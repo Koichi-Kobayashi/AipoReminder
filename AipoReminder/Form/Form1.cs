@@ -260,12 +260,6 @@ namespace AipoReminder
                     }
                 }
 
-                // タイムカード連携はAipoのバージョンが5以上のみ
-                if (5 <= int.Parse(comboBoxAipoVersion.SelectedItem.ToString()))
-                {
-                    checkBoxExtTimeCard.Enabled = false;
-                }
-
                 return true;
             }
             catch (TypeInitializationException e)
