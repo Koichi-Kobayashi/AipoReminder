@@ -95,6 +95,7 @@ namespace AipoReminder.DAO
 
         /// <summary>
         /// タイムカードの出社時刻を登録
+        /// Aipo4～5
         /// </summary>
         /// <param name="data"></param>
         public int InsertTimeCard(System.Data.DataSet data)
@@ -120,6 +121,61 @@ namespace AipoReminder.DAO
             sqlbldr.AppendLine("    , update_date");
             sqlbldr.AppendLine(") values (");
             sqlbldr.AppendLine("      :user_id");
+            sqlbldr.AppendLine("    , to_date(:punch_date, 'YYYY-MM-DD')");
+            sqlbldr.AppendLine("    , :type");
+            if (!String.IsNullOrEmpty(param.clock_in_time))
+            {
+                sqlbldr.AppendLine("    , to_timestamp(:clock_in_time, 'YYYY-MM-DD HH24:MI:SS.MS')");
+                paramList.Add(DBUtility.MakeParameter("clock_in_time", param.clock_in_time, NpgsqlDbType.Varchar));
+            }
+            if (!String.IsNullOrEmpty(param.clock_out_time))
+            {
+                sqlbldr.AppendLine("    , to_timestamp(:clock_out_time, 'YYYY-MM-DD HH24:MI:SS.MS')");
+                paramList.Add(DBUtility.MakeParameter("clock_out_time", param.clock_out_time, NpgsqlDbType.Varchar));
+            }
+            sqlbldr.AppendLine("    , to_date(:create_date, 'YYYY-MM-DD')");
+            sqlbldr.AppendLine("    , to_timestamp(:update_date, 'YYYY-MM-DD HH24:MI:SS.MS')");
+            sqlbldr.AppendLine(");");
+
+            paramList.Add(DBUtility.MakeParameter("user_id", param.user_id, NpgsqlDbType.Integer));
+            paramList.Add(DBUtility.MakeParameter("punch_date", param.punch_date, NpgsqlDbType.Varchar));
+            paramList.Add(DBUtility.MakeParameter("type", param.type, NpgsqlDbType.Char));
+            paramList.Add(DBUtility.MakeParameter("create_date", param.create_date, NpgsqlDbType.Varchar));
+            paramList.Add(DBUtility.MakeParameter("update_date", param.update_date, NpgsqlDbType.Varchar));
+
+            return this.dbHelper.Insert(((ExtTimeCardDataSet)data).eip_t_ext_timecard, sqlbldr.ToString(), paramList);
+        }
+
+        /// <summary>
+        /// タイムカードの出社時刻を登録
+        /// Aipo6
+        /// </summary>
+        /// <param name="data"></param>
+        public int InsertTimeCardv6(System.Data.DataSet data)
+        {
+            System.Text.StringBuilder sqlbldr = new System.Text.StringBuilder();
+            ExtTimeCardDataSet.update_eip_t_ext_timecardRow param = ((ExtTimeCardDataSet)data).update_eip_t_ext_timecard[0];
+            ArrayList paramList = new ArrayList();
+
+            sqlbldr.AppendLine("insert");
+            sqlbldr.AppendLine(" into eip_t_ext_timecard (");
+            sqlbldr.AppendLine("      timecard_id");
+            sqlbldr.AppendLine("    , user_id");
+            sqlbldr.AppendLine("    , punch_date");
+            sqlbldr.AppendLine("    , type");
+            if (!String.IsNullOrEmpty(param.clock_in_time))
+            {
+                sqlbldr.AppendLine("    , clock_in_time");
+            }
+            if (!String.IsNullOrEmpty(param.clock_out_time))
+            {
+                sqlbldr.AppendLine("    , clock_out_time");
+            }
+            sqlbldr.AppendLine("    , create_date");
+            sqlbldr.AppendLine("    , update_date");
+            sqlbldr.AppendLine(") values (");
+            sqlbldr.AppendLine("      (select nextval('pk_eip_t_ext_timecard'))");
+            sqlbldr.AppendLine("    , :user_id");
             sqlbldr.AppendLine("    , to_date(:punch_date, 'YYYY-MM-DD')");
             sqlbldr.AppendLine("    , :type");
             if (!String.IsNullOrEmpty(param.clock_in_time))

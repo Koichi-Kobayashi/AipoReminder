@@ -1,5 +1,6 @@
 ﻿using AipoReminder.DAO;
 using WinFramework.Utility;
+using AipoReminder.Utility;
 
 namespace AipoReminder.Logic
 {
@@ -33,7 +34,16 @@ namespace AipoReminder.Logic
         public int InsertTimeCard(System.Data.DataSet data)
         {
             ExtTimeCardDAO dao = new ExtTimeCardDAO(this.dbHelper);
-            return dao.InsertTimeCard(data);
+            switch (SettingManager.AipoVersion)
+            {
+                case 4:
+                case 5:
+                    return dao.InsertTimeCard(data);
+                case 6:
+                    return dao.InsertTimeCardv6(data);
+                default:
+                    return dao.InsertTimeCardv6(data);
+            }
         }
 
         public int UpdateTimeCard(System.Data.DataSet data)
