@@ -185,6 +185,21 @@ namespace AipoReminder
                 // データベース名
                 textBoxDbName.Text = SettingManager.NpgsqlConnectionDatabase;
 
+                // v6対応バージョンの初回起動かどうか
+                if (SettingManager.V6FirstTime)
+                {
+                    DialogResult result = MessageBox.Show(MessageConstants.MSG_CONFIRM_V6_FIRST_TIME, 
+                                                          MessageConstants.MSG_CAPTION_004, 
+                                                          MessageBoxButtons.OKCancel, 
+                                                          MessageBoxIcon.Question);
+                    if (result == DialogResult.OK)
+                    {
+                        SettingManager.AipoVersion = 6;
+                    }
+                    SettingManager.V6FirstTime = false;
+                    SettingManager.V6FirstTimeSave();
+                }
+
                 // AipoVersionコンボボックスのSelectedIndexを設定
                 switch (SettingManager.AipoVersion)
                 {
@@ -266,7 +281,10 @@ namespace AipoReminder
             {
                 LogUtility.WriteLogError(e.Message);
                 // エラーメッセージ
-                MessageBox.Show(MessageConstants.ERR_SETTING, MessageConstants.MSG_CAPTION_003, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(MessageConstants.ERR_SETTING, 
+                                MessageConstants.MSG_CAPTION_003, 
+                                MessageBoxButtons.OK, 
+                                MessageBoxIcon.Warning);
                 return false;
             }
         }
@@ -463,7 +481,6 @@ namespace AipoReminder
                     ExtTimeCardDataSet.update_eip_t_ext_timecardRow updateRow = data.update_eip_t_ext_timecard.Newupdate_eip_t_ext_timecardRow();
                     updateRow.user_id = SettingManager.UserId;
                     updateRow.clock_out_time = dt.ToString("yyyy-MM-dd HH:mm:ss.fff");
-//                    updateRow.clock_out_time = dt;
                     updateRow.update_date = dtUpdateDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
                     updateRow.timecard_id = data.eip_t_ext_timecard[0].timecard_id;
                     data.update_eip_t_ext_timecard.Rows.Add(updateRow);
@@ -513,7 +530,10 @@ namespace AipoReminder
             if (this.challengeLoginCount > Form1.CHALLENGE_LOGIN_MAX_COUNT)
             {
                 // エラーメッセージ
-                MessageBox.Show(MessageConstants.ERR_DB_ACCESS, MessageConstants.MSG_CAPTION_001, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(MessageConstants.ERR_DB_ACCESS, 
+                                MessageConstants.MSG_CAPTION_001, 
+                                MessageBoxButtons.OK, 
+                                MessageBoxIcon.Warning);
                 // ウィンドウを表示
                 this.ActiveWindow();
                 // タイマー停止
@@ -729,14 +749,20 @@ namespace AipoReminder
                 else
                 {
                     // ログイン名とパスワードが不一致
-                    MessageBox.Show(MessageConstants.ERR_PASSWORD, MessageConstants.MSG_CAPTION_001, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(MessageConstants.ERR_PASSWORD, 
+                                    MessageConstants.MSG_CAPTION_001, 
+                                    MessageBoxButtons.OK, 
+                                    MessageBoxIcon.Warning);
                 }
             }
             catch (DBException ex)
             {
                 Debug.Print(ex.toString());
                 // エラーメッセージ
-                MessageBox.Show(MessageConstants.ERR_DB_ACCESS, MessageConstants.MSG_CAPTION_001, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(MessageConstants.ERR_DB_ACCESS, 
+                                MessageConstants.MSG_CAPTION_001, 
+                                MessageBoxButtons.OK, 
+                                MessageBoxIcon.Warning);
             }
         }
 

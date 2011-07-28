@@ -138,6 +138,11 @@ namespace AipoReminder.Utility
         /// </summary>
         public static string BrowserName { get; set; }
 
+        /// <summary>
+        /// v6対応のために初回起動時に確認メッセージを表示するかどうか
+        /// </summary>
+        public static bool V6FirstTime { get; set; }
+
         static SettingManager()
         {
             UserId = Properties.Settings.Default.userId;
@@ -164,6 +169,7 @@ namespace AipoReminder.Utility
             CheckInformation = Properties.Settings.Default.checkInformation;
             CheckExtTimeCard = Properties.Settings.Default.ckeckExtTimeCard;
             BrowserName = Properties.Settings.Default.browserName;
+            V6FirstTime = Properties.Settings.Default.v6FirstTime;
 
             // カンマ区切りのユーザIDの中に数字ではない文字が含まれていた場合、ユーザIDを取得しない
             bool isNotDigit = false;
@@ -303,6 +309,19 @@ namespace AipoReminder.Utility
             Properties.Settings.Default.NpgsqlConnectionPassword = Security.EncryptData(SettingManager.NpgsqlConnectionPassword);
             Properties.Settings.Default.NpgsqlConnectionDatabase = SettingManager.NpgsqlConnectionDatabase;
             Properties.Settings.Default.NpgsqlConnectionTimeout = SettingManager.NpgsqlConnectionTimeout;
+
+            Properties.Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// v6対応初回起動フラグを保存する
+        /// </summary>
+        public static void V6FirstTimeSave()
+        {
+            // v6対応初回起動フラグ
+            Properties.Settings.Default.v6FirstTime = SettingManager.V6FirstTime;
+            // AipoVersion
+            Properties.Settings.Default.aipoVersion = SettingManager.AipoVersion;
 
             Properties.Settings.Default.Save();
         }

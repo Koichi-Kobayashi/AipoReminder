@@ -43,5 +43,9 @@ namespace AipoReminder.Constants
         // 吹き出し
         public const string MSG_INFORMATION_01 = "Aipoリマインダーからのお知らせ";
         public const string MSG_INFORMATION_02 = "お知らせ";
+
+        // v6対応バージョン初回起動時メッセージ
+        public const string MSG_CAPTION_004 = "Aipoバージョン6対応";
+        public const string MSG_CONFIRM_V6_FIRST_TIME = "AipoVersionの設定を6に変更しますか？\nあとで変更する事も可能です。";
     }
 }

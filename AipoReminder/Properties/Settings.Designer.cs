@@ -322,5 +322,17 @@ namespace AipoReminder.Properties {
                 this["browserName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool v6FirstTime {
+            get {
+                return ((bool)(this["v6FirstTime"]));
+            }
+            set {
+                this["v6FirstTime"] = value;
+            }
+        }
     }
 }
