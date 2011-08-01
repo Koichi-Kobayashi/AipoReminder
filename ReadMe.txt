@@ -1,14 +1,15 @@
 ===========================================================================
-【 ソフト名 】　Aipo支援ツール「Aipoリマインダー｣ Ver 1.0.10.0
-【 登 録 名 】　AipoReminder1.0.10.0.zip
+【 ソフト名 】　Aipo支援ツール「Aipoリマインダー｣ Ver 1.1.0.0
+【 登 録 名 】　AipoReminder1.1.0.0.zip
 【 圧縮形式 】　zip
-【 作 成 者 】　Copyright (C) 2009-2010 k.kobayashi
+【 作 成 者 】　Copyright (C) 2009-2011 k.kobayashi
 【 HomePage 】　なし
 【  e-mail  】　tous.les.deux256@gmail.com
+【  twitter 】　@AipoReminder
 【 動作環境 】　日本語版 Windows XP SP3 32bit/ 日本語版 Vista SP2 64bit
                 日本語版 Windows 7 64bit
                 .NET Framework 2.0以上
-【 掲載月日 】　2010/08/15
+【 掲載月日 】　2011/07/25
 【 種    別 】　フリーソフトウェア
 ===========================================================================
 
@@ -56,8 +57,8 @@
 ---------------------------------------------------------------------------
 --  インストール方法  -----------------------------------------------------
 ---------------------------------------------------------------------------
-　AipoReminder1092.zipを任意のディレクトリに解凍してください。
-　解凍後のフォルダ名をAipoReminder10100からAipoReminderに変更しておくと後々のアップデート時にスムーズにアップデートが出来ます。
+　AipoReminder1100.zipを任意のディレクトリに解凍してください。
+　解凍後のフォルダ名をAipoReminder1100からAipoReminderに変更しておくと後々のアップデート時にスムーズにアップデートが出来ます。
 
 ---------------------------------------------------------------------------
 --  アップデート方法  -----------------------------------------------------
@@ -144,26 +145,51 @@
 
       PostgreSQLに接続出来たら、以下のコマンドを順に実行して下さい。
 
-      CREATE ROLE aipo_reminder WITH LOGIN PASSWORD 'reminder';
-      GRANT SELECT ON eip_t_schedule_map TO aipo_reminder;
-      GRANT SELECT ON eip_t_schedule TO aipo_reminder;
-      GRANT SELECT ON turbine_user TO aipo_reminder;
-      GRANT SELECT ON turbine_group TO aipo_reminder;
-      GRANT SELECT ON turbine_user_group_role TO aipo_reminder;
-      GRANT SELECT ON eip_t_whatsnew TO aipo_reminder;
-      GRANT SELECT ON eip_t_blog_entry TO aipo_reminder;
-      GRANT SELECT ON eip_t_blog_comment TO aipo_reminder;
-      GRANT SELECT ON eip_t_workflow_request_map TO aipo_reminder;
-      GRANT SELECT ON eip_t_workflow_request TO aipo_reminder;
-      GRANT SELECT ON eip_t_workflow_category TO aipo_reminder;
-      GRANT SELECT ON eip_t_msgboard_topic TO aipo_reminder;
-      GRANT SELECT ON eip_t_msgboard_category TO aipo_reminder;
-      GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder;
-      GRANT SELECT ON eip_t_note TO aipo_reminder;
-      GRANT SELECT, INSERT, UPDATE ON eip_t_ext_timecard TO aipo_reminder;
-      GRANT SELECT ON eip_t_ext_timecard_system TO aipo_reminder;
-      GRANT SELECT ON eip_t_ext_timecard_system_map TO aipo_reminder;
-      GRANT UPDATE ON eip_t_ext_timecard_timecard_id_seq TO aipo_reminder;
+　　　【Aipo4～5の場合】
+        CREATE ROLE aipo_reminder WITH LOGIN PASSWORD 'reminder';
+        GRANT SELECT ON eip_t_schedule_map TO aipo_reminder;
+        GRANT SELECT ON eip_t_schedule TO aipo_reminder;
+        GRANT SELECT ON turbine_user TO aipo_reminder;
+        GRANT SELECT ON turbine_group TO aipo_reminder;
+        GRANT SELECT ON turbine_user_group_role TO aipo_reminder;
+        GRANT SELECT ON eip_t_whatsnew TO aipo_reminder;
+        GRANT SELECT ON eip_t_blog_entry TO aipo_reminder;
+        GRANT SELECT ON eip_t_blog_comment TO aipo_reminder;
+        GRANT SELECT ON eip_t_workflow_request_map TO aipo_reminder;
+        GRANT SELECT ON eip_t_workflow_request TO aipo_reminder;
+        GRANT SELECT ON eip_t_workflow_category TO aipo_reminder;
+        GRANT SELECT ON eip_t_msgboard_topic TO aipo_reminder;
+        GRANT SELECT ON eip_t_msgboard_category TO aipo_reminder;
+        GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder;
+        GRANT SELECT ON eip_t_note TO aipo_reminder;
+        GRANT SELECT, INSERT, UPDATE ON eip_t_ext_timecard TO aipo_reminder;
+        GRANT SELECT ON eip_t_ext_timecard_system TO aipo_reminder;
+        GRANT SELECT ON eip_t_ext_timecard_system_map TO aipo_reminder;
+        GRANT UPDATE ON eip_t_ext_timecard_timecard_id_seq TO aipo_reminder;
+
+　　　【Aipo6の場合】
+        CREATE ROLE aipo_reminder WITH LOGIN PASSWORD 'reminder';
+        GRANT SELECT ON eip_t_schedule_map TO aipo_reminder;
+        GRANT SELECT ON eip_t_schedule TO aipo_reminder;
+        GRANT SELECT ON turbine_user TO aipo_reminder;
+        GRANT SELECT ON turbine_group TO aipo_reminder;
+        GRANT SELECT ON turbine_user_group_role TO aipo_reminder;
+        GRANT SELECT ON eip_t_whatsnew TO aipo_reminder;
+        GRANT SELECT ON eip_t_blog_entry TO aipo_reminder;
+        GRANT SELECT ON eip_t_blog_comment TO aipo_reminder;
+        GRANT SELECT ON eip_t_workflow_request_map TO aipo_reminder;
+        GRANT SELECT ON eip_t_workflow_request TO aipo_reminder;
+        GRANT SELECT ON eip_t_workflow_category TO aipo_reminder;
+        GRANT SELECT ON eip_t_msgboard_topic TO aipo_reminder;
+        GRANT SELECT ON eip_t_msgboard_category TO aipo_reminder;
+        GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder;
+        GRANT SELECT ON eip_t_note TO aipo_reminder;
+        GRANT SELECT, INSERT, UPDATE ON eip_t_ext_timecard TO aipo_reminder;
+        GRANT SELECT ON eip_t_ext_timecard_system TO aipo_reminder;
+        GRANT SELECT ON eip_t_ext_timecard_system_map TO aipo_reminder;
+        GRANT UPDATE ON pk_eip_t_ext_timecard TO aipo_reminder;
+        GRANT SELECT ON activity TO aipo_reminder;
+        GRANT SELECT ON activity_map TO aipo_reminder;
 
       \q で切断します。
 
@@ -205,26 +231,51 @@
 
       PostgreSQLに接続出来たら、以下のコマンドを順に実行して下さい。
 
-      CREATE ROLE aipo_reminder WITH LOGIN PASSWORD 'reminder';
-      GRANT SELECT ON eip_t_schedule_map TO aipo_reminder;
-      GRANT SELECT ON eip_t_schedule TO aipo_reminder;
-      GRANT SELECT ON turbine_user TO aipo_reminder;
-      GRANT SELECT ON turbine_group TO aipo_reminder;
-      GRANT SELECT ON turbine_user_group_role TO aipo_reminder;
-      GRANT SELECT ON eip_t_whatsnew TO aipo_reminder;
-      GRANT SELECT ON eip_t_blog_entry TO aipo_reminder;
-      GRANT SELECT ON eip_t_blog_comment TO aipo_reminder;
-      GRANT SELECT ON eip_t_workflow_request_map TO aipo_reminder;
-      GRANT SELECT ON eip_t_workflow_request TO aipo_reminder;
-      GRANT SELECT ON eip_t_workflow_category TO aipo_reminder;
-      GRANT SELECT ON eip_t_msgboard_topic TO aipo_reminder;
-      GRANT SELECT ON eip_t_msgboard_category TO aipo_reminder;
-      GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder;
-      GRANT SELECT ON eip_t_note TO aipo_reminder;
-      GRANT SELECT, INSERT, UPDATE ON eip_t_ext_timecard TO aipo_reminder;
-      GRANT SELECT ON eip_t_ext_timecard_system TO aipo_reminder;
-      GRANT SELECT ON eip_t_ext_timecard_system_map TO aipo_reminder;
-      GRANT UPDATE ON eip_t_ext_timecard_timecard_id_seq TO aipo_reminder;
+　　　【Aipo4～5の場合】
+        CREATE ROLE aipo_reminder WITH LOGIN PASSWORD 'reminder';
+        GRANT SELECT ON eip_t_schedule_map TO aipo_reminder;
+        GRANT SELECT ON eip_t_schedule TO aipo_reminder;
+        GRANT SELECT ON turbine_user TO aipo_reminder;
+        GRANT SELECT ON turbine_group TO aipo_reminder;
+        GRANT SELECT ON turbine_user_group_role TO aipo_reminder;
+        GRANT SELECT ON eip_t_whatsnew TO aipo_reminder;
+        GRANT SELECT ON eip_t_blog_entry TO aipo_reminder;
+        GRANT SELECT ON eip_t_blog_comment TO aipo_reminder;
+        GRANT SELECT ON eip_t_workflow_request_map TO aipo_reminder;
+        GRANT SELECT ON eip_t_workflow_request TO aipo_reminder;
+        GRANT SELECT ON eip_t_workflow_category TO aipo_reminder;
+        GRANT SELECT ON eip_t_msgboard_topic TO aipo_reminder;
+        GRANT SELECT ON eip_t_msgboard_category TO aipo_reminder;
+        GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder;
+        GRANT SELECT ON eip_t_note TO aipo_reminder;
+        GRANT SELECT, INSERT, UPDATE ON eip_t_ext_timecard TO aipo_reminder;
+        GRANT SELECT ON eip_t_ext_timecard_system TO aipo_reminder;
+        GRANT SELECT ON eip_t_ext_timecard_system_map TO aipo_reminder;
+        GRANT UPDATE ON eip_t_ext_timecard_timecard_id_seq TO aipo_reminder;
+
+　　　【Aipo6の場合】
+        CREATE ROLE aipo_reminder WITH LOGIN PASSWORD 'reminder';
+        GRANT SELECT ON eip_t_schedule_map TO aipo_reminder;
+        GRANT SELECT ON eip_t_schedule TO aipo_reminder;
+        GRANT SELECT ON turbine_user TO aipo_reminder;
+        GRANT SELECT ON turbine_group TO aipo_reminder;
+        GRANT SELECT ON turbine_user_group_role TO aipo_reminder;
+        GRANT SELECT ON eip_t_whatsnew TO aipo_reminder;
+        GRANT SELECT ON eip_t_blog_entry TO aipo_reminder;
+        GRANT SELECT ON eip_t_blog_comment TO aipo_reminder;
+        GRANT SELECT ON eip_t_workflow_request_map TO aipo_reminder;
+        GRANT SELECT ON eip_t_workflow_request TO aipo_reminder;
+        GRANT SELECT ON eip_t_workflow_category TO aipo_reminder;
+        GRANT SELECT ON eip_t_msgboard_topic TO aipo_reminder;
+        GRANT SELECT ON eip_t_msgboard_category TO aipo_reminder;
+        GRANT SELECT ON eip_t_msgboard_category_map TO aipo_reminder;
+        GRANT SELECT ON eip_t_note TO aipo_reminder;
+        GRANT SELECT, INSERT, UPDATE ON eip_t_ext_timecard TO aipo_reminder;
+        GRANT SELECT ON eip_t_ext_timecard_system TO aipo_reminder;
+        GRANT SELECT ON eip_t_ext_timecard_system_map TO aipo_reminder;
+        GRANT UPDATE ON pk_eip_t_ext_timecard TO aipo_reminder;
+        GRANT SELECT ON activity TO aipo_reminder;
+        GRANT SELECT ON activity_map TO aipo_reminder;
 
       \q で切断します。
 
@@ -275,6 +326,10 @@
 　k.kobayashiまでメールでご連絡下さい。
 　不具合報告の際は、出来れば動作させているマシンの詳細な環境情報を添えて下さい。
 
+　twitterでも気軽にフォローして下さい。
+　アカウント
+　@AipoReminder
+
 ---------------------------------------------------------------------------
 --  既知のバグ  -----------------------------------------------------------
 ---------------------------------------------------------------------------
@@ -289,6 +344,20 @@
 ---------------------------------------------------------------------------
 --  改版履歴  -------------------------------------------------------------
 ---------------------------------------------------------------------------
+■ Ver 1.1.0.0 (2011/08/01)
+　【変更】
+　・Aipo6への対応
+　　Aipoの仕様により、新着情報が「あなた宛てのお知らせ」と
+　　「更新情報」アプリになったことで、「更新情報」アプリでは、
+　　既読管理を行っていないため、リマインダーで通知出来るものを
+　　「あなた宛てのお知らせ」のみとした。
+　　「あなた宛てのお知らせ」の仕組み上、お知らせの種類を管理していないため、
+　　リマインダーでも踏襲することにした
+　・Npgsqlのバージョンを2.0.11.91にアップデート
+　・eip_t_ext_timecard_timecard_id_seqが廃止になり、pk_eip_t_ext_timecardが
+　　使用されるようになったので、postgres_setting.batをV4,5用とV6用に分けた
+　・Aipo6へ対応する際、上記の「制限」の項で書いているdpl003はdpl004に読み替えて下さい。
+
 ■ Ver 1.0.10.0 (2010/08/15)
 　【変更】
 　・Npgsqlのバージョンを2.0.10にアップデートした

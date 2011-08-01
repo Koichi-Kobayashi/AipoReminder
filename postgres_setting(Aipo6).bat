@@ -4,7 +4,7 @@
 rem ------------------------------------------------------------------------
 rem aipoをインストールした場所に合わせて下さい
 rem psql実行ファイル
-set psql=E:\aipo\dpl003\postgresql\bin\psql.exe
+set psql=E:\aipo\dpl004\postgresql\bin\psql.exe
 rem ------------------------------------------------------------------------
 
 set psql=%psql% -d org001 -U aipo_postgres -q -t -d org001 -c 
@@ -32,7 +32,9 @@ set role_cmd=%role_cmd% GRANT SELECT ON eip_t_note TO aipo_reminder;
 set role_cmd=%role_cmd% GRANT SELECT, INSERT, UPDATE ON eip_t_ext_timecard TO aipo_reminder;
 set role_cmd=%role_cmd% GRANT SELECT ON eip_t_ext_timecard_system TO aipo_reminder;
 set role_cmd=%role_cmd% GRANT SELECT ON eip_t_ext_timecard_system_map TO aipo_reminder;
-set role_cmd=%role_cmd% GRANT SELECT ON eip_t_ext_timecard_timecard_id_seq TO aipo_reminder; "
+set role_cmd=%role_cmd% GRANT UPDATE ON pk_eip_t_ext_timecard TO aipo_reminder;
+set role_cmd=%role_cmd% GRANT SELECT ON activity TO aipo_reminder;
+set role_cmd=%role_cmd% GRANT SELECT ON activity_map TO aipo_reminder; "
 
 rem ロール検索
 %psql% "SELECT * FROM pg_roles where rolname = 'aipo_reminder';" | findstr "aipo_reminder" > %result%
@@ -49,3 +51,5 @@ if "%role%" == "aipo_reminder" (
     %psql% %role_add_cmd%
     %psql% %role_cmd%
 )
+
+pause;
