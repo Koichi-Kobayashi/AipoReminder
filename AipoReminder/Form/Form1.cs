@@ -227,26 +227,26 @@ namespace AipoReminder
                 // 指定ブラウザComboboxの初期設定
                 SetComboBoxBrowserItems();
 
-                // Aipoのバージョン依存項目の設定
-                InitAipoVersionConfig();
-            
                 if (String.IsNullOrEmpty(SettingManager.UserId) ||
                     String.IsNullOrEmpty(SettingManager.LoginName) ||
                     String.IsNullOrEmpty(SettingManager.UserPassword))
                 {
-                    // 新着情報はデフォルトですべてチェックしておく
-                    SettingManager.CheckBlog = true;
-                    SettingManager.CheckBlogComment = true;
-                    SettingManager.CheckMsgboard = true;
-                    SettingManager.CheckSchedule = true;
-                    SettingManager.CheckWorkflow = true;
-                    SettingManager.CheckMemo = true;
-                    checkBoxBlog.Checked = true;
-                    checkBoxBlogComment.Checked = true;
-                    checkBoxMsgboard.Checked = true;
-                    checkBoxSchedule.Checked = true;
-                    checkBoxWorkflow.Checked = true;
-                    checkBoxMemo.Checked = true;
+                    if (SettingManager.AipoVersion < 6)
+                    {
+                        // 新着情報はデフォルトですべてチェックしておく
+                        SettingManager.CheckBlog = true;
+                        SettingManager.CheckBlogComment = true;
+                        SettingManager.CheckMsgboard = true;
+                        SettingManager.CheckSchedule = true;
+                        SettingManager.CheckWorkflow = true;
+                        SettingManager.CheckMemo = true;
+                        checkBoxBlog.Checked = true;
+                        checkBoxBlogComment.Checked = true;
+                        checkBoxMsgboard.Checked = true;
+                        checkBoxSchedule.Checked = true;
+                        checkBoxWorkflow.Checked = true;
+                        checkBoxMemo.Checked = true;
+                    }
 
                     this.ActiveWindow();
                     return false;
@@ -274,6 +274,12 @@ namespace AipoReminder
                         comboBoxBrowser.SelectedItem = browserItem;
                     }
                 }
+
+                // Aipoのバージョン依存項目の設定
+                InitAipoVersionConfig();
+
+                // 設定を保存
+                SettingManager.WhatsnewInfoSave();
 
                 return true;
             }
@@ -581,9 +587,24 @@ namespace AipoReminder
                     InitWhatsnewConfigEnabled(true);
                     break;
                 case 6:
+                    InitWhatsnewConfigCheck(false);
                     InitWhatsnewConfigEnabled(false);
                     break;
             }
+        }
+
+        /// <summary>
+        /// 新着情報のチェックボックスのチェックを切り替える
+        /// </summary>
+        /// <param name="isChecked">true:ON、false:OFF</param>
+        private void InitWhatsnewConfigCheck(bool isChecked)
+        {
+            checkBoxBlog.Checked = isChecked;
+            checkBoxBlogComment.Checked = isChecked;
+            checkBoxMsgboard.Checked = isChecked;
+            checkBoxSchedule.Checked = isChecked;
+            checkBoxWorkflow.Checked = isChecked;
+            checkBoxMemo.Checked = isChecked;
         }
 
         /// <summary>
@@ -697,6 +718,7 @@ namespace AipoReminder
                     textBoxDbUserId.Enabled = false;
                     textBoxDbPassword.Enabled = false;
                     textBoxDbName.Enabled = false;
+                    comboBoxAipoVersion.Enabled = false;
 
                     // 自動ログイン用html作成
                     SettingManager.AutoLoginHtml = String.Format(Properties.Resources.autologin,
@@ -920,6 +942,7 @@ namespace AipoReminder
             // Aipoのバージョンが6以上の場合は新着情報のチェックボックスを非活性にする
             if (6 <= selectedAipoVersion)
             {
+                InitWhatsnewConfigCheck(false);
                 InitWhatsnewConfigEnabled(false);
             }
             else

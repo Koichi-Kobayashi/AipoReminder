@@ -31,7 +31,7 @@ namespace AipoReminder.DAO
             sql.AppendLine(", to_char(t1.update_date, 'YYYY/MM/DD') as update_date");
             sql.AppendLine("from");
             sql.AppendLine("    activity t1 join activity_map t2");
-            sql.AppendLine("        on t1.id = t2.id");
+            sql.AppendLine("        on t1.id = t2.activity_id");
             sql.AppendLine("    left join turbine_user t3");
             sql.AppendLine("        on t1.login_name = t3.login_name");
             sql.AppendLine("where 1 = 1");
