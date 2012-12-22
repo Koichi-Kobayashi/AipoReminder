@@ -40,6 +40,7 @@ namespace AipoReminder.Logic
                 case 5:
                     return dao.InsertTimeCard(data);
                 case 6:
+                case 7:
                     return dao.InsertTimeCardv6(data);
                 default:
                     return dao.InsertTimeCardv6(data);

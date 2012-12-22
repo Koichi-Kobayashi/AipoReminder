@@ -185,19 +185,19 @@ namespace AipoReminder
                 // データベース名
                 textBoxDbName.Text = SettingManager.NpgsqlConnectionDatabase;
 
-                // v6対応バージョンの初回起動かどうか
-                if (SettingManager.V6FirstTime)
+                // v7(v6)対応バージョンの初回起動かどうか
+                if (SettingManager.V7FirstTime)
                 {
-                    DialogResult result = MessageBox.Show(MessageConstants.MSG_CONFIRM_V6_FIRST_TIME, 
+                    DialogResult result = MessageBox.Show(MessageConstants.MSG_CONFIRM_V7_FIRST_TIME, 
                                                           MessageConstants.MSG_CAPTION_004, 
                                                           MessageBoxButtons.OKCancel, 
                                                           MessageBoxIcon.Question);
                     if (result == DialogResult.OK)
                     {
-                        SettingManager.AipoVersion = 6;
+                        SettingManager.AipoVersion = 7;
                     }
-                    SettingManager.V6FirstTime = false;
-                    SettingManager.V6FirstTimeSave();
+                    SettingManager.V7FirstTime = false;
+                    SettingManager.V7FirstTimeSave();
                 }
 
                 // AipoVersionコンボボックスのSelectedIndexを設定
@@ -212,6 +212,9 @@ namespace AipoReminder
                     case 6:
                         comboBoxAipoVersion.SelectedIndex = 2;
                         break;
+                    case 7:
+                        comboBoxAipoVersion.SelectedIndex = 3;
+                        break;
                 }
 
                 // スケジュールのチェック間隔コンボボックスのSelectedIndexを設定
@@ -225,7 +228,7 @@ namespace AipoReminder
                 }
 
                 // 指定ブラウザComboboxの初期設定
-                SetComboBoxBrowserItems();
+                //SetComboBoxBrowserItems();
 
                 if (String.IsNullOrEmpty(SettingManager.UserId) ||
                     String.IsNullOrEmpty(SettingManager.LoginName) ||
@@ -267,13 +270,14 @@ namespace AipoReminder
                 checkBoxOtherSchedule.Checked = SettingManager.CheckOtherSchedule;      // 他のユーザのスケジュールをチェックするかどうか
                 checkBoxInformation.Checked = SettingManager.CheckInformation;          // お知らせを吹き出しからウィンドウタイプに変更するかどうか
                 checkBoxExtTimeCard.Checked = SettingManager.CheckExtTimeCard;          // タイムカードと連携するかどうか
-                foreach (ComboBoxBrowserItem browserItem in comboBoxBrowser.Items)      // 指定ブラウザの設定
-                {
-                    if (SettingManager.BrowserName.Equals(browserItem.Name))
-                    {
-                        comboBoxBrowser.SelectedItem = browserItem;
-                    }
-                }
+                //foreach (ComboBoxBrowserItem browserItem in comboBoxBrowser.Items)      // 指定ブラウザの設定
+                //{
+                //    if (SettingManager.BrowserName.Equals(browserItem.Name))
+                //    {
+                //        comboBoxBrowser.SelectedItem = browserItem;
+                //    }
+                //}
+                textBoxBrowser.Text = SettingManager.BrowserPath;                       // ブラウザのパス
 
                 // Aipoのバージョン依存項目の設定
                 InitAipoVersionConfig();
@@ -587,6 +591,7 @@ namespace AipoReminder
                     InitWhatsnewConfigEnabled(true);
                     break;
                 case 6:
+                case 7:
                     InitWhatsnewConfigCheck(false);
                     InitWhatsnewConfigEnabled(false);
                     break;
@@ -621,25 +626,25 @@ namespace AipoReminder
             checkBoxMemo.Enabled = isEnabled;
         }
 
-        /// <summary>
-        /// グループ一覧をComboBoxに設定
-        /// </summary>
-        private void SetComboBoxBrowserItems()
-        {
-            ComboBoxBrowserItem defaultItem = new ComboBoxBrowserItem(0, "デフォルト", "");
-            comboBoxBrowser.Items.Add(defaultItem);
-            comboBoxBrowser.SelectedIndex = 0;
+        ///// <summary>
+        ///// グループ一覧をComboBoxに設定
+        ///// </summary>
+        //private void SetComboBoxBrowserItems()
+        //{
+        //    ComboBoxBrowserItem defaultItem = new ComboBoxBrowserItem(0, "デフォルト", "");
+        //    comboBoxBrowser.Items.Add(defaultItem);
+        //    comboBoxBrowser.SelectedIndex = 0;
 
-            AipoReminder.Utility.RegistryUtility regUtil = new AipoReminder.Utility.RegistryUtility();
-            List<ComboBoxBrowserItem> listBrowserItem = regUtil.getBrowserComboItem();
+        //    AipoReminder.Utility.RegistryUtility regUtil = new AipoReminder.Utility.RegistryUtility();
+        //    List<ComboBoxBrowserItem> listBrowserItem = regUtil.getBrowserComboItem();
 
-            for (int i = 0; i < listBrowserItem.Count; i++)
-            {
-                ComboBoxBrowserItem item = listBrowserItem[i];
-                item.Id = i + 1;
-                comboBoxBrowser.Items.Add(item);
-            }
-        }
+        //    for (int i = 0; i < listBrowserItem.Count; i++)
+        //    {
+        //        ComboBoxBrowserItem item = listBrowserItem[i];
+        //        item.Id = i + 1;
+        //        comboBoxBrowser.Items.Add(item);
+        //    }
+        //}
 
         private void initTempDir()
         {
@@ -852,8 +857,9 @@ namespace AipoReminder
             SettingManager.CheckOtherSchedule = checkBoxOtherSchedule.Checked;      // 他のユーザのスケジュールのチェックするかどうか
             SettingManager.CheckInformation = checkBoxInformation.Checked;          // お知らせを吹き出しからウィンドウタイプに変更するかどうか
             SettingManager.CheckExtTimeCard = checkBoxExtTimeCard.Checked;          // タイムカードと連携するかどうか
-            ComboBoxBrowserItem bItem = (ComboBoxBrowserItem)comboBoxBrowser.SelectedItem;
-            SettingManager.BrowserName = bItem.Name;                                // 指定ブラウザ名
+//            ComboBoxBrowserItem bItem = (ComboBoxBrowserItem)comboBoxBrowser.SelectedItem;
+//            SettingManager.BrowserName = bItem.Name;                                // 指定ブラウザ名
+            SettingManager.BrowserPath = textBoxBrowser.Text;                       // ブラウザのパス
 
             if (isSetGroupUserId)
             {
@@ -908,6 +914,19 @@ namespace AipoReminder
                 isSetGroupUserId = true;
             }
             f.Dispose();
+        }
+
+        /// <summary>
+        /// ブラウザ参照ボタン
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.OK == this.openFileDialog1.ShowDialog())
+            {
+                this.textBoxBrowser.Text = this.openFileDialog1.FileName;
+            }
         }
 
         /// <summary>
@@ -1104,8 +1123,9 @@ namespace AipoReminder
         private void ShowAipoTopPage()
         {
             ThreadingManager threadingManager = new ThreadingManager();
-            ComboBoxBrowserItem item = (ComboBoxBrowserItem)comboBoxBrowser.SelectedItem;
-            threadingManager.setBrowserPath(item.Path);
+            //ComboBoxBrowserItem item = (ComboBoxBrowserItem)comboBoxBrowser.SelectedItem;
+            //threadingManager.setBrowserPath(item.Path);
+            threadingManager.setBrowserPath(SettingManager.BrowserPath);
             Thread thread = new Thread(new ThreadStart(threadingManager.Run));
 
             thread.Start();
@@ -1146,7 +1166,8 @@ namespace AipoReminder
                     this.WhatsnewProcess(isCheckNow, isStartup);
                     break;
                 case 6:
-                    this.WhatsnewProcessV6(isCheckNow, isStartup);
+                case 7:
+                    this.WhatsnewProcessV7(isCheckNow, isStartup);
                     break;
             }
         }
@@ -1442,7 +1463,7 @@ namespace AipoReminder
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void WhatsnewProcessV6(bool isCheckNow, bool isStartup)
+        public void WhatsnewProcessV7(bool isCheckNow, bool isStartup)
         {
             if (!isLogin)
             {

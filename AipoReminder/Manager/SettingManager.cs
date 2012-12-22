@@ -139,9 +139,14 @@ namespace AipoReminder.Utility
         public static string BrowserName { get; set; }
 
         /// <summary>
-        /// v6対応のために初回起動時に確認メッセージを表示するかどうか
+        /// v7(v6)対応のために初回起動時に確認メッセージを表示するかどうか
         /// </summary>
-        public static bool V6FirstTime { get; set; }
+        public static bool V7FirstTime { get; set; }
+
+        /// <summary>
+        /// 指定ブラウザのパス
+        /// </summary>
+        public static string BrowserPath { get; set; }
 
         static SettingManager()
         {
@@ -169,7 +174,8 @@ namespace AipoReminder.Utility
             CheckInformation = Properties.Settings.Default.checkInformation;
             CheckExtTimeCard = Properties.Settings.Default.ckeckExtTimeCard;
             BrowserName = Properties.Settings.Default.browserName;
-            V6FirstTime = Properties.Settings.Default.v6FirstTime;
+            V7FirstTime = Properties.Settings.Default.v7FirstTime;
+            BrowserPath = Properties.Settings.Default.browserPath;
 
             // カンマ区切りのユーザIDの中に数字ではない文字が含まれていた場合、ユーザIDを取得しない
             bool isNotDigit = false;
@@ -293,6 +299,8 @@ namespace AipoReminder.Utility
             Properties.Settings.Default.ckeckExtTimeCard = SettingManager.CheckExtTimeCard;
             // 指定ブラウザ名
             Properties.Settings.Default.browserName = SettingManager.BrowserName;
+            // 指定ブラウザ名
+            Properties.Settings.Default.browserPath = SettingManager.BrowserPath;
 
             Properties.Settings.Default.Save();
         }
@@ -314,12 +322,12 @@ namespace AipoReminder.Utility
         }
 
         /// <summary>
-        /// v6対応初回起動フラグを保存する
+        /// v7(v6)対応初回起動フラグを保存する
         /// </summary>
-        public static void V6FirstTimeSave()
+        public static void V7FirstTimeSave()
         {
-            // v6対応初回起動フラグ
-            Properties.Settings.Default.v6FirstTime = SettingManager.V6FirstTime;
+            // v7(v6)対応初回起動フラグ
+            Properties.Settings.Default.v7FirstTime = SettingManager.V7FirstTime;
             // AipoVersion
             Properties.Settings.Default.aipoVersion = SettingManager.AipoVersion;
 

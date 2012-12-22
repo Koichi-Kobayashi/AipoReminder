@@ -44,8 +44,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label11 = new System.Windows.Forms.Label();
-            this.comboBoxBrowser = new System.Windows.Forms.ComboBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBoxBrowser = new System.Windows.Forms.TextBox();
             this.checkBoxExtTimeCard = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.checkBoxInformation = new System.Windows.Forms.CheckBox();
@@ -97,6 +97,7 @@
             this.timerLogin = new System.Windows.Forms.Timer(this.components);
             this.alertWindow1 = new Allison.AlertWindow.AlertWindow();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -149,7 +150,8 @@
             this.comboBoxAipoVersion.Items.AddRange(new object[] {
             "4",
             "5",
-            "6"});
+            "6",
+            "7"});
             this.comboBoxAipoVersion.Location = new System.Drawing.Point(209, 141);
             this.comboBoxAipoVersion.Name = "comboBoxAipoVersion";
             this.comboBoxAipoVersion.Size = new System.Drawing.Size(75, 20);
@@ -255,8 +257,8 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.FloralWhite;
-            this.tabPage4.Controls.Add(this.label11);
-            this.tabPage4.Controls.Add(this.comboBoxBrowser);
+            this.tabPage4.Controls.Add(this.button3);
+            this.tabPage4.Controls.Add(this.textBoxBrowser);
             this.tabPage4.Controls.Add(this.checkBoxExtTimeCard);
             this.tabPage4.Controls.Add(this.button2);
             this.tabPage4.Controls.Add(this.checkBoxInformation);
@@ -275,23 +277,23 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "お知らせ設定";
             // 
-            // label11
+            // button3
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(35, 114);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(71, 12);
-            this.label11.TabIndex = 13;
-            this.label11.Text = "ブラウザ指定：";
+            this.button3.Location = new System.Drawing.Point(184, 109);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(71, 23);
+            this.button3.TabIndex = 13;
+            this.button3.Text = "参照";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // comboBoxBrowser
+            // textBoxBrowser
             // 
-            this.comboBoxBrowser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxBrowser.FormattingEnabled = true;
-            this.comboBoxBrowser.Location = new System.Drawing.Point(122, 111);
-            this.comboBoxBrowser.Name = "comboBoxBrowser";
-            this.comboBoxBrowser.Size = new System.Drawing.Size(133, 20);
-            this.comboBoxBrowser.TabIndex = 12;
+            this.textBoxBrowser.Location = new System.Drawing.Point(14, 111);
+            this.textBoxBrowser.Name = "textBoxBrowser";
+            this.textBoxBrowser.ReadOnly = true;
+            this.textBoxBrowser.Size = new System.Drawing.Size(166, 19);
+            this.textBoxBrowser.TabIndex = 12;
             // 
             // checkBoxExtTimeCard
             // 
@@ -789,6 +791,12 @@
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "\"実行ファイル(*.exe)|*.exe|すべてのファイル(*.*)|*.*\"";
+            this.openFileDialog1.RestoreDirectory = true;
+            this.openFileDialog1.Title = "使用するブラウザを選択して下さい";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -806,9 +814,9 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Aipoリマインダー";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -897,8 +905,9 @@
         private Allison.AlertWindow.AlertWindow alertWindow1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.CheckBox checkBoxExtTimeCard;
-        private System.Windows.Forms.ComboBox comboBoxBrowser;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBoxBrowser;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button button3;
     }
 }
 
