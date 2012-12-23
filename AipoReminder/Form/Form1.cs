@@ -196,6 +196,13 @@ namespace AipoReminder
                     {
                         SettingManager.AipoVersion = 7;
                     }
+
+                    DialogResult result2 = MessageBox.Show(MessageConstants.MSG_CONFIRM_V7_BROWSER,
+                                                           MessageConstants.MSG_CAPTION_005,
+                                                           MessageBoxButtons.OK,
+                                                           MessageBoxIcon.Information);
+
+
                     SettingManager.V7FirstTime = false;
                     SettingManager.V7FirstTimeSave();
                 }
@@ -1122,13 +1129,16 @@ namespace AipoReminder
         /// </summary>
         private void ShowAipoTopPage()
         {
-            ThreadingManager threadingManager = new ThreadingManager();
-            //ComboBoxBrowserItem item = (ComboBoxBrowserItem)comboBoxBrowser.SelectedItem;
-            //threadingManager.setBrowserPath(item.Path);
-            threadingManager.setBrowserPath(SettingManager.BrowserPath);
-            Thread thread = new Thread(new ThreadStart(threadingManager.Run));
+            if (!String.IsNullOrEmpty(SettingManager.BrowserPath)) 
+            {
+                ThreadingManager threadingManager = new ThreadingManager();
+                //ComboBoxBrowserItem item = (ComboBoxBrowserItem)comboBoxBrowser.SelectedItem;
+                //threadingManager.setBrowserPath(item.Path);
+                threadingManager.setBrowserPath(SettingManager.BrowserPath);
+                Thread thread = new Thread(new ThreadStart(threadingManager.Run));
 
-            thread.Start();
+                thread.Start();
+            }
         }
 
         /// <summary>

@@ -98,6 +98,7 @@
             this.alertWindow1 = new Allison.AlertWindow.AlertWindow();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -257,6 +258,7 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.FloralWhite;
+            this.tabPage4.Controls.Add(this.label11);
             this.tabPage4.Controls.Add(this.button3);
             this.tabPage4.Controls.Add(this.textBoxBrowser);
             this.tabPage4.Controls.Add(this.checkBoxExtTimeCard);
@@ -289,10 +291,10 @@
             // 
             // textBoxBrowser
             // 
-            this.textBoxBrowser.Location = new System.Drawing.Point(14, 111);
+            this.textBoxBrowser.Location = new System.Drawing.Point(51, 111);
             this.textBoxBrowser.Name = "textBoxBrowser";
             this.textBoxBrowser.ReadOnly = true;
-            this.textBoxBrowser.Size = new System.Drawing.Size(166, 19);
+            this.textBoxBrowser.Size = new System.Drawing.Size(129, 19);
             this.textBoxBrowser.TabIndex = 12;
             // 
             // checkBoxExtTimeCard
@@ -797,6 +799,15 @@
             this.openFileDialog1.RestoreDirectory = true;
             this.openFileDialog1.Title = "使用するブラウザを選択して下さい";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(5, 113);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 12);
+            this.label11.TabIndex = 14;
+            this.label11.Text = "ブラウザ：";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -908,6 +919,7 @@
         private System.Windows.Forms.TextBox textBoxBrowser;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label11;
     }
 }
 

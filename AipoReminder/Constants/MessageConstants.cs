@@ -44,8 +44,12 @@ namespace AipoReminder.Constants
         public const string MSG_INFORMATION_01 = "Aipoリマインダーからのお知らせ";
         public const string MSG_INFORMATION_02 = "お知らせ";
 
-        // v6対応バージョン初回起動時メッセージ
+        // v7対応バージョン初回起動時メッセージ
         public const string MSG_CAPTION_004 = "Aipoバージョン7対応";
         public const string MSG_CONFIRM_V7_FIRST_TIME = "AipoVersionの設定を7に変更しますか？\nあとで変更する事も可能です。";
+
+        // 起動ブラウザ確認メッセージ
+        public const string MSG_CAPTION_005 = "起動ブラウザについて";
+        public const string MSG_CONFIRM_V7_BROWSER = "起動ブラウザの指定方法を変更しました。\n「お知らせ設定」から設定して下さい。";
     }
 }
