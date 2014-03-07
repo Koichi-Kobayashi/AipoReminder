@@ -1,0 +1,5 @@
+*.dll.config
+Debug
+Release
+.suo
+.csproj.user
