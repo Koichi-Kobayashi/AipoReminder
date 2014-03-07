@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("AlertWindow")]
-[assembly: AssemblyCopyright("Copyright © 2010 k.kobayashi")]
+[assembly: AssemblyCopyright("© 2010 k.kobayashi")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

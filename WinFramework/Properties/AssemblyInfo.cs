@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("WinFramework")]
-[assembly: AssemblyCopyright("Copyright © 2009 k.kobayashi")]
+[assembly: AssemblyCopyright("© 2009 k.kobayashi")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

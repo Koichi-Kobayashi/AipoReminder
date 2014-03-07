@@ -1,7 +1,17 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AipoReminder", "AipoReminder\AipoReminder.csproj", "{8D29F70C-2B00-4CAF-B829-39D634B98C46}"
+	ProjectSection(ProjectDependencies) = postProject
+		{055465D4-FAAF-4336-B953-49D7EB66ABAC} = {055465D4-FAAF-4336-B953-49D7EB66ABAC}
+		{C8D9CCEC-8C5E-4AD9-B789-23B01F9EDCA4} = {C8D9CCEC-8C5E-4AD9-B789-23B01F9EDCA4}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFramework", "WinFramework\WinFramework.csproj", "{055465D4-FAAF-4336-B953-49D7EB66ABAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlertWindow", "AlertWindow\AlertWindow.csproj", "{C8D9CCEC-8C5E-4AD9-B789-23B01F9EDCA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +29,22 @@ Global
 		{8D29F70C-2B00-4CAF-B829-39D634B98C46}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8D29F70C-2B00-4CAF-B829-39D634B98C46}.Release|x86.ActiveCfg = Release|x86
 		{8D29F70C-2B00-4CAF-B829-39D634B98C46}.Release|x86.Build.0 = Release|x86
+		{055465D4-FAAF-4336-B953-49D7EB66ABAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{055465D4-FAAF-4336-B953-49D7EB66ABAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{055465D4-FAAF-4336-B953-49D7EB66ABAC}.Debug|x86.ActiveCfg = Debug|x86
+		{055465D4-FAAF-4336-B953-49D7EB66ABAC}.Debug|x86.Build.0 = Debug|x86
+		{055465D4-FAAF-4336-B953-49D7EB66ABAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{055465D4-FAAF-4336-B953-49D7EB66ABAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{055465D4-FAAF-4336-B953-49D7EB66ABAC}.Release|x86.ActiveCfg = Release|x86
+		{055465D4-FAAF-4336-B953-49D7EB66ABAC}.Release|x86.Build.0 = Release|x86
+		{C8D9CCEC-8C5E-4AD9-B789-23B01F9EDCA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8D9CCEC-8C5E-4AD9-B789-23B01F9EDCA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8D9CCEC-8C5E-4AD9-B789-23B01F9EDCA4}.Debug|x86.ActiveCfg = Debug|x86
+		{C8D9CCEC-8C5E-4AD9-B789-23B01F9EDCA4}.Debug|x86.Build.0 = Debug|x86
+		{C8D9CCEC-8C5E-4AD9-B789-23B01F9EDCA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8D9CCEC-8C5E-4AD9-B789-23B01F9EDCA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8D9CCEC-8C5E-4AD9-B789-23B01F9EDCA4}.Release|x86.ActiveCfg = Release|x86
+		{C8D9CCEC-8C5E-4AD9-B789-23B01F9EDCA4}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
