@@ -2,9 +2,9 @@
 y ƒ\ƒtƒg–¼ z@Aipox‰‡ƒc[ƒ‹uAipoƒŠƒ}ƒCƒ“ƒ_[£ Ver 1.2.0.0
 y “o ˜^ –¼ z@AipoReminder1.2.0.0.zip
 y ˆ³kŒ`® z@zip
-y ì ¬ Ò z@Copyright (C) 2009-2012 k.kobayashi
+y ì ¬ Ò z@(C) 2009 k.kobayashi
 y  WebSite z@‚È‚µ
-y  e-mail  z@tous.les.deux256@gmail.com
+y  e-mail  z@koichi.code@gmail.com
 y  twitter z@@AipoReminder
 y “®ìŠÂ‹« z@“ú–{Œê”Å Windows XP SP3 32bit/ “ú–{Œê”Å Vista SP2 64bit
                 “ú–{Œê”Å Windows 7 64bit
