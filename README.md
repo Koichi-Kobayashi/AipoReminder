@@ -207,16 +207,13 @@ AipoReminder
         GRANT UPDATE ON pk_eip_t_ext_timecard TO aipo_reminder;  
         GRANT SELECT ON activity TO aipo_reminder;  
         GRANT SELECT ON activity_map TO aipo_reminder;  
-  
+
       \q で切断します。  
-  
+
       最後にAipoの再起動を行って下さい。  
-  
-  
+
 #AlertWindow.dllについて  
-AlertWindow.dllはYouryellaさんが作成したものを独自にカスタマイズしています。    
-Youryellaさんに使用の許可を頂いています。    
-本家サイト    
-http://youryella.wankuma.com/Library/ClassLibrary/AlertWindow.aspx    
-  
-  
+AlertWindow.dllはYouryellaさんが作成したものを独自にカスタマイズしています。  
+Youryellaさんに使用の許可を頂いています。  
+本家サイト  
+http://youryella.wankuma.com/Library/ClassLibrary/AlertWindow.aspx  
