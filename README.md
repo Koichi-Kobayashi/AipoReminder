@@ -8,21 +8,25 @@ AipoReminder
 　　一部の機能は5.0.0.0以上で使用可能です。  
   
 以下、Aipoの管理者向けの情報です。  
-　次の情報を元にPostgreSQLの設定を変更することで、本ソフトウェアが正常に動作するようになりますが、  
+　次の情報を元にPostgreSQLの設定を変更することで、
+ 本ソフトウェアが正常に動作するようになりますが、  
 　セキュリティレベルが下がります。  
 　使用者のセキュリティポリシーにそぐわない場合は、使用を中止して下さい。  
   
 　３.ポートの設定について  
 　　Aipoをインストールしたままの状態ではローカルホストのみのアクセスを許可しているため、  
 　　AipoリマインダーをクライアントPCにインストールしても  
-　　Aipoに接続出来ないというエラーが表示されますので、PostgreSQLが使用するポートを開ける必要があります。  
+　　Aipoに接続出来ないというエラーが表示されますので、PostgreSQLが使用するポートを
+  開ける必要があります。  
   
 　　　【Windows XP / Windows Server 2003等にAipoをインストールしている場合】  
 　　　ファイアウォールが有効になっている場合、「例外タブ」で「ポートの追加」より、  
 　　　5432ポートを開けるように設定して下さい。  
-　　　名前は特に何でも構いませんが、分かり易いように、Aipo_PostgreSQLとし、ポートは5432でTCPを選択して下さい。  
+　　　名前は特に何でも構いませんが、分かり易いように、Aipo_PostgreSQLとし、
+　　　ポートは5432でTCPを選択して下さい。  
   
-　　　セキュリティ対策ソフトでファイアウォールを構築している場合は、そちらの設定が優先されますので、  
+　　　セキュリティ対策ソフトでファイアウォールを構築している場合は、
+　　　そちらの設定が優先されますので、  
 　　　セキュリティ対策ソフトの設定を行って下さい。  
   
 　　　【LinuxにAipoをインストールしている場合】  
@@ -180,7 +184,7 @@ AipoReminder
         GRANT SELECT ON eip_t_ext_timecard_system_map TO aipo_reminder;  
         GRANT UPDATE ON eip_t_ext_timecard_timecard_id_seq TO aipo_reminder;  
   
-      【Aipo6の場合】  
+      【Aipo6,7の場合】  
         CREATE ROLE aipo_reminder WITH LOGIN PASSWORD 'reminder';  
         GRANT SELECT ON eip_t_schedule_map TO aipo_reminder;  
         GRANT SELECT ON eip_t_schedule TO aipo_reminder;  
