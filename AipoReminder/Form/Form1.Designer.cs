@@ -44,6 +44,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.checkBoxExtTimeCardUpdateCkeckout = new System.Windows.Forms.CheckBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.textBoxBrowser = new System.Windows.Forms.TextBox();
             this.checkBoxExtTimeCard = new System.Windows.Forms.CheckBox();
@@ -98,7 +100,6 @@
             this.alertWindow1 = new Allison.AlertWindow.AlertWindow();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -258,6 +259,7 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.FloralWhite;
+            this.tabPage4.Controls.Add(this.checkBoxExtTimeCardUpdateCkeckout);
             this.tabPage4.Controls.Add(this.label11);
             this.tabPage4.Controls.Add(this.button3);
             this.tabPage4.Controls.Add(this.textBoxBrowser);
@@ -278,6 +280,25 @@
             this.tabPage4.Size = new System.Drawing.Size(488, 248);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "お知らせ設定";
+            // 
+            // checkBoxExtTimeCardUpdateCkeckout
+            // 
+            this.checkBoxExtTimeCardUpdateCkeckout.AutoSize = true;
+            this.checkBoxExtTimeCardUpdateCkeckout.Location = new System.Drawing.Point(14, 185);
+            this.checkBoxExtTimeCardUpdateCkeckout.Name = "checkBoxExtTimeCardUpdateCkeckout";
+            this.checkBoxExtTimeCardUpdateCkeckout.Size = new System.Drawing.Size(169, 16);
+            this.checkBoxExtTimeCardUpdateCkeckout.TabIndex = 15;
+            this.checkBoxExtTimeCardUpdateCkeckout.Text = "終了時に退勤時刻を更新する";
+            this.checkBoxExtTimeCardUpdateCkeckout.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(5, 113);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 12);
+            this.label11.TabIndex = 14;
+            this.label11.Text = "ブラウザ：";
             // 
             // button3
             // 
@@ -306,6 +327,7 @@
             this.checkBoxExtTimeCard.TabIndex = 11;
             this.checkBoxExtTimeCard.Text = "タイムカードと連携する(Aipo5～)";
             this.checkBoxExtTimeCard.UseVisualStyleBackColor = true;
+            this.checkBoxExtTimeCard.CheckedChanged += new System.EventHandler(this.checkBoxExtTimeCard_CheckedChanged);
             // 
             // button2
             // 
@@ -799,15 +821,6 @@
             this.openFileDialog1.RestoreDirectory = true;
             this.openFileDialog1.Title = "使用するブラウザを選択して下さい";
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(5, 113);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(47, 12);
-            this.label11.TabIndex = 14;
-            this.label11.Text = "ブラウザ：";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -920,6 +933,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckBox checkBoxExtTimeCardUpdateCkeckout;
     }
 }
 

@@ -285,9 +285,20 @@ namespace AipoReminder
                 //    }
                 //}
                 textBoxBrowser.Text = SettingManager.BrowserPath;                       // ブラウザのパス
+                checkBoxExtTimeCardUpdateCkeckout.Checked = SettingManager.CheckExtTimeCardUpdateCheckout;  // 終了時に退勤の時刻を更新するかどうか
 
                 // Aipoのバージョン依存項目の設定
                 InitAipoVersionConfig();
+
+                // タイムカード連携に合わせて退勤時刻連携も連動させる
+                if (SettingManager.CheckExtTimeCard)
+                {
+                    checkBoxExtTimeCardUpdateCkeckout.Enabled = true;
+                }
+                else
+                {
+                    checkBoxExtTimeCardUpdateCkeckout.Enabled = false;
+                }
 
                 // 設定を保存
                 SettingManager.WhatsnewInfoSave();
@@ -493,7 +504,8 @@ namespace AipoReminder
                     data.update_eip_t_ext_timecard.Rows.Add(updateRow);
                     m.Execute(m.InsertTimeCard, data);
                 }
-                else if (String.IsNullOrEmpty(data.eip_t_ext_timecard[0].clock_out_time))
+                else if (SettingManager.CheckExtTimeCardUpdateCheckout || 
+                    (!SettingManager.CheckExtTimeCardUpdateCheckout && String.IsNullOrEmpty(data.eip_t_ext_timecard[0].clock_out_time)))
                 {
                     ExtTimeCardDataSet.update_eip_t_ext_timecardRow updateRow = data.update_eip_t_ext_timecard.Newupdate_eip_t_ext_timecardRow();
                     updateRow.user_id = SettingManager.UserId;
@@ -867,6 +879,7 @@ namespace AipoReminder
 //            ComboBoxBrowserItem bItem = (ComboBoxBrowserItem)comboBoxBrowser.SelectedItem;
 //            SettingManager.BrowserName = bItem.Name;                                // 指定ブラウザ名
             SettingManager.BrowserPath = textBoxBrowser.Text;                       // ブラウザのパス
+            SettingManager.CheckExtTimeCardUpdateCheckout = checkBoxExtTimeCardUpdateCkeckout.Checked;  // 終了時に退勤の時刻を更新
 
             if (isSetGroupUserId)
             {
@@ -996,6 +1009,26 @@ namespace AipoReminder
                 }
             }
         }
+
+        /// <summary>
+        /// タイムカード連携のチェックボックスのオン・オフで退勤時刻を更新するかどうかのチェックボックスも連動させる
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxExtTimeCard_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox cb = (CheckBox)sender;
+
+            if (cb.Checked)
+            {
+                checkBoxExtTimeCardUpdateCkeckout.Enabled = true;
+            }
+            else
+            {
+                checkBoxExtTimeCardUpdateCkeckout.Enabled = false;
+            }
+        }
+
 #endregion
 
 #region DB関連処理

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Aipoリマインダー")]
-[assembly: AssemblyCopyright("© 2009 k.kobayashi")]
+[assembly: AssemblyCopyright("© 2009-2014 k.kobayashi")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 // AssemblyVersionが変わると設定ファイルのパスが変わってしまうのでこのままで固定
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.1.0")]
 
 // log4net
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
