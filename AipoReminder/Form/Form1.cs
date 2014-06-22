@@ -290,16 +290,6 @@ namespace AipoReminder
                 // Aipoのバージョン依存項目の設定
                 InitAipoVersionConfig();
 
-                // タイムカード連携に合わせて退勤時刻連携も連動させる
-                if (SettingManager.CheckExtTimeCard)
-                {
-                    checkBoxExtTimeCardUpdateCkeckout.Enabled = true;
-                }
-                else
-                {
-                    checkBoxExtTimeCardUpdateCkeckout.Enabled = false;
-                }
-
                 // 設定を保存
                 SettingManager.WhatsnewInfoSave();
 
@@ -976,6 +966,15 @@ namespace AipoReminder
             else
             {
                 checkBoxExtTimeCard.Enabled = false;
+            }
+            // タイムカード連携に合わせて退勤時刻連携も連動させる
+            if (SettingManager.CheckExtTimeCard)
+            {
+                checkBoxExtTimeCardUpdateCkeckout.Enabled = true;
+            }
+            else
+            {
+                checkBoxExtTimeCardUpdateCkeckout.Enabled = false;
             }
 
             // Aipoのバージョンが6以上の場合は新着情報のチェックボックスを非活性にする
