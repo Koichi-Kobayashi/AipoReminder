@@ -1,4 +1,6 @@
 #AipoReminder  
+
+[![Join the chat at https://gitter.im/Koichi-Kobayashi/AipoReminder](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Koichi-Kobayashi/AipoReminder?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
   
 グループウェアAipoの新着通知を自動で取得するアプリケーションです。  
   
